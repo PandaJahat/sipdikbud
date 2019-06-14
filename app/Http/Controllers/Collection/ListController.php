@@ -50,7 +50,7 @@ class ListController extends Controller
         return 'Penelitian berhasil dihapus!';
     }
 
-    public function download(Request $request)
+    public function downloadForm(Request $request)
     {
         # code...
     }

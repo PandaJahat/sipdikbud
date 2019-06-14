@@ -120,6 +120,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $category = (clone $route)->group(base_path('routes/web/reference/category.php'));
         $language = (clone $route)->group(base_path('routes/web/reference/language.php'));
+        $reason = (clone $route)->group(base_path('routes/web/reference/reason.php'));
     }
     // Module Routes: end
 

@@ -30,6 +30,8 @@ class CategoryController extends Controller
             return Carbon::parse($category->created_at)->format('d/m/Y');
         })
         ->addColumn('actions', function($category) {
+            if ($category->collections()->exists()) return '';
+
             return '<a href="javascript:;" class="uk-badge uk-badge-warning" onclick="updateCategory('.$category->id.')">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteCategory('.$category->id.')">Hapus</a>';
         })
         ->rawColumns([

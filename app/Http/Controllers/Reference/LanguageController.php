@@ -30,6 +30,8 @@ class LanguageController extends Controller
             return Carbon::parse($language->created_at)->format('d/m/Y');
         })
         ->addColumn('actions', function($language) {
+            if ($language->collections()->exists()) return '';
+
             return '<a href="javascript:;" class="uk-badge uk-badge-warning" onclick="updateLanguage('.$language->id.')">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteLanguage('.$language->id.')">Hapus</a>';
         })
         ->rawColumns([
