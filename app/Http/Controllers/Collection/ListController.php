@@ -28,6 +28,9 @@ class ListController extends Controller
 
         return DataTables::of($collections)
         ->addIndexColumn()
+        ->editColumn('title', function($collection) {
+            return '<a href="javascript:;" onclick="downloadCollection('.$collection->id.')">'.$collection->title.'</a>';
+        })
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
         })
@@ -35,7 +38,7 @@ class ListController extends Controller
             return '<a href="'.route('collection.update', ['id' => $collection->id]).'" class="uk-badge uk-badge-warning">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteCollection('.$collection->id.')">Hapus</a>';
         })
         ->rawColumns([
-            'actions'
+            'actions', 'title'
         ])
         ->make(true);
     }
@@ -52,6 +55,6 @@ class ListController extends Controller
 
     public function downloadForm(Request $request)
     {
-        # code...
+        return '';
     }
 }
