@@ -14,8 +14,8 @@
                     <th>#</th>
                     <th style="width: 40%">Judul</th>
                     <th>Peneliti</th>
+                    <th>Tahun</th>
                     <th>Diupload</th>
-                    <th>Dipublis</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>

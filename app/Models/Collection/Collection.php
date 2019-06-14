@@ -32,4 +32,14 @@ class Collection extends Model
     {
         return $this->hasMany('App\Models\Collection\Keyword', 'collection_id', 'id');
     }
+
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Collection\Language', 'language_id', 'id');
+    }
+
+    public function author()
+    {
+        return $this->belongsTo('App\Models\Collection\Author', 'author_id', 'id');
+    }
 }
