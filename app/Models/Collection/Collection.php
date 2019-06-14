@@ -22,4 +22,14 @@ class Collection extends Model
         "author_id",
         "language_id",
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Models\Collection\Category', 'collection_category', 'collection_id', 'category_id');
+    }
+
+    public function keywords()
+    {
+        return $this->hasMany('App\Models\Collection\Keyword', 'collection_id', 'id');
+    }
 }

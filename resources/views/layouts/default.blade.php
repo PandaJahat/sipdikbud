@@ -17,6 +17,8 @@
 
     <link rel="icon" type="image" href="{{ asset('favicon.ico') }}">
 
+    @stack('links-first')
+
     <!-- uikit -->
     <link rel="stylesheet" href="{{ asset('assets/bower_components/uikit/css/uikit.almost-flat.min.css') }}" media="all">
 
