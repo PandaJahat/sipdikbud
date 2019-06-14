@@ -4,40 +4,50 @@
 @include('plugins.autocomplete')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Upload Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Ubah Penelitian</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
-        <form action="{{ route('collection.create.submit') }}" method="post" enctype="multipart/form-data" id="form-create">
+        <form action="{{ route('collection.update.submit') }}" method="post" enctype="multipart/form-data" id="form-update">
             @csrf
+            @method('PATCH')
+            <input type="hidden" name="id" value="{{ $collection->id }}">
             <div class="uk-grid">
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
                         <label>Judul Penelitian <span class="uk-text-danger">*</span></label>
-                        <input type="text" class="md-input" name="title" value="{{ old('title') }}" required />
+                        <input type="text" class="md-input" name="title" value="{{ $collection->title }}" required />
                     </div>
                     <div class="uk-form-row">
                         <label>Nama Peneliti <span class="uk-text-danger">*</span></label>
-                        <input type="text" class="md-input" name="author" value="{{ old('author') }}" required />
+                        <input type="text" class="md-input" name="author" value="{{ $collection->author->name }}" required />
                     </div>
                     <div class="uk-form-row">
                         <label>Tahun Terbit</label>
-                        <input type="text" class="md-input" name="published_year" value="{{ old('published_year') }}" />
+                        <input type="text" class="md-input" name="published_year" value="{{ $collection->published_year }}" />
                     </div>
                     <div class="uk-form-row">
                         <label>Diterbitkan Oleh</label>
-                        <input type="text" class="md-input" name="published_by" value="{{ old('published_by') }}" />
+                        <input type="text" class="md-input" name="published_by" value="{{ $collection->published_by }}" />
                     </div>
                     <div class="uk-form-row">
                         <label>Deskripsi</label>
-                        <textarea cols="30" rows="4" class="md-input" name="description">{{ old('description') }}</textarea>
+                        <textarea cols="30" rows="4" class="md-input" name="description">{{ $collection->description }}</textarea>
                     </div>
                     <div class="uk-form-row">
-                        <label>Gambar Cover</label>
+                        <label>Gambar Cover Sebelumnya</label>
+                        <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" alt="cover">
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Gambar Cover (pilih file untuk mengganti cover sebelumnya)</label>
                         <input type="file" name="cover" class="dropify-id" accept="image/*" />
                     </div>
                     <div class="uk-form-row">
-                        <label>Dokumen Penelitian <span class="uk-text-danger">*</span></label>
-                        <input type="file" name="document" class="dropify-id" required/>
+                        <label>Dokumen Penelitian Sebelumnya: </label>
+                        <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="{{ route('collection.download', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank"><i class="uk-icon-download"></i> Download</a>
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Dokumen Penelitian (pilih file untuk mengganti dokumen sebelumnya)</label>
+                        <input type="file" name="document" class="dropify-id"/>
                     </div>
                 </div>
                 <div class="uk-width-1-2">
@@ -53,12 +63,14 @@
                     </div>
                     <div class="uk-form-row">
                         <label>Kata Kunci (pisahkan dengan koma)</label>
-                        <input type="text" class="md-input" name="keywords" value="{{ old('keywords') }}" />
+                        <input type="text" class="md-input" name="keywords" value="{{ $keywords }}" />
                     </div>
                 </div>
             </div>
             <hr>
-            <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Upload</button>
+            <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Simpan</button>
+            &nbsp;&nbsp;
+            <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.list') }}">Kembali</a>
         </form>
     </div>
 </div>
@@ -125,7 +137,7 @@
                     callback(result)
                 })
 
-                select_language[0].selectize.setValue("{{ old('language_id') }}")
+                select_language[0].selectize.setValue("{{ $collection->language_id }}")
             })
 
             $.get("{{ route('collection.create.get.categories') }}").done(function (result) {
@@ -133,7 +145,7 @@
                     callback(result)
                 })
 
-                select_category[0].selectize.setValue("{{ old('categories') }}")
+                select_category[0].selectize.setValue({{ $categories }})
             })
             
             $.get("{{ route('collection.create.get.authors') }}").done(function (result) {
@@ -152,7 +164,7 @@
             
         })
 
-        $('#form-create').on('keyup keypress', function (e) {
+        $('#form-update').on('keyup keypress', function (e) {
             var keyCode = e.keyCode || e.which
             if (keyCode === 13) {
                 e.preventDefault()

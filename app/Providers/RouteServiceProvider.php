@@ -106,6 +106,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $list = (clone $route)->group(base_path('routes/web/collection/list.php'));
         $create = (clone $route)->group(base_path('routes/web/collection/create.php'));
+        $update = (clone $route)->group(base_path('routes/web/collection/update.php'));
+        $download = (clone $route)->group(base_path('routes/web/collection/download.php'));
     }
 
     protected function moduleReferenceRoutes()

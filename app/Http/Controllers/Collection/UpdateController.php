@@ -5,25 +5,34 @@ namespace App\Http\Controllers\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+use function GuzzleHttp\json_decode;
 
 # Models
-use App\Models\Collection\Language;
-use App\Models\Collection\Category;
-use App\Models\Collection\Author;
 use App\Models\Collection\Collection;
+use App\Models\Collection\Author;
 
-class CreateController extends Controller
+class UpdateController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('contents.collection.create.index');
+        $collection = Collection::find($request->id)->load([
+            'author', 'language', 'keywords', 'categories'
+        ]);
+        $keywords = implode(',', json_decode($collection->keywords->pluck('keyword')));
+        $categories = $collection->categories->pluck('id');
+
+        return view('contents.collection.update.index', [
+            'collection' => $collection,
+            'keywords' => $keywords,
+            'categories' => $categories
+        ]);
     }
 
-    public function create(Request $request)
+    public function update(Request $request)
     {
-        $collection = new Collection($request->all());
-        
+        $collection = Collection::find($request->id);
+        $collection->fill($request->all());
+
         if ($request->hasFile('cover')) {
             $cover_file = $request->file('cover');
     
@@ -56,32 +65,18 @@ class CreateController extends Controller
             $collection->author_id = $author->id;
         }
 
-        $collection->user_id = Auth::user()->id;
         $collection->save();
 
+        $collection->categories()->detach();
         $collection->categories()->attach($request->categories);
 
+        $collection->keywords()->delete();
         foreach (explode(',', $request->keywords) as $keyword) {
             $collection->keywords()->create([
                 'keyword' => $keyword
             ]);
         }
 
-        return redirect()->route('collection.list')->with('success', 'Berhasil mengupload penelitian!');
-    }
-
-    public function getLanguages()
-    {
-        return Language::orderBy('name')->get();
-    }
-
-    public function getCategories()
-    {
-        return Category::orderBy('name')->get();
-    }
-
-    public function getAuthors()
-    {
-        return Author::get()->pluck('name');
+        return redirect()->route('collection.list')->with('success', 'Berhasil mengubah penelitian!');
     }
 }
