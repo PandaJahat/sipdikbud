@@ -16,6 +16,7 @@ class Collection extends Model
         "published_year",
         "description",
         "cover_file",
+        "abstract_file",
         "document_file",
         "user_id",
         "is_active",

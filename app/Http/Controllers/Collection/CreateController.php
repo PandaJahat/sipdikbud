@@ -34,6 +34,16 @@ class CreateController extends Controller
             $collection->cover_file = $cover_filename;            
         }
 
+        if ($request->hasFile('abstract')) {
+            $abstract_file = $request->file('abstract');
+    
+            $extension = $abstract_file->getClientOriginalExtension();
+            $abstract_filename = strtotime('now').'_'.Str::slug($request->title, '_').'.'.$extension;
+            
+            $abstract_file->move(storage_path('files/abstracts'), $abstract_filename);  
+            $collection->abstract_file = $abstract_filename;
+        }
+
         if ($request->hasFile('document')) {
             $document_file = $request->file('document');
     
@@ -59,7 +69,7 @@ class CreateController extends Controller
         $collection->user_id = Auth::user()->id;
         $collection->save();
 
-        $collection->categories()->attach($request->categories);
+        $collection->categories()->attach([$request->category_id]);
 
         foreach (explode(',', $request->keywords) as $keyword) {
             $collection->keywords()->create([

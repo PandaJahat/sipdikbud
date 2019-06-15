@@ -33,13 +33,25 @@
                         <label>Deskripsi</label>
                         <textarea cols="30" rows="4" class="md-input" name="description">{{ $collection->description }}</textarea>
                     </div>
+                    @if (!empty($collection->cover_file))
                     <div class="uk-form-row">
                         <label>Gambar Cover Sebelumnya</label>
                         <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" alt="cover">
                     </div>
+                    @endif
                     <div class="uk-form-row">
                         <label>Gambar Cover (pilih file untuk mengganti cover sebelumnya)</label>
                         <input type="file" name="cover" class="dropify-id" accept="image/*" />
+                    </div>
+                    @if (!empty($collection->abstract_file))
+                    <div class="uk-form-row">
+                        <label>Abstract Sebelumnya: </label>
+                        <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="{{ route('collection.download.abstract', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank"><i class="uk-icon-download"></i> Download</a>
+                    </div>
+                    @endif
+                    <div class="uk-form-row">
+                        <label>Abstrak (pilih file untuk mengganti dokumen sebelumnya)</label>
+                        <input type="file" name="abstract" class="dropify-id"/>
                     </div>
                     <div class="uk-form-row">
                         <label>Dokumen Penelitian Sebelumnya: </label>
@@ -57,8 +69,8 @@
                         </select>
                     </div>
                     <div class="uk-form-row">
-                        <select name="categories[]" id="categories" multiple required>
-                            <option value="">Pilih Kategori Penelitian</option>
+                        <select name="category_id" id="categories" required>
+                            <option value="">Pilih Bidang Penelitian</option>
                         </select>
                     </div>
                     <div class="uk-form-row">

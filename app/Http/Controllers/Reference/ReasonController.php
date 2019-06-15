@@ -24,9 +24,9 @@ class ReasonController extends Controller
             $reason = new Reason($request->all());
             $reason->save();
 
-            return redirect()->route('reference.reason')->with('success', 'Berhasil menyimpan tujuan!');
+            return redirect()->route('reference.reason')->with('success', 'Berhasil menyimpan kategori kebermanfaatan!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.reason')->with('error', 'Terjadi kesalahan saat menyimpan tujuan!');
+            return redirect()->route('reference.reason')->with('error', 'Terjadi kesalahan saat menyimpan kategori kebermanfaatan!');
         }
     }
 
@@ -67,9 +67,9 @@ class ReasonController extends Controller
             $reason->fill($request->all());
             $reason->save();
 
-            return redirect()->route('reference.reason')->with('success', 'Berhasil menyimpan perubahan tujuan!');
+            return redirect()->route('reference.reason')->with('success', 'Berhasil menyimpan perubahan kategori kebermanfaatan!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.reason')->with('error', 'Terjadi kesalahan saat menyimpan perubahan tujuan!');
+            return redirect()->route('reference.reason')->with('error', 'Terjadi kesalahan saat menyimpan perubahan kategori kebermanfaatan!');
         }
     }
 
@@ -77,9 +77,9 @@ class ReasonController extends Controller
     {
         $reason = Reason::find($request->id);
 
-        if (empty($reason)) return 'Terjadi kesalahan saat menghapus tujuan!';
+        if (empty($reason)) return 'Terjadi kesalahan saat menghapus kategori kebermanfaatan!';
 
         $reason->delete();
-        return 'Berhasil menghapus tujuan';        
+        return 'Berhasil menghapus kategori kebermanfaatan!';        
     }
 }

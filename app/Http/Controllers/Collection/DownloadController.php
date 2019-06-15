@@ -56,4 +56,19 @@ class DownloadController extends Controller
             ]
         ]);
     }
+
+    public function abstract(Request $request)
+    {
+        try {
+            $collection = Collection::find(Crypt::decrypt($request->id));
+
+            if (empty($collection)) return redirect()->route('collection.list')->with('error', 'Abstrak tidak ditemukan!');
+            
+            return response()->file(storage_path('files/abstracts/'.$collection->abstract_file), [
+                'filename' => 'downloaded.pdf'
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('collection.list')->with('error', 'Terjadi kesalahan saat mengunduh Abstrak!');
+        }
+    }
 }

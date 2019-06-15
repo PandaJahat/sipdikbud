@@ -31,10 +31,10 @@
                     <span class="menu_title">Referensi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Kategori Penelitian</a></li>
+                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang Penelitian</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa Penelitian</a></li>
                     <li ><a href="javascript:;">Lembaga/Bidang</a></li>
-                    <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Tujuan Mengunduh</a></li>
+                    <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori Kebermanfaatan</a></li>
                 </ul>
             </li>
             <li title="API" class="submenu_trigger">

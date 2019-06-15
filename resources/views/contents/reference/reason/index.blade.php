@@ -4,12 +4,12 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Tujuan Mengunduh</h3>
+<h3 class="heading_b uk-margin-bottom">Kategori Kebermanfaatan</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-grid">
             <div class="uk-width-1-1">
-                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#reason-create'}"><i class="uk-icon-plus"></i> Buat Tujuan</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#reason-create'}"><i class="uk-icon-plus"></i> Buat Kategori</button>
             </div>
         </div>
         <br>
@@ -36,7 +36,7 @@
 <div class="uk-modal" id="reason-create">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Tujuan</h3>
+            <h3 class="uk-modal-title">Formulir Kategori</h3>
         </div>
         
         <form action="{{ route('reference.reason.create.submit') }}" method="POST">
@@ -46,7 +46,7 @@
                 <input type="text" class="md-input" name="order" />
             </div>
             <div class="uk-form-row">
-                <label>Tujuan <span class="uk-text-danger">*</span></label>
+                <label>Kategori Kebermanfaatan <span class="uk-text-danger">*</span></label>
                 <input type="text" class="md-input" name="name" required />
             </div>
             <div class="uk-modal-footer uk-text-right">
@@ -60,7 +60,7 @@
 <div class="uk-modal" id="reason-update">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Perubahan Tujuan</h3>
+            <h3 class="uk-modal-title">Formulir Perubahan Kategori</h3>
         </div>
         
         <form action="{{ route('reference.reason.update.submit') }}" method="POST">

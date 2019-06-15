@@ -29,7 +29,7 @@ class ListController extends Controller
         return DataTables::of($collections)
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
-            return '<a href="javascript:;" onclick="downloadCollection('.$collection->id.')">'.$collection->title.'</a>';
+            return '<a href="'.route('collection.detail', ['id' => $collection->id]).'">'.$collection->title.'</a>';
         })
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');

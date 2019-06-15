@@ -36,6 +36,10 @@
                         <input type="file" name="cover" class="dropify-id" accept="image/*" />
                     </div>
                     <div class="uk-form-row">
+                        <label>Abstrak</label>
+                        <input type="file" name="abstract" class="dropify-id"/>
+                    </div>
+                    <div class="uk-form-row">
                         <label>Dokumen Penelitian <span class="uk-text-danger">*</span></label>
                         <input type="file" name="document" class="dropify-id" required/>
                     </div>
@@ -47,8 +51,8 @@
                         </select>
                     </div>
                     <div class="uk-form-row">
-                        <select name="categories[]" id="categories" multiple required>
-                            <option value="">Pilih Kategori Penelitian</option>
+                        <select name="category_id" id="categories" required>
+                            <option value="">Pilih Bidang Penelitian</option>
                         </select>
                     </div>
                     <div class="uk-form-row">
@@ -67,7 +71,7 @@
 @push('scripts')
     <script>
         var select_language = $('select[name=language_id]')
-        var select_category = $('#categories')
+        var select_category = $('select[name=category_id]')
 
         $(function () {
             select_language.selectize({
@@ -133,7 +137,7 @@
                     callback(result)
                 })
 
-                select_category[0].selectize.setValue("{{ old('categories') }}")
+                select_category[0].selectize.setValue("{{ old('category_id') }}")
             })
             
             $.get("{{ route('collection.create.get.authors') }}").done(function (result) {
