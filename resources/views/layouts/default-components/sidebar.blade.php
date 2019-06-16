@@ -25,26 +25,29 @@
                     <li ><a href="javascript:;">Moderasi Penelitian</a></li>
                 </ul>
             </li>
-            <li title="Referensi" class="submenu_trigger">
-                <a href="#">
-                    <span class="menu_icon"><i class="material-icons">&#xE241;</i></span>
-                    <span class="menu_title">Referensi</span>
-                </a>
-                <ul class="" style="display: none;">
-                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang Penelitian</a></li>
-                    <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa Penelitian</a></li>
-                    <li ><a href="javascript:;">Lembaga/Bidang</a></li>
-                    <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori Kebermanfaatan</a></li>
-                </ul>
-            </li>
             <li title="API" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE8C0;</i></span>
                     <span class="menu_title">Integrasi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li ><a href="javascript:;">Buat Integrasi</a></li>
+                    <li ><a href="javascript:;">Integrasi OJS</a></li>
+                    <li ><a href="javascript:;">Integrasi Aplikasi Lain</a></li>
                     <li ><a href="javascript:;">Pengaturan Integrasi</a></li>
+                </ul>
+            </li>
+            <li title="Referensi" class="submenu_trigger">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">&#xE241;</i></span>
+                    <span class="menu_title">Referensi</span>
+                </a>
+                <ul class="" style="display: none;">
+                    <li class="menu_subtitle">Penelitian</li>
+                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang</a></li>
+                    <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
+                    <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga/Bidang</a></li>
+                    <li class="menu_subtitle">Kebermanfaatan</li>
+                    <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                 </ul>
             </li>
             <li title="Pengguna" class="submenu_trigger">

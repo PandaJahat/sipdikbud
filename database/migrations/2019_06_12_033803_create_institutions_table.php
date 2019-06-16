@@ -18,7 +18,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('name');
             $table->text('description');
 
-            $table->text('logo_file');
+            $table->text('logo_file')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

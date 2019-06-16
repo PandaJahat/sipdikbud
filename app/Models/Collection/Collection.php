@@ -59,6 +59,11 @@ class Collection extends Model
     {
         return $this->hasMany('App\Models\Collection\Download_log', 'collection_id', 'id');
     }
+    
+    public function institutions()
+    {
+        return $this->belongsToMany('App\Models\Collection\Institution', 'collection_institution', 'collection_id', 'institution_id');
+    }
 
     public function getCategoryAttribute()
     {
