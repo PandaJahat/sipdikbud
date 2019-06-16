@@ -18,7 +18,10 @@
                     <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
                         <a href="#" class="user_action_image"><img class="md-user-image" src="{{ asset('img/user.png') }}" alt=""/>&nbsp;{{ Auth::user()->name }}</a>
                         <div class="uk-dropdown uk-dropdown-small">
-                            <ul class="uk-nav js-uk-prevent">                                
+                            <ul class="uk-nav js-uk-prevent">
+                                <li>
+                                    <a href="{{ route('home') }}">Beranda</a>
+                                </li>                                
                                 <li><a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">Keluar</a></li>

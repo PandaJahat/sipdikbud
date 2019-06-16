@@ -70,6 +70,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->moduleCollectionRoutes();
         $this->moduleReferenceRoutes();
         $this->moduleIntegrationRoutes();
+        $this->moduleHomeRoutes();
     }
 
     // Module Routes: start
@@ -138,6 +139,17 @@ class RouteServiceProvider extends ServiceProvider
 
         $ojs = (clone $route)->group(base_path('routes/web/integration/ojs.php'));
         $other = (clone $route)->group(base_path('routes/web/integration/other.php'));
+    }
+
+    protected function moduleHomeRoutes()
+    {
+        $namespace = $this->namespace.'\Home';
+
+        $route = Route::middleware([
+            'web'
+        ])->namespace($namespace);
+
+        $home = (clone $route)->group(base_path('routes/web/home/home.php'));
     }
     // Module Routes: end
 
