@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 # Models
 use App\Models\Collection\Collection;
@@ -30,7 +31,7 @@ class ListController extends Controller
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
             $class = $collection->is_active ? '' : 'uk-text-muted';
-            return '<a class="'.$class.'" href="'.route('collection.detail', ['id' => $collection->id]).'">'.$collection->title.'</a>';
+            return '<a class="'.$class.'" href="'.route('collection.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
         })
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');

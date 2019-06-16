@@ -62,7 +62,7 @@ class Collection extends Model
     
     public function institutions()
     {
-        return $this->belongsToMany('App\Models\Collection\Institution', 'collection_institution', 'collection_id', 'institution_id');
+        return $this->belongsToMany('App\Models\Collection\Institution', 'collection_institution', 'collection_id', 'institution_id')->withPivot('user_id');
     }
 
     public function getCategoryAttribute()
