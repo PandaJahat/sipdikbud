@@ -31,8 +31,8 @@
                     <span class="menu_title">Integrasi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li ><a href="javascript:;">Integrasi OJS</a></li>
-                    <li ><a href="javascript:;">Integrasi Aplikasi Lain</a></li>
+                    <li class="{{ Request::is('integration/ojs') ? 'act_item' : '' }}"><a href="{{ route('integration.ojs') }}">Integrasi OJS</a></li>
+                    <li class="{{ Request::is('integration/other') ? 'act_item' : '' }}"><a href="{{ route('integration.other') }}">Integrasi Aplikasi Lain</a></li>
                     <li ><a href="javascript:;">Pengaturan Integrasi</a></li>
                 </ul>
             </li>

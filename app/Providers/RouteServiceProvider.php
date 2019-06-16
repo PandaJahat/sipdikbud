@@ -69,6 +69,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->moduleUserRoutes();
         $this->moduleCollectionRoutes();
         $this->moduleReferenceRoutes();
+        $this->moduleIntegrationRoutes();
     }
 
     // Module Routes: start
@@ -125,6 +126,18 @@ class RouteServiceProvider extends ServiceProvider
         $language = (clone $route)->group(base_path('routes/web/reference/language.php'));
         $reason = (clone $route)->group(base_path('routes/web/reference/reason.php'));
         $institution = (clone $route)->group(base_path('routes/web/reference/institution.php'));
+    }
+
+    protected function moduleIntegrationRoutes()
+    {
+        $namespace = $this->namespace.'\Integration';
+
+        $route = Route::middleware([
+            'web', 'auth'
+        ])->namespace($namespace);
+
+        $ojs = (clone $route)->group(base_path('routes/web/integration/ojs.php'));
+        $other = (clone $route)->group(base_path('routes/web/integration/other.php'));
     }
     // Module Routes: end
 
