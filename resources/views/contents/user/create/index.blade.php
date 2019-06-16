@@ -36,6 +36,10 @@
                         <input type="text" class="md-input" name="institute" value="{{ old('institute') }}" required />
                     </div>
                     <div class="uk-form-row">
+                        <label>Nomor Telepon</label>
+                        <input type="text" class="md-input" name="phone_number" value="{{ old('phone_number') }}" />
+                    </div>
+                    <div class="uk-form-row">
                         <label>E-Mail <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="email" value="{{ old('email') }}" required />
                     </div>

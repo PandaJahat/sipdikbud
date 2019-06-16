@@ -16,6 +16,7 @@
         "laravel/tinker": "^1.0",
         "league/csv": "^9.2",
         "owen-it/laravel-auditing": "^9.2",
+        "rap2hpoutre/laravel-log-viewer": "^1.2",
         "santigarcor/laratrust": "5.2.*",
         "yajra/laravel-datatables-oracle": "^9.3"
     },

@@ -80,9 +80,9 @@
                 </div>
             </div>
             <hr>
-            <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Simpan</button>
-            &nbsp;&nbsp;
             <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.list') }}">Kembali</a>
+            &nbsp;&nbsp;
+            <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">Simpan</button>
         </form>
     </div>
 </div>

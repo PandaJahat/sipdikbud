@@ -4,7 +4,7 @@
             <h3 class="uk-modal-title">Tujuan Mengunduh Penelitian</h3>
         </div>
         
-        <form action="{{ route('collection.download.reason.submit') }}" method="POST">
+        <form action="{{ route('collection.download.reason.submit') }}" method="POST" target="_blank" onsubmit="setTimeout(function(){window.location.reload();},10)">
             @csrf
             <input type="hidden" name="collection_id">
             <input type="hidden" name="previous_url" value="{{ Request::fullUrl() }}">

@@ -45,6 +45,10 @@
                         <input type="text" class="md-input" name="institute" value="{{ $user->profile->institute }}" required />
                     </div>
                     <div class="uk-form-row">
+                        <label>Nomor Telepon</label>
+                        <input type="text" class="md-input" name="phone_number" value="{{ $user->profile->phone_number }}" />
+                    </div>
+                    <div class="uk-form-row">
                         <label>E-Mail <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="email" value="{{ $user->email }}" required />
                     </div>

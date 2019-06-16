@@ -78,6 +78,18 @@
           background-color: #1876d2;
           color: #fff;
       }
+
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url("{{ asset('assets/material-icons/iconfont/MaterialIcons-Regular.eot') }}");
+          src: local('Material Icons'),
+              local('MaterialIcons-Regular'),
+              url("{{ asset('assets/material-icons/iconfont/MaterialIcons-Regular.woff2') }}") format('woff2'),
+              url("{{ asset('assets/material-icons/iconfont/MaterialIcons-Regular.woff') }}") format('woff'),
+              url("{{ asset('assets/material-icons/iconfont/MaterialIcons-Regular.ttf') }}") format('truetype');
+      }
     </style>
 
     <!-- matchMedia polyfill for testing media queries in JS -->

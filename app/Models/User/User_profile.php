@@ -23,7 +23,9 @@ class User_profile extends Model implements Auditable
         "village_id",
         "address",
         "institute",
-        "gender_id"
+        "gender_id",
+        "email",
+        "phone_number"
     ];
 
     public function gender()

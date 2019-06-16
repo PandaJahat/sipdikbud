@@ -21,7 +21,7 @@
                 </a>
                 <ul class="" style="display: none;">
                     <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Penelitian</a></li>
-                    <li class="{{ Request::is('collection/list') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Penelitian</a></li>
+                    <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Penelitian</a></li>
                     <li ><a href="javascript:;">Moderasi Penelitian</a></li>
                 </ul>
             </li>
