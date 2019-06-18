@@ -50,6 +50,15 @@
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                 </ul>
             </li>
+            <li title="Mitra" class="submenu_trigger">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">location_city</i></span>
+                    <span class="menu_title">Mitra</span>
+                </a>
+                <ul class="" style="display: none;">
+                    <li class="{{ Request::is('partner/list') ? 'act_item' : '' }}"><a href="{{ route('partner.list') }}">Daftar Mitra</a></li>
+                </ul>
+            </li>
             <li title="Pengguna" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE87C;</i></span>
