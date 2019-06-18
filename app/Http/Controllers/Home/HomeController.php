@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+# Models
+use App\Models\Collection\Category;
+
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('contents.home.home.index');
+        return view('contents.home.home.index', [
+            'categories' => $this->getCategories()
+        ]);
     }
 
-    public function results()
+    public function getCategories()
     {
-        return view('contents.home.home.temp-result');
+        return Category::orderBy('name', 'asc')->get();
     }
 }
