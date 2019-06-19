@@ -162,6 +162,7 @@ class RouteServiceProvider extends ServiceProvider
         ])->namespace($namespace);
 
         $home = (clone $route)->group(base_path('routes/web/home/home.php'));
+        $search = (clone $route)->group(base_path('routes/web/home/search.php'));
     }
     // Module Routes: end
 
