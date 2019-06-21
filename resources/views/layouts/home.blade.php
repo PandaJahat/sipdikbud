@@ -44,9 +44,23 @@
                     </li>
                     <li class="nav-item">
                         @guest
-                            <a href="{{ route('login') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user-circle"></i> Masuk</a>
+                            <a href="{{ route('login') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user"></i> Masuk</a>
+                            &nbsp;
+                            <a href="{{ route('home.register') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user-plus"></i> Daftar</a>
                         @else
-                            <a href="{{ route('dashboard') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}</a>
+                            <a href="{{ route('dashboard') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user"></i> {{ Auth::user()->name }}</a>
+                            @if (Laratrust::hasRole('public'))
+                            &nbsp;
+                            <a class="btn btn-dark shadow" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @endif
                         @endguest
                     </li>
                 </ul>
