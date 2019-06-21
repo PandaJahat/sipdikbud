@@ -31,7 +31,7 @@ class RegisterController extends Controller
             ])->withInput(); 
         } catch (\Exception $e) {
             return redirect()->route('home.register')->withErrors([
-                'validation' => 'Terjadi kesalahan saat validasi!'
+                'validation' => $e->getMessage()
             ]);
         }
 
@@ -51,7 +51,7 @@ class RegisterController extends Controller
 
         } catch (\Exception $e) {
             return redirect()->route('home.register')->withErrors([
-                'validation' => 'Terjadi kesalahan saat validasi!'
+                'validation' => $e->getMessage()
             ]);
         }
     }
