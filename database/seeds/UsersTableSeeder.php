@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'operator',
+            'name' => 'researcher',
             'display_name' => 'Peneliti',
 
             'created_at' => now(),
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('roles')->insert([
             'name' => 'moderator',
-            'display_name' => 'Moderator',
+            'display_name' => 'Operator',
 
             'created_at' => now(),
             'updated_at' => now()

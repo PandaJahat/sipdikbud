@@ -24,12 +24,17 @@ class MappingController extends Controller
     public function data(Request $request)
     {
         setlocale(LC_ALL, 'id_ID.utf8');
+        $user = Auth::user();
 
         $collections = Collection::select(DB::raw('collections.*'))->with([
             'author', 'language'
         ])->withCount([
             'institutions'
         ]);
+
+        if ($user->hasRole('researcher')) {
+            $collections->where('user_id', $user->id);
+        }
 
         return DataTables::of($collections)
         ->addIndexColumn()

@@ -70,7 +70,7 @@
                     <div data-tilt class="card border-0 shadow my-2">
                         <div class="card-body text-center">
                             <img width="100" class="img-fluid" src="{{ asset('front/img/library.svg') }}">
-                            <h3 class="font-weight-bold pt-1">Jejaring</h3>
+                            <h3 class="font-weight-bold pt-1">Instansi</h3>
                             <h3><span class="badge badge-pill badge-primary">{{ $partner_count->non_institute }}</span></h3>
                         </div>
                     </div>

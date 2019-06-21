@@ -25,6 +25,7 @@
                     <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Penelitian</a></li>
                 </ul>
             </li>
+            @if (Laratrust::hasRole('admin'))
             <li title="API" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE8C0;</i></span>
@@ -69,6 +70,7 @@
                     <li class="{{ Request::is('user/list', 'user/update') ? 'act_item' : '' }}"><a href="{{ route('user.list') }}">Daftar Pengguna</a></li>
                 </ul>
             </li>
+            @endif
         </ul>
     </div>
 </aside>
