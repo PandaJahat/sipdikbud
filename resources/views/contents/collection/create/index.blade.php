@@ -16,7 +16,7 @@
                         <input type="text" class="md-input" name="title" value="{{ old('title') }}" required />
                     </div>
                     <div class="uk-form-row">
-                        <label>Pengarang <span class="uk-text-danger">*</span></label>
+                        <label>Nama Penulis <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="author" value="{{ old('author') }}" required />
                     </div>
                     <div class="uk-form-row">

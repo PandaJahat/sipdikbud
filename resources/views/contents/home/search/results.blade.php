@@ -113,7 +113,7 @@
                     <table class="table table-borderless table-sm">
                         <tbody>
                             <tr>
-                                <th scope="row" style="width: 150px;">Peneliti :</th>
+                                <th scope="row" style="width: 150px;">Penulis :</th>
                                 <td>{{ $item->author->name }}</td>
                             </tr>
                             <tr>

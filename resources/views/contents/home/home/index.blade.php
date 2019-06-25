@@ -18,7 +18,7 @@
                 <select class="custom-select mr-sm-2 shadow-blue border border-primary" id="inlineFormCustomSelect" name="category">
                     <option value="all" selected>Semua Kategori</option>
                     <option value="title">Judul</option>
-                    <option value="author">Peneliti</option>
+                    <option value="author">Penulis</option>
                     <option value="keyword">Kata Kunci</option>
                 </select>
             </div>

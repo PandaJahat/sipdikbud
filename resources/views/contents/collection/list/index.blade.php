@@ -13,7 +13,7 @@
                 <tr>
                     <th>#</th>
                     <th style="width: 40%">Judul</th>
-                    <th>Pengarang</th>
+                    <th>Penulis</th>
                     <th>Tahun</th>
                     <th>Diupload</th>
                     <th>Aksi</th>

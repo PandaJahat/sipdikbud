@@ -63,7 +63,7 @@
                                                     <i class="md-list-addon-icon material-icons">perm_contact_calendar</i>
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
-                                                    <label>Peneliti</label>
+                                                    <label>Penulis</label>
                                                     <input type="text" class="md-input" value="{{ $collection->author()->exists() ? $collection->author->name : '-' }}" readonly>
                                                 </div>
                                             </div>

@@ -14,7 +14,7 @@
                     <th>#</th>
                     <th>Status</th>
                     <th>Judul</th>
-                    <th>Peneliti</th>
+                    <th>Penulis</th>
                     <th>Bidang</th>
                     <th>Tahun</th>
                     <th>Diupload</th>
