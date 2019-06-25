@@ -4,7 +4,7 @@
 @include('plugins.autocomplete')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Ubah Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Ubah Koleksi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <form action="{{ route('collection.update.submit') }}" method="post" enctype="multipart/form-data" id="form-update">
@@ -14,7 +14,7 @@
             <div class="uk-grid">
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
-                        <label>Judul Penelitian <span class="uk-text-danger">*</span></label>
+                        <label>Judul Koleksi <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="title" value="{{ $collection->title }}" required />
                     </div>
                     <div class="uk-form-row">
@@ -43,7 +43,7 @@
                         <label>Gambar Cover (pilih file untuk mengganti cover sebelumnya)</label>
                         <input type="file" name="cover" class="dropify-id" accept="image/*" />
                     </div>
-                    @if (!empty($collection->abstract_file))
+                    {{-- @if (!empty($collection->abstract_file))
                     <div class="uk-form-row">
                         <label>Abstract Sebelumnya: </label>
                         <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="{{ route('collection.download.abstract', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank"><i class="uk-icon-download"></i> Download</a>
@@ -52,25 +52,25 @@
                     <div class="uk-form-row">
                         <label>Abstrak (pilih file untuk mengganti dokumen sebelumnya)</label>
                         <input type="file" name="abstract" class="dropify-id"/>
-                    </div>
+                    </div> --}}
                     <div class="uk-form-row">
-                        <label>Dokumen Penelitian Sebelumnya: </label>
+                        <label>File Dokumen Sebelumnya: </label>
                         <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon waves-effect waves-button waves-light" href="{{ route('collection.download', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank"><i class="uk-icon-download"></i> Download</a>
                     </div>
                     <div class="uk-form-row">
-                        <label>Dokumen Penelitian (pilih file untuk mengganti dokumen sebelumnya)</label>
+                        <label>File Dokumen (pilih file untuk mengganti dokumen sebelumnya)</label>
                         <input type="file" name="document" class="dropify-id"/>
                     </div>
                 </div>
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
                         <select name="language_id" required>
-                            <option value="">Pilih Bahasa Penelitian</option>
+                            <option value="">Pilih Bahasa</option>
                         </select>
                     </div>
                     <div class="uk-form-row">
                         <select name="category_id" id="categories" required>
-                            <option value="">Pilih Bidang Penelitian</option>
+                            <option value="">Pilih Bidang</option>
                         </select>
                     </div>
                     <div class="uk-form-row">

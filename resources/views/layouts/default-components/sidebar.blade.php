@@ -14,15 +14,15 @@
                 </a>
                 
             </li>
-            <li title="Penelitian" class="submenu_trigger">
+            <li title="Koleksi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span>
-                    <span class="menu_title">Penelitian</span>
+                    <span class="menu_title">Koleksi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Penelitian</a></li>
-                    <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Penelitian</a></li>
-                    <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Penelitian</a></li>
+                    <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Koleksi</a></li>
+                    <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Koleksi</a></li>
+                    <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Koleksi</a></li>
                 </ul>
             </li>
             @if (Laratrust::hasRole('admin'))
@@ -43,10 +43,10 @@
                     <span class="menu_title">Referensi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="menu_subtitle">Penelitian</li>
+                    <li class="menu_subtitle">Koleksi</li>
                     <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
-                    <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga/Bidang</a></li>
+                    <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                 </ul>

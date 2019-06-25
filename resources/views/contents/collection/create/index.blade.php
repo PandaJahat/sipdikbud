@@ -4,7 +4,7 @@
 @include('plugins.autocomplete')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Upload Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Upload Koleksi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <form action="{{ route('collection.create.submit') }}" method="post" enctype="multipart/form-data" id="form-create">
@@ -12,11 +12,11 @@
             <div class="uk-grid">
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
-                        <label>Judul Penelitian <span class="uk-text-danger">*</span></label>
+                        <label>Judul <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="title" value="{{ old('title') }}" required />
                     </div>
                     <div class="uk-form-row">
-                        <label>Nama Peneliti <span class="uk-text-danger">*</span></label>
+                        <label>Pengarang <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="author" value="{{ old('author') }}" required />
                     </div>
                     <div class="uk-form-row">
@@ -35,24 +35,24 @@
                         <label>Gambar Cover</label>
                         <input type="file" name="cover" class="dropify-id" accept="image/*" />
                     </div>
-                    <div class="uk-form-row">
+                    {{-- <div class="uk-form-row">
                         <label>Abstrak</label>
                         <input type="file" name="abstract" class="dropify-id"/>
-                    </div>
+                    </div> --}}
                     <div class="uk-form-row">
-                        <label>Dokumen Penelitian <span class="uk-text-danger">*</span></label>
+                        <label>File Dokumen <span class="uk-text-danger">*</span></label>
                         <input type="file" name="document" class="dropify-id" required/>
                     </div>
                 </div>
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
                         <select name="language_id" required>
-                            <option value="">Pilih Bahasa Penelitian</option>
+                            <option value="">Pilih Bahasa</option>
                         </select>
                     </div>
                     <div class="uk-form-row">
                         <select name="category_id" id="categories" required>
-                            <option value="">Pilih Bidang Penelitian</option>
+                            <option value="">Pilih Bidang</option>
                         </select>
                     </div>
                     <div class="uk-form-row">

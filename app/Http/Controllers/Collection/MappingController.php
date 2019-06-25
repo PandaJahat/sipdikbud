@@ -73,7 +73,7 @@ class MappingController extends Controller
                 'collection' => $collection
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('collection.mapping')->with('error', 'Penelitian tidak ditemukan!');
+            return redirect()->route('collection.mapping')->with('error', 'Koleksi tidak ditemukan!');
         }
     }
 
@@ -89,7 +89,7 @@ class MappingController extends Controller
                 ]);
             }
 
-            return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Penelitian berhasil dimoderasi!');
+            return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Koleksi berhasil dimoderasi!');
         } catch (\Throwable $th) {
             return redirect()->route('collection.mapping')->with('error', 'Terjadi kesalahan saat moderasi penelitian!');
         }

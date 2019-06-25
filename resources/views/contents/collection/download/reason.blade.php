@@ -1,7 +1,7 @@
 <div class="uk-modal" id="collection-download">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Tujuan Mengunduh Penelitian</h3>
+            <h3 class="uk-modal-title">Tujuan Mengunduh Koleksi</h3>
         </div>
         
         <form action="{{ route('collection.download.reason.submit') }}" method="POST" target="_blank" onsubmit="setTimeout(function(){window.location.reload();},10)">

@@ -11,7 +11,7 @@
     <form class="container" method="GET" action="{{ route('home.search.results') }}">
         <div class="form-row align-items-center">
             <div class="col-lg-7 col-md-5 col-sm-12 py-2">
-                <input type="text" class="form-control shadow-blue border border-primary" name="search" placeholder="Cari Hasil Penelitian">
+                <input type="text" class="form-control shadow-blue border border-primary" name="search" placeholder="Pencarian">
             </div>
             <div class="col-lg-3 col-md-5 col-sm-12 py-2">
                 <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
@@ -23,7 +23,7 @@
                 </select>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-12">
-                <button type="submit" class="btn btn-primary btn-block shadow-blue">Cari Penelitian</button>
+                <button type="submit" class="btn btn-primary btn-block shadow-blue">Cari</button>
             </div>
         </div>
     </form>
@@ -31,7 +31,7 @@
         <span>Kata kunci populer :
             <span class="badge badge-primary" onclick="selectPopularKeyword(this)">Pendidikan</span>
             <span class="badge badge-secondary">Model Belajar</span>
-            <span class="badge badge-success">Penelitian</span>
+            <span class="badge badge-success">Buku</span>
             {{-- <span class="badge badge-danger">Sosial</span>
             <span class="badge badge-warning">High Order Thinking</span>
             <span class="badge badge-info">Pengembangan Diri</span>
@@ -102,7 +102,7 @@
             </div>
             <div class="col-md-5">
                 <div class="container top-content-single">
-                    <h1>Bidang Penelitian</h1>
+                    <h1>Bidang</h1>
                 </div>
                 <div class="jumbotron">
                     <div class="list-group shadow">

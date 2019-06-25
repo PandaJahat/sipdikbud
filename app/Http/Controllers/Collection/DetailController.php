@@ -24,7 +24,7 @@ class DetailController extends Controller
                 'collection' => $collection
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('collection.list')->with('error', 'Penelitian tidak ditemukan!');
+            return redirect()->route('collection.list')->with('error', 'Koleksi tidak ditemukan!');
         }
     }
 }

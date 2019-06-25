@@ -55,10 +55,10 @@ class ListController extends Controller
     {
         $collection = Collection::find($request->id);
         
-        if (empty($collection)) return 'Penelitian tidak ditemukan!';
+        if (empty($collection)) return 'Koleksi tidak ditemukan!';
 
         $collection->delete();
-        return 'Penelitian berhasil dihapus!';
+        return 'Koleksi berhasil dihapus!';
     }
 
     public function downloadForm(Request $request)

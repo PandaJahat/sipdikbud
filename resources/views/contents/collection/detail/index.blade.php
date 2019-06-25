@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Detail Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Detail Koleksi</h3>
 <div class="uk-grid" data-uk-grid-margin="">
     <div class="uk-width-large-7-10 uk-row-first">
         <div class="md-card">
@@ -34,7 +34,7 @@
             </div></div>
             <div class="user_content">
                 <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#collection_detail', animation:'slide-horizontal'}">
-                    <li class="uk-active"><a href="#">Informasi Penelitian</a></li>
+                    <li class="uk-active"><a href="#">Informasi Koleksi</a></li>
                     <li><a href="#">Gambar Cover</a></li>
                 </ul>
                 <ul id="collection_detail" class="uk-switcher uk-margin">
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
                             <h3 class="full_width_in_card heading_c">
-                                Dokumen
+                                Download
                             </h3>
                             <div class="uk-grid" data-uk-grid-margin="">
                                 <div class="uk-width-1-1 uk-row-first">
@@ -167,7 +167,7 @@
                                         @if (!empty($collection->document_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Penelitian</a></span>
+                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Koleksi</a></span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -227,7 +227,7 @@
     <div class="uk-width-large-3-10">
         <div class="md-card">
             <div class="md-card-content">
-                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Penelitian</h3>
+                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Koleksi</h3>
                 <div class="uk-form-row">
                     <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
                     <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>

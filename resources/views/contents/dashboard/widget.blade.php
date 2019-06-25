@@ -3,7 +3,7 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
-                <span class="uk-text-muted uk-text-small">Penelitian</span>
+                <span class="uk-text-muted uk-text-small">Koleksi</span>
                 <h2 class="uk-margin-remove"><span id="count-pilot">0</span></h2>
             </div>
         </div>
