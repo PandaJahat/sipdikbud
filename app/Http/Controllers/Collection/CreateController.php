@@ -12,6 +12,8 @@ use App\Models\Collection\Language;
 use App\Models\Collection\Category;
 use App\Models\Collection\Author;
 use App\Models\Collection\Collection;
+use App\Models\Collection\Genre;
+use App\Models\Collection\Topic;
 
 class CreateController extends Controller
 {
@@ -70,6 +72,7 @@ class CreateController extends Controller
         $collection->save();
 
         $collection->categories()->attach([$request->category_id]);
+        $collection->genres()->attach($request->genres);
 
         foreach (explode(',', $request->keywords) as $keyword) {
             $collection->keywords()->create([
@@ -77,7 +80,20 @@ class CreateController extends Controller
             ]);
         }
 
-        return redirect()->route('collection.list')->with('success', 'Berhasil mengupload penelitian!');
+        foreach (explode(',', $request->topics) as $topic) {
+            $getTopic = Topic::where('topic', $topic)->first();
+
+            if (empty($getTopic)) {
+                $getTopic = new Topic([
+                    'topic' => $topic
+                ]);
+                $getTopic->save(); 
+            }
+
+            $collection->topics()->attach([$getTopic->id]);
+        }
+
+        return redirect()->route('collection.list')->with('success', 'Berhasil mengupload koleksi!');
     }
 
     public function getLanguages()
@@ -93,5 +109,10 @@ class CreateController extends Controller
     public function getAuthors()
     {
         return Author::get()->pluck('name');
+    }
+
+    public function getGenres()
+    {
+        return Genre::orderBy('name')->get();
     }
 }

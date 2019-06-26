@@ -90,10 +90,10 @@
                                         <div class="uk-grid-margin uk-row-first">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">local_offer</i>
+                                                    <i class="md-list-addon-icon material-icons">book</i>
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
-                                                    <label>Bidang</label>
+                                                    <label>Kategori</label>
                                                     <input type="text" class="md-input" value="{{ $collection->categories()->exists() ? $collection->category->name : '-' }}" readonly>
                                                 </div>
                                             </div>
@@ -128,6 +128,28 @@
                                                 <div class="md-input-wrapper md-input-filled">
                                                     <label>Diterbitkan Oleh</label>
                                                     <input type="text" class="md-input" value="{{ !empty($collection->published_by) ? $collection->published_by : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">local_offer</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Genre</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->genres()->exists() ? implode(', ', json_decode($collection->genres->pluck('name'))) : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid-margin">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">assignment</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Topik</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->topics()->exists() ? implode(',', json_decode($collection->topics->pluck('topic'))) : '-' }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -171,7 +193,7 @@
                                         @if (!empty($collection->abstract_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Abstrak</a></span>
+                                                    <span class="md-list-heading"><a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Abstrak</a></span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -186,7 +208,7 @@
                                         @if (!empty($collection->document_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Koleksi</a></span>
+                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Download Dokumen PDF</a></span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -237,7 +259,9 @@
                         </div>
                     </li>
                     <li>
+                        @if (!empty($collection->cover_file))
                         <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" alt="cover">
+                        @endif
                     </li>
                 </ul>
             </div>

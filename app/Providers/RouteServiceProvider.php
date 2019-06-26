@@ -129,6 +129,7 @@ class RouteServiceProvider extends ServiceProvider
         $reason = (clone $route)->group(base_path('routes/web/reference/reason.php'));
         $institution = (clone $route)->group(base_path('routes/web/reference/institution.php'));
         $genre = (clone $route)->group(base_path('routes/web/reference/genre.php'));
+        $topic = (clone $route)->group(base_path('routes/web/reference/topic.php'));
     }
 
     protected function moduleIntegrationRoutes()
