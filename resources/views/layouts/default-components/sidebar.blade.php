@@ -45,7 +45,7 @@
                 <ul class="" style="display: none;">
                     <li class="menu_subtitle">Koleksi</li>
                     <li class=""><a href="javascript:;">Penerbit</a></li>
-                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang</a></li>
+                    <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Kategori</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
                     <li class=""><a href="javascript:;">Genre</a></li>
                     <li class=""><a href="javascript:;">Topik</a></li>
