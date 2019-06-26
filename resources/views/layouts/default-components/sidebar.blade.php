@@ -48,7 +48,7 @@
                     <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Kategori</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
                     <li class="{{ Request::is('reference/genre') ? 'act_item' : '' }}"><a href="{{ route('reference.genre') }}">Genre</a></li>
-                    <li class=""><a href="javascript:;">Topik</a></li>
+                    <li class="{{ Request::is('reference/topic') ? 'act_item' : '' }}"><a href="{{ route('reference.topic') }}">Topik</a></li>
                     <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
