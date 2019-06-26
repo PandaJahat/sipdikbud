@@ -11,4 +11,9 @@ class OtherAppController extends Controller
     {
         return view('contents.integration.other.index');
     }
+
+    public function data(Request $request)
+    {
+        # code...
+    }
 }

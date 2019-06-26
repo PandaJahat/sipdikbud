@@ -14,7 +14,7 @@
                     <th>#</th>
                     <th>Aplikasi</th>
                     <th>Lembaga</th>
-                    <th>Jenis Data Terintegrasi</th>
+                    <th>Jenis Data</th>
                     <th>Terakhir Integrasi</th>
                     <th style="width: 5%">Aksi</th>
                 </tr>
