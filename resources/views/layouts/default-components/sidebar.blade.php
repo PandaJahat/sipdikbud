@@ -44,8 +44,11 @@
                 </a>
                 <ul class="" style="display: none;">
                     <li class="menu_subtitle">Koleksi</li>
+                    <li class=""><a href="javascript:;">Penerbit</a></li>
                     <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Bidang</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
+                    <li class=""><a href="javascript:;">Genre</a></li>
+                    <li class=""><a href="javascript:;">Topik</a></li>
                     <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
