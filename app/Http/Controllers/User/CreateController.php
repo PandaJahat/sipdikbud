@@ -84,7 +84,7 @@ class CreateController extends Controller
         return Village::select(DB::raw('id, name'))->where('subdistrict_id', $request->subdistrict_id)->get();
     }
 
-    private function getGenders()
+    public function getGenders()
     {
         return Gender::all();
     }

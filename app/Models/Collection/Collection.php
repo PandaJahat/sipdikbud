@@ -69,4 +69,14 @@ class Collection extends Model
     {
         return $this->categories->first();
     }
+
+    public function genres()
+    {
+        return $this->belongsToMany('App\Models\Collection\Genre', 'collection_genre', 'collection_id', 'genre_id');
+    }
+
+    public function topics()
+    {
+        return $this->belongsToMany('App\Models\Collection\Topic', 'collection_topic', 'collection_id', 'topic_id');
+    }
 }

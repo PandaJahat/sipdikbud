@@ -24,12 +24,17 @@ class MappingController extends Controller
     public function data(Request $request)
     {
         setlocale(LC_ALL, 'id_ID.utf8');
+        $user = Auth::user();
 
         $collections = Collection::select(DB::raw('collections.*'))->with([
             'author', 'language'
         ])->withCount([
             'institutions'
         ]);
+
+        if ($user->hasRole('researcher')) {
+            $collections->where('user_id', $user->id);
+        }
 
         return DataTables::of($collections)
         ->addIndexColumn()
@@ -68,7 +73,7 @@ class MappingController extends Controller
                 'collection' => $collection
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('collection.mapping')->with('error', 'Penelitian tidak ditemukan!');
+            return redirect()->route('collection.mapping')->with('error', 'Koleksi tidak ditemukan!');
         }
     }
 
@@ -84,7 +89,7 @@ class MappingController extends Controller
                 ]);
             }
 
-            return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Penelitian berhasil dimoderasi!');
+            return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Koleksi berhasil dimoderasi!');
         } catch (\Throwable $th) {
             return redirect()->route('collection.mapping')->with('error', 'Terjadi kesalahan saat moderasi penelitian!');
         }

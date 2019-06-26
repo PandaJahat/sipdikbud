@@ -10,20 +10,23 @@ use function GuzzleHttp\json_decode;
 # Models
 use App\Models\Collection\Collection;
 use App\Models\Collection\Author;
+use App\Models\Collection\Topic;
 
 class UpdateController extends Controller
 {
     public function index(Request $request)
     {
         $collection = Collection::find($request->id)->load([
-            'author', 'language', 'keywords', 'categories'
+            'author', 'language', 'keywords', 'categories', 'topics'
         ]);
         $keywords = implode(',', json_decode($collection->keywords->pluck('keyword')));
+        $topics = implode(',', json_decode($collection->topics->pluck('topic')));
         $categories = $collection->categories->pluck('id');
 
         return view('contents.collection.update.index', [
             'collection' => $collection,
             'keywords' => $keywords,
+            'topics' => $topics,
             'categories' => $categories
         ]);
     }
@@ -80,6 +83,9 @@ class UpdateController extends Controller
         $collection->categories()->detach();
         $collection->categories()->attach($request->categories);
 
+        $collection->genres()->detach();
+        $collection->genres()->attach($request->genres);
+
         $collection->keywords()->delete();
         foreach (explode(',', $request->keywords) as $keyword) {
             $collection->keywords()->create([
@@ -87,6 +93,20 @@ class UpdateController extends Controller
             ]);
         }
 
-        return redirect()->route('collection.list')->with('success', 'Berhasil mengubah penelitian!');
+        $collection->topics()->detach();
+        foreach (explode(',', $request->topics) as $topic) {
+            $getTopic = Topic::where('topic', $topic)->first();
+
+            if (empty($getTopic)) {
+                $getTopic = new Topic([
+                    'topic' => $topic
+                ]);
+                $getTopic->save(); 
+            }
+
+            $collection->topics()->attach([$getTopic->id]);
+        }
+
+        return redirect()->route('collection.list')->with('success', 'Berhasil mengubah koleksi!');
     }
 }

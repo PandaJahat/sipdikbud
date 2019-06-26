@@ -9,6 +9,6 @@ class OpenJournalSystemController extends Controller
 {
     public function index()
     {
-        return view('contents.dashboard.index');
+        return redirect()->back();
     }
 }

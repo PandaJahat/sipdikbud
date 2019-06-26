@@ -15,5 +15,12 @@ class Source extends Model
         "description",
         "logo_file",
         "url",
+        "code",
+        "is_institute"
     ];
+
+    public function collections()
+    {
+        return $this->hasMany('App\Models\Collection\Collection', 'source_id', 'id');
+    }
 }

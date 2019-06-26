@@ -20,7 +20,7 @@
                     <th style="width: 5%">#</th>
                     <th>Nama</th>
                     <th>Kode</th>
-                    <th>Jumlah Penelitian</th>
+                    <th>Jumlah Koleksi</th>
                     <th>Dibuat pada</th>
                     <th style="width: 12%">Aksi</th>
                 </tr>

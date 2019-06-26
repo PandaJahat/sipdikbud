@@ -4,12 +4,12 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Bidang Penilitian</h3>
+<h3 class="heading_b uk-margin-bottom">Kategori Koleksi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-grid">
             <div class="uk-width-1-1">
-                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#category-create'}"><i class="uk-icon-plus"></i> Buat Bidang</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#category-create'}"><i class="uk-icon-plus"></i> Buat Kategori</button>
             </div>
         </div>
         <br>
@@ -19,7 +19,7 @@
                 <tr>
                     <th style="width: 5%">#</th>
                     <th>Nama</th>
-                    <th>Jumlah Penelitian</th>
+                    <th>Jumlah Koleksi</th>
                     <th>Dibuat pada</th>
                     <th style="width: 12%">Aksi</th>
                 </tr>
@@ -35,13 +35,13 @@
 <div class="uk-modal" id="category-create">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Bidang</h3>
+            <h3 class="uk-modal-title">Formulir Kategori</h3>
         </div>
         
         <form action="{{ route('reference.category.create.submit') }}" method="POST">
             @csrf
             <div class="uk-form-row">
-                <label>Nama Bidang <span class="uk-text-danger">*</span></label>
+                <label>Nama Kategori <span class="uk-text-danger">*</span></label>
                 <input type="text" class="md-input" name="name" required />
             </div>
             <div class="uk-modal-footer uk-text-right">
@@ -55,7 +55,7 @@
 <div class="uk-modal" id="category-update">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Perubahan Bidang</h3>
+            <h3 class="uk-modal-title">Formulir Perubahan Kategori</h3>
         </div>
         
         <form action="{{ route('reference.category.update.submit') }}" method="POST">

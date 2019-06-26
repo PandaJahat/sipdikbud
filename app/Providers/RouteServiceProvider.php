@@ -71,6 +71,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->moduleReferenceRoutes();
         $this->moduleIntegrationRoutes();
         $this->moduleHomeRoutes();
+        $this->modulePartnerRoutes();
     }
 
     // Module Routes: start
@@ -127,6 +128,8 @@ class RouteServiceProvider extends ServiceProvider
         $language = (clone $route)->group(base_path('routes/web/reference/language.php'));
         $reason = (clone $route)->group(base_path('routes/web/reference/reason.php'));
         $institution = (clone $route)->group(base_path('routes/web/reference/institution.php'));
+        $genre = (clone $route)->group(base_path('routes/web/reference/genre.php'));
+        $topic = (clone $route)->group(base_path('routes/web/reference/topic.php'));
     }
 
     protected function moduleIntegrationRoutes()
@@ -141,6 +144,17 @@ class RouteServiceProvider extends ServiceProvider
         $other = (clone $route)->group(base_path('routes/web/integration/other.php'));
     }
 
+    protected function modulePartnerRoutes()
+    {
+        $namespace = $this->namespace.'\Partner';
+
+        $route = Route::middleware([
+            'web', 'auth'
+        ])->namespace($namespace);
+
+        $ojs = (clone $route)->group(base_path('routes/web/partner/list.php'));
+    }
+
     protected function moduleHomeRoutes()
     {
         $namespace = $this->namespace.'\Home';
@@ -150,6 +164,8 @@ class RouteServiceProvider extends ServiceProvider
         ])->namespace($namespace);
 
         $home = (clone $route)->group(base_path('routes/web/home/home.php'));
+        $search = (clone $route)->group(base_path('routes/web/home/search.php'));
+        $register = (clone $route)->group(base_path('routes/web/home/register.php'));
     }
     // Module Routes: end
 

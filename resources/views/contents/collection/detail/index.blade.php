@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Detail Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Detail Koleksi</h3>
 <div class="uk-grid" data-uk-grid-margin="">
     <div class="uk-width-large-7-10 uk-row-first">
         <div class="md-card">
@@ -34,7 +34,7 @@
             </div></div>
             <div class="user_content">
                 <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#collection_detail', animation:'slide-horizontal'}">
-                    <li class="uk-active"><a href="#">Informasi Penelitian</a></li>
+                    <li class="uk-active"><a href="#">Informasi Koleksi</a></li>
                     <li><a href="#">Gambar Cover</a></li>
                 </ul>
                 <ul id="collection_detail" class="uk-switcher uk-margin">
@@ -63,7 +63,7 @@
                                                     <i class="md-list-addon-icon material-icons">perm_contact_calendar</i>
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
-                                                    <label>Peneliti</label>
+                                                    <label>Penulis</label>
                                                     <input type="text" class="md-input" value="{{ $collection->author()->exists() ? $collection->author->name : '-' }}" readonly>
                                                 </div>
                                             </div>
@@ -71,10 +71,10 @@
                                         <div class="uk-grid-margin uk-row-first">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">local_offer</i>
+                                                    <i class="md-list-addon-icon material-icons">book</i>
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
-                                                    <label>Bidang</label>
+                                                    <label>Kategori</label>
                                                     <input type="text" class="md-input" value="{{ $collection->categories()->exists() ? $collection->category->name : '-' }}" readonly>
                                                 </div>
                                             </div>
@@ -115,6 +115,28 @@
                                         <div class="uk-grid-margin uk-row-first">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">local_offer</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Genre</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->genres()->exists() ? implode(', ', json_decode($collection->genres->pluck('name'))) : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid-margin">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">assignment</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Topik</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->topics()->exists() ? implode(',', json_decode($collection->topics->pluck('topic'))) : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
                                                     <i class="md-list-addon-icon material-icons">flag</i>
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
@@ -144,7 +166,7 @@
                                 </div>
                             </div>
                             <h3 class="full_width_in_card heading_c">
-                                Dokumen
+                                Download
                             </h3>
                             <div class="uk-grid" data-uk-grid-margin="">
                                 <div class="uk-width-1-1 uk-row-first">
@@ -152,7 +174,7 @@
                                         @if (!empty($collection->abstract_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Abstrak</a></span>
+                                                    <span class="md-list-heading"><a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Abstrak</a></span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -167,7 +189,7 @@
                                         @if (!empty($collection->document_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Penelitian</a></span>
+                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Download Dokumen PDF</a></span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -218,7 +240,9 @@
                         </div>
                     </li>
                     <li>
+                        @if (!empty($collection->cover_file))
                         <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" alt="cover">
+                        @endif
                     </li>
                 </ul>
             </div>
@@ -227,7 +251,7 @@
     <div class="uk-width-large-3-10">
         <div class="md-card">
             <div class="md-card-content">
-                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Penelitian</h3>
+                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Koleksi</h3>
                 <div class="uk-form-row">
                     <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
                     <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>

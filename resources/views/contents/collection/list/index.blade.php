@@ -4,7 +4,7 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Daftar Penelitian</h3>
+<h3 class="heading_b uk-margin-bottom">Daftar Koleksi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         {{-- <div class="uk-overflow-container"> --}}
@@ -13,7 +13,7 @@
                 <tr>
                     <th>#</th>
                     <th style="width: 40%">Judul</th>
-                    <th>Peneliti</th>
+                    <th>Penulis</th>
                     <th>Tahun</th>
                     <th>Diupload</th>
                     <th>Aksi</th>
