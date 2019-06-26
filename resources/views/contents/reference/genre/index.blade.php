@@ -4,17 +4,17 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Kategori Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Genre Koleksi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-grid">
             <div class="uk-width-1-1">
-                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#category-create'}"><i class="uk-icon-plus"></i> Buat Kategori</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#genre-create'}"><i class="uk-icon-plus"></i> Buat Genre</button>
             </div>
         </div>
         <br>
         <div class="uk-overflow-container">
-            <table class="uk-table uk-table-hover" id="category-table">
+            <table class="uk-table uk-table-hover" id="genre-table">
                 <thead>
                 <tr>
                     <th style="width: 5%">#</th>
@@ -32,16 +32,16 @@
     </div>
 </div>
 
-<div class="uk-modal" id="category-create">
+<div class="uk-modal" id="genre-create">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Kategori</h3>
+            <h3 class="uk-modal-title">Formulir Genre</h3>
         </div>
         
-        <form action="{{ route('reference.category.create.submit') }}" method="POST">
+        <form action="{{ route('reference.genre.create.submit') }}" method="POST">
             @csrf
             <div class="uk-form-row">
-                <label>Nama Kategori <span class="uk-text-danger">*</span></label>
+                <label>Nama Genre <span class="uk-text-danger">*</span></label>
                 <input type="text" class="md-input" name="name" required />
             </div>
             <div class="uk-modal-footer uk-text-right">
@@ -52,13 +52,13 @@
     </div>
 </div>
 
-<div class="uk-modal" id="category-update">
+<div class="uk-modal" id="genre-update">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Formulir Perubahan Kategori</h3>
+            <h3 class="uk-modal-title">Formulir Perubahan Genre</h3>
         </div>
         
-        <form action="{{ route('reference.category.update.submit') }}" method="POST">
+        <form action="{{ route('reference.genre.update.submit') }}" method="POST">
             <span class="form"></span>
             <div class="uk-modal-footer uk-text-right">
                 <button type="button" class="md-btn md-btn-default uk-modal-close">Tutup</button>
@@ -71,15 +71,15 @@
 
 @push('scripts')
     <script>
-        var category_table
+        var genre_table
 
         $(function () {
-            category_table = $('#category-table').DataTable({
+            genre_table = $('#genre-table').DataTable({
                 language: defaultLang,
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('reference.category.data') }}"
+                    url: "{{ route('reference.genre.data') }}"
                 },
                 columnDefs: [
                     {
@@ -123,19 +123,19 @@
             })
         })
 
-        function updateCategory(id) {
-            $.get("{{ route('reference.category.update.form') }}", {
+        function updateGenre(id) {
+            $.get("{{ route('reference.genre.update.form') }}", {
                 id: id
             }).done(function (result) {
-                $('#category-update').find('.form').html(result)
-                UIkit.modal('#category-update').show()
+                $('#genre-update').find('.form').html(result)
+                UIkit.modal('#genre-update').show()
             })
         }
 
-        function deleteCategory(id) {
+        function deleteGenre(id) {
             Swal.fire({
                 title: 'Anda yakin?',
-                text: "Ingin menghapus kategori ini",
+                text: "Ingin menghapus genre ini",
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -144,7 +144,7 @@
                 cancelButtonText: 'Tidak'
             }).then((result) => {
                 if (result.value) {
-                    $.post("{{ route('reference.category.delete.submit') }}", {
+                    $.post("{{ route('reference.genre.delete.submit') }}", {
                         _token: "{{ csrf_token() }}",
                         _method: 'DELETE',
                         id: id
@@ -155,7 +155,7 @@
                             'success'
                         )
 
-                        category_table.draw(false)
+                        genre_table.draw(false)
                     })
                 }
             })
