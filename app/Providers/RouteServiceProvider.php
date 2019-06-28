@@ -142,6 +142,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $ojs = (clone $route)->group(base_path('routes/web/integration/ojs.php'));
         $other = (clone $route)->group(base_path('routes/web/integration/other.php'));
+        $app = (clone $route)->group(base_path('routes/web/integration/app.php'));
     }
 
     protected function modulePartnerRoutes()

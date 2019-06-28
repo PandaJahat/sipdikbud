@@ -16,7 +16,11 @@ class Source extends Model
         "logo_file",
         "url",
         "code",
-        "is_institute"
+        "is_institute",
+        "company_name",
+        "type",
+        "last_sync",
+        "route"
     ];
 
     public function collections()
