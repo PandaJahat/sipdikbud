@@ -63,7 +63,7 @@ return [
             ]) : [],
         ],
 
-        'mysql2' => [
+        'rekapin' => [
             'driver'    => env('DB_CONNECTION_SECOND', ''),
             'host'      => env('DB_HOST_SECOND', ''),
             'port'      => env('DB_PORT_SECOND', ''),

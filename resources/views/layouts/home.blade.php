@@ -1,86 +1,83 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="zxx">
 
 <head>
-    <!-- Required meta tags -->
+    <!-- Basic -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="32x32" type="image/png">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css') }}">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,600,700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/all.css') }}">
-    <!-- Animate -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/animate.css') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SIPDIKBUD | Sistem Informasi Penelitian Kemendikbud</title>
+    <meta name="keywords" content="puslitjakdikbud, kemdikbud, penelitian" />
+    <meta name="description" content="Sistem Informasi Penelitian Kemendikbud">
+    <meta name="author" content="puslitjakdikbud">
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets-front/img/favicon.png') }}" sizes="32x32" type="image/png">
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+    <!-- Web Fonts  -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700,900%7COpen+Sans:300,400,600,700,800" rel="stylesheet" type="text/css">
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/font-awesome/css/fontawesome-all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/animate/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/linear-icons/css/linear-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/owl.carousel/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/owl.carousel/assets/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/vendor/magnific-popup/magnific-popup.min.css') }}">
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="{{ asset('assets-front/css/theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-front/css/theme-elements.css') }}">
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="{{ asset('assets-front/css/skins/default.css') }}">
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets-front/css/custom.css') }}">
+    <!-- Head Libs -->
+    <script src="{{ asset('assets-front/vendor/modernizr/modernizr.min.js') }}"></script>
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom static-top shadow-sm navbar-border-bottom">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('home') }}">
-                <img height="30" src="{{ asset('front/img/logo-white.svg') }}" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{ route('home') }}">Beranda
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:;">Tentang SIPDIKBUD</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="javascript:;">Hubungi Kami</a>
-                    </li>
-                    <li class="nav-item">
-                        @guest
-                            <a href="{{ route('login') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user"></i> Masuk</a>
-                            &nbsp;
-                            <a href="{{ route('home.register') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user-plus"></i> Daftar</a>
-                        @else
-                            <a href="{{ route('dashboard') }}" type="link" class="btn btn-dark shadow"><i class="fas fa-user"></i> {{ Auth::user()->name }}</a>
-                            @if (Laratrust::hasRole('public'))
-                            &nbsp;
-                            <a class="btn btn-dark shadow" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                            @endif
-                        @endguest
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    @yield('content')
-    <footer class="footer py-3">
-        <div class="container">
-            <span class="text-light">© 2019 Sistem Informasi Penelitian Kemendikbud | Puslitjakdikbud</span>
-        </div>
-    </footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
-
-    @stack('scripts')
+    <div class="body">
+        @include('layouts.home-components.header')
+        @yield('content')
+        @include('layouts.home-components.footer')
+    </div>
+    <!-- Vendor -->
+    <script src="{{ asset('assets-front/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.appear/jquery.appear.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery-cookie/jquery-cookie.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/common/common.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.validation/jquery.validation.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.easy-pie-chart/jquery.easy-pie-chart.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.gmap/jquery.gmap.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/jquery.lazyload/jquery.lazyload.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/isotope/jquery.isotope.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/vide/vide.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/vivus/vivus.min.js') }}"></script>
+    <!-- Theme Base, Components and Settings -->
+    <script src="{{ asset('assets-front/js/theme.js') }} }}"></script>
+    <!-- Current Page Vendor and Views -->
+    <script src="{{ asset('assets-front/vendor/rs-plugin/js/jquery.themepunch.tools.min.js') }}"></script>
+    <script src="{{ asset('assets-front/vendor/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
+    <!-- Theme Custom -->
+    <script src="{{ asset('assets-front/js/custom.js') }}"></script>
+    <!-- Theme Initialization Files -->
+    <script src="{{ asset('assets-front/js/theme.init.js') }}"></script>
+    <!-- Examples -->
+    <script src="{{ asset('assets-front/js/examples/examples.portfolio.js') }}"></script>
+    <!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information.
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js' }}','ga');
+        
+            ga('create', 'UA-12345678-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+         -->
 </body>
 
 </html>

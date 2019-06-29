@@ -7,5 +7,8 @@ use App\Http\Controllers\Controller;
 
 class AboutController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('contents.home.about.index');
+    }
 }

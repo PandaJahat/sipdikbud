@@ -22,7 +22,8 @@ class Collection extends Model
         "is_active",
         "author_id",
         "language_id",
-        "source_id"
+        "source_id",
+        "code"
     ];
 
     public function categories()

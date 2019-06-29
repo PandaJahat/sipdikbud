@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 # Models
 use App\Models\Collection\Category;
 use App\Models\Collection\Source;
+use App\Models\Collection\Collection;
 
 class HomeController extends Controller
 {
@@ -16,18 +17,32 @@ class HomeController extends Controller
         return view('contents.home.home.index', [
             'categories' => $this->getCategories(),
             'partners' => $this->getSources(),
-            'partner_count' => (object) $this->getPartnerCount()
+            'partner_count' => (object) $this->getPartnerCount(),
+            'collection_count' => $this->getCollectionCount()
         ]);
+    }
+
+    public function getCollectionCount()
+    {
+        return Collection::where('is_active', true)->count();
     }
 
     public function getCategories()
     {
-        return Category::orderBy('name', 'asc')->get();
+        return Category::orderBy('name', 'asc')->withCount([
+            'collections' => function($query) {
+                $query->where('is_active', true);
+            } 
+        ])->get();
     }
 
     public function getSources()
     {
-        return Source::withCount('collections')->orderBy('collections_count', 'desc')->limit(5)->get();
+        return Source::withCount([
+            'collections' => function($query) {
+                $query->where('is_active', true);
+            } 
+        ])->orderBy('collections_count', 'desc')->limit(5)->get();
     }
 
     public function getPartnerCount()
@@ -35,10 +50,12 @@ class HomeController extends Controller
         $institute = Source::where('is_institute', true)->count();
         
         $non_institute = Source::where('is_institute', false)->count();
+
+        $ojs = Source::where('type', 'ojs')->count();
         
         return [
             'institute' => $institute,
-            'repository' => 0,
+            'ojs' => $ojs,
             'non_institute' => $non_institute 
         ];
     }

@@ -17,9 +17,6 @@ class SearchController extends Controller
         return view('contents.home.search.results', [
             'request' => $request,
             'categories' => $this->getCategories($request),
-            'institutes' => $this->getInstitutes($request),
-            'years' => $this->getYears($request),
-
             'collections' => $this->getCollection($request)
         ]);
     }
@@ -29,20 +26,22 @@ class SearchController extends Controller
         $category = $request->category;
         $collections = Collection::query();
         
-        if ($category == 'title' || $category == 'all') {
-            $collections->orWhere('title', 'like', "%$request->search%");
+        if (!empty($request->publisher)) {
+            $collections->orWhere('published_by', 'like', "%$request->publisher%");
         }
 
-        if ($category == 'author' || $category == 'all') {
+        if (!empty($request->author)) {
             $collections->orWhereHas('author', function($query) use($request) {
-                $query->where('name', 'like', "%$request->search%");
+                $query->where('name', 'like', "%$request->author%");
             });
         }
 
-        if ($category == 'keyword' || $category == 'all') {
+        if (!empty($request->keywords)) {
             $collections->orWhereHas('keywords', function($query) use($request) {
-                $query->where('keyword', 'like', "%$request->search%");
+                $query->where('keyword', 'like', "%$request->keywords%");
             });
+
+            $collections->orWhere('title', 'like', "%$request->keywords%");
         }
 
         return $collections->paginate(10);
@@ -51,51 +50,23 @@ class SearchController extends Controller
     public function getCategories(Request $request)
     {
         return Category::whereHas('collections', function($query) use($request) {
-            $category = $request->category;
-
-            if ($category == 'title' || $category == 'all') {
-                $query->orWhere('title', 'like', "%$request->search%");
+            if (!empty($request->publisher)) {
+                $query->orWhere('published_by', 'like', "%$request->publisher%");
             }
     
-            if ($category == 'author' || $category == 'all') {
+            if (!empty($request->author)) {
                 $query->orWhereHas('author', function($query) use($request) {
-                    $query->where('name', 'like', "%$request->search%");
+                    $query->where('name', 'like', "%$request->author%");
                 });
             }
     
-            if ($category == 'keyword' || $category == 'all') {
+            if (!empty($request->keywords)) {
                 $query->orWhereHas('keywords', function($query) use($request) {
-                    $query->where('keyword', 'like', "%$request->search%");
+                    $query->where('keyword', 'like', "%$request->keywords%");
                 });
+    
+                $query->orWhere('title', 'like', "%$request->keywords%");
             }
         })->orderBy('name')->get();
-    }
-
-    public function getInstitutes(Request $request)
-    {
-        return Source::whereHas('collections', function($query) use($request) {
-            $category = $request->category;
-            
-            if ($category == 'title' || $category == 'all') {
-                $query->orWhere('title', 'like', "%$request->search%");
-            }
-    
-            if ($category == 'author' || $category == 'all') {
-                $query->orWhereHas('author', function($query) use($request) {
-                    $query->where('name', 'like', "%$request->search%");
-                });
-            }
-    
-            if ($category == 'keyword' || $category == 'all') {
-                $query->orWhereHas('keywords', function($query) use($request) {
-                    $query->where('keyword', 'like', "%$request->search%");
-                });
-            }
-        })->orderBy('name')->get();
-    }
-
-    public function getYears(Request $request)
-    {
-        return Collection::select('published_year')->where('title', 'like', "%$request->search%")->groupBy('published_year')->get();
     }
 }
