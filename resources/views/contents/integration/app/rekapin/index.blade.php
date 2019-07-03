@@ -47,6 +47,9 @@
             </ul>
            </div>
        </div>
+       <br>
+       <button type="button" class="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light" onclick="SyncNow({{ Auth::user()->id }})">Integrasi Data</button>
+       <br>
        <div class="uk-grid">
            <div class="uk-width-1-1">
                <div class="uk-overflow-container">
@@ -128,5 +131,20 @@
             })  
 
         })
+
+        function SyncNow(user_id) {
+            $.LoadingOverlay('show')
+            $.get("{{ route('integration.app.rekapin.sync') }}", {
+                user_id: user_id
+            }).done(function (result) {
+                $.LoadingOverlay('hide', true)
+
+                Swal.fire(
+                    'Berhasil!',
+                    'Sistem dalam proses integrasi!',
+                    'success'
+                )
+            })
+        }
     </script>
 @endpush

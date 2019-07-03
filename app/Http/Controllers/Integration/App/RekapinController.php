@@ -22,7 +22,10 @@ class RekapinController extends Controller
     {
         $source = Source::where('code', 'rekapin')->first();
 
-        return empty($source) ? redirect()->route('integration.other')->with('error', 'Terjadi kesalahan, silahkan hubungi Admin.') : view('contents.integration.app.rekapin.index', [
+        return empty($source) ? 
+            redirect()->route('integration.other')->with('error', 'Terjadi kesalahan, silahkan hubungi Admin.') 
+            : 
+            view('contents.integration.app.rekapin.index', [
             'source' => $source
         ]);
     }
@@ -41,8 +44,11 @@ class RekapinController extends Controller
             return Carbon::parse($collection->published_date)->format('Y');
         })
         ->addColumn('status', function($collection) {
-            return SipCollection::where('code', 'rekapin'.$collection->id)->count() > 0 ? 'Ya' : 'Tidak';
+            return SipCollection::where('code', 'rekapin'.$collection->id)->count() > 0 ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
         })
+        ->rawColumns([
+            'status'
+        ])
         ->make(true);
     }
 
