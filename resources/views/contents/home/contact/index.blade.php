@@ -26,22 +26,22 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="d-flex justify-content-start align-items-center py-3">
-                        <img class="img-fluid" width="90" src="img/sign-post.svg">
+                        <img class="img-fluid" width="90" src="{{ asset('assets-front/img/sign-post.svg') }}">
                         <h6 class="text-justify pl-3">
                             Komplek Kementerian Pendidikan dan Kebudayaan, Gedung E Lantai 19, Jalan Jenderal Sudirman - Senayan, Jakarta 10270
                         </h6>
                     </div>
                     <div class="d-flex justify-content-start align-items-center py-3">
-                        <img class="img-fluid" width="90" src="img/call.svg">
+                        <img class="img-fluid" width="90" src="{{ asset('assets-front/img/call.svg') }}">
                         <h5 class="pl-3">Telp : 0215713827</h5>
                     </div>
                     <div class="d-flex justify-content-start align-items-center py-3">
-                        <img class="img-fluid" width="90" src="img/email.svg">
+                        <img class="img-fluid" width="90" src="{{ asset('assets-front/img/email.svg') }}">
                         <h5 class="pl-3">Email : puslitjakbud@kemdikbud.go.id</h5>
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
-                    <img class="img-fluid" src="img/map.png">
+                    <img class="img-fluid" src="{{ asset('assets-front/img/map.png') }}">
                 </div>
             </div>
         </div>

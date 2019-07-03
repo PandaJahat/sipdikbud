@@ -7,19 +7,25 @@
 
     <div class="menu_section">
         <ul>
-            <li title="Beranda">
-                <a href="{{ route('home') }}">
+            <li title="Beranda" class="submenu_trigger">
+                <a href="#">
                     <span class="menu_icon"><i class="material-icons">home</i></span>
                     <span class="menu_title">Beranda</span>
                 </a>
+                <ul class="" style="display: none;">
+                    <li><a href="{{ route('home') }}">Menuju Beranda</a></li>
+                    @if (Laratrust::hasRole('admin'))
+                        <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Pengaturan Tentang</a></li>
+                    @endif
+                </ul>
             </li>
             <li class="{{ Request::is('dashboard') ? 'current_section' : '' }}" title="Dashboard">
                 <a href="{{ route('dashboard') }}">
                     <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
                     <span class="menu_title">Dashboard</span>
                 </a>
-                
             </li>
+            @if (Laratrust::hasRole('admin'))
             <li title="Koleksi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span>
@@ -31,7 +37,6 @@
                     <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Koleksi</a></li>
                 </ul>
             </li>
-            @if (Laratrust::hasRole('admin'))
             <li title="API" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE8C0;</i></span>
@@ -79,6 +84,14 @@
                 </ul>
             </li>
             @endif
+            <li title="Keluar">
+                <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                    <span class="menu_icon"><i class="material-icons">close</i></span>
+                    <span class="menu_title">Keluar</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

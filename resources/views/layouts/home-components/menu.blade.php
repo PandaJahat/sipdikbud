@@ -10,13 +10,8 @@
         </a>
     </li>
     <li class="dropdown dropdown-mega">
-        <a class="dropdown-item " href="javascript:;">
+        <a class="dropdown-item {{ Request::is('home/contact') ? 'active' : '' }}" href="{{ route('home.contact') }}">
             Hubungi Kami
-        </a>
-    </li>
-    <li class="dropdown dropdown-mega">
-        <a class="dropdown-item" href="javascript:;">
-            Masuk
         </a>
     </li>
 </ul>

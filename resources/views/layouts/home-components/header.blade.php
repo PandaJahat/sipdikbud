@@ -28,12 +28,21 @@
                             </span>
                         </button>
                         <div class="header-button d-sm-flex ml-3">
-                            <a href="{{ route('register') }}" class="btn btn-primary" target="_blank">
+                            @guest
+                            <a href="{{ route('login') }}" class="btn btn-primary" target="_blank">
                                 <span style="font-weight: 400;" class="wrap">
-                                    <span>Daftar</span>
+                                    <span>Masuk/Daftar</span>
                                     <i class="lnr lnr-user"></i>
                                 </span>
                             </a>
+                            @else
+                            <a href="{{ route('dashboard') }}" class="btn btn-primary" target="_blank">
+                                <span style="font-weight: 400;" class="wrap">
+                                    <span>{{ Auth::user()->name }}</span>
+                                    <i class="lnr lnr-user"></i>
+                                </span>
+                            </a>
+                            @endguest
                         </div>
                     </div>
                 </div>

@@ -25,26 +25,7 @@
             <h3 class="">Apa itu <strong class="text-primary">SIPDIKBUD ?</strong></h3>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
-                    <p class="text-justify pt-3">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <ul class="list-unstyled">
-                        <li>Nulla volutpat aliquam velit :
-                            <ul>
-                                <li>Phasellus iaculis neque</li>
-                                <li>Purus sodales ultricies</li>
-                                <li>Vestibulum laoreet porttitor sem</li>
-                                <li>Ac tristique libero volutpat at</li>
-                                <li>Phasellus iaculis neque</li>
-                                <li>Purus sodales ultricies</li>
-                            </ul>
-                        </li>
-                    </ul>
+                    {!! option_exists('about') ? option('about') : '' !!}
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <img class="img-fluid px-5" src="{{ asset('assets-front/img/imac.png') }}">

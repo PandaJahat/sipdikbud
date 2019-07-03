@@ -168,6 +168,8 @@ class RouteServiceProvider extends ServiceProvider
         $search = (clone $route)->group(base_path('routes/web/home/search.php'));
         $register = (clone $route)->group(base_path('routes/web/home/register.php'));
         $about = (clone $route)->group(base_path('routes/web/home/about.php'));
+        $contact = (clone $route)->group(base_path('routes/web/home/contact.php'));
+        $setting = (clone $route)->group(base_path('routes/web/home/setting.php'));
     }
     // Module Routes: end
 
