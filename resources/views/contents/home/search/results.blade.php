@@ -1,5 +1,7 @@
 @extends('layouts.home')
 
+@include('plugins.mark')
+
 @section('content')
 <div role="main" class="main">
     <section class="page-header page-header-color page-header-quaternary">
@@ -81,7 +83,7 @@
                             </div>
                         </div>
                         <div class="col-md-9 col-lg-12 col-xl-8">
-                            <h2 class="line-height-1 font-weight-bold text-4 mb-2">
+                            <h2 class="line-height-1 font-weight-bold text-4 mb-2 highlight-title">
                                 <a href="shop-product-detail-right-sidebar.html" class="link-color-dark">
                                     {{ $item->title }}
                                 </a>
@@ -91,7 +93,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row" style="width: 100px;">Terbitan :</th>
-                                        <td>{{ $item->published_by }}</td>
+                                        <td class="highlight-publisher">{{ $item->published_by }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Institusi :</th>
@@ -99,7 +101,7 @@
                                     </tr>
                                     <tr>
                                         <th scope="row">Penulis :</th>
-                                        <td>{{ $item->author->name }}</td>
+                                        <td class="highlight-author">{{ $item->author->name }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Lokasi :</th>
@@ -128,3 +130,27 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(function () {
+            $('.highlight-title').each(function (e) {
+                @if (!empty($request->keywords))
+                $(this).mark("{{ $request->keywords }}");
+                @endif
+            })  
+
+            $('.highlight-publisher').each(function (e) {
+                @if (!empty($request->publisher))
+                $(this).mark("{{ $request->publisher }}");
+                @endif
+            })  
+
+            $('.highlight-author').each(function (e) {
+                @if (!empty($request->author))
+                $(this).mark("{{ $request->author }}");
+                @endif
+            })  
+        })
+    </script>
+@endpush

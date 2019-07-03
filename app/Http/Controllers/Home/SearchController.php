@@ -44,6 +44,8 @@ class SearchController extends Controller
             $collections->orWhere('title', 'like', "%$request->keywords%");
         }
 
+        $collections->orderBy('title', 'asc');
+
         return $collections->paginate(10);
     }
 

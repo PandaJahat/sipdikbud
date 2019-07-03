@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{ asset('assets-front/css/skins/default.css') }}">
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets-front/css/custom.css') }}">
+
+    @stack('styles')
+
     <!-- Head Libs -->
     <script src="{{ asset('assets-front/vendor/modernizr/modernizr.min.js') }}"></script>
 </head>
@@ -78,6 +81,7 @@
             ga('send', 'pageview');
         </script>
          -->
+    @stack('scripts')
 </body>
 
 </html>
