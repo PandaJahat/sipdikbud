@@ -23,7 +23,6 @@ class SearchController extends Controller
 
     public function getCollection(Request $request)
     {
-        $category = $request->category;
         $collections = Collection::query();
         
         if (!empty($request->publisher)) {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Carbon;
 
 # Models
 use App\User;
@@ -26,8 +27,11 @@ class RegisterController extends Controller
                 'email' => 'Email sudah digunakan!'
             ])->withInput();
 
-            if ($request->password != $request->password_confirm) return redirect()->back()->withErrors([
-                'password' => 'Kata Sandi dan Kata Sandi (ulangi) harus sama!'
+            // if ($request->password != $request->password_confirm) return redirect()->back()->withErrors([
+            //     'password' => 'Kata Sandi dan Kata Sandi (ulangi) harus sama!'
+            // ])->withInput(); 
+            if (empty($request->gender_id)) return redirect()->back()->withErrors([
+                    'gender' => 'Jenis kelamin harus diisi!'
             ])->withInput(); 
         } catch (\Exception $e) {
             return redirect()->route('home.register')->withErrors([
@@ -43,6 +47,7 @@ class RegisterController extends Controller
             $user->attachRole('public');
 
             $profile = new User_profile($request->all());
+            $profile->date_of_birth = Carbon::createFromFormat('d/m/Y', $request->date_of_birth)->format('Y-m-d');
             $profile->fullname = $user->name;
             $profile->user_id = $user->id;
             $profile->save();
@@ -50,7 +55,7 @@ class RegisterController extends Controller
             return redirect()->route('login');
 
         } catch (\Exception $e) {
-            return redirect()->route('home.register')->withErrors([
+            return redirect()->route('login')->withErrors([
                 'validation' => $e->getMessage()
             ]);
         }
