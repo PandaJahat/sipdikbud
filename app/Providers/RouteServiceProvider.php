@@ -114,6 +114,8 @@ class RouteServiceProvider extends ServiceProvider
         $detail = (clone $route)->group(base_path('routes/web/collection/detail.php'));
 
         $mapping = (clone $route)->group(base_path('routes/web/collection/mapping.php'));
+
+        $search = (clone $route)->group(base_path('routes/web/collection/search.php'));
     }
 
     protected function moduleReferenceRoutes()

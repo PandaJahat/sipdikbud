@@ -19,16 +19,18 @@
                     <span class="menu_title">Dashboard</span>
                 </a>
             </li>
-            @if (Laratrust::hasRole('admin'))
             <li title="Publikasi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span>
                     <span class="menu_title">Publikasi</span>
                 </a>
                 <ul class="" style="display: none;">
+                    <li class="{{ Request::is('collection/search') ? 'act_item' : '' }} {{ Request::is('collection/detail') && Laratrust::hasRole('public') ? 'act_item' : '' }}"><a href="{{ route('collection.search') }}">Pencarian Publikasi</a></li>
+                    @if (Laratrust::hasRole(['admin', 'researcher']))
                     <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Publikasi</a></li>
                     <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Publikasi</a></li>
                     <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Publikasi</a></li>
+                    @endif
                 </ul>
             </li>
             <li title="API" class="submenu_trigger">
@@ -86,7 +88,6 @@
                     <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Halaman Tentang</a></li>
                 </ul>
             </li>
-            @endif
             <li title="Keluar">
                 <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();

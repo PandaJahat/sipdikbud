@@ -85,4 +85,14 @@ class Collection extends Model
     {
         return $this->belongsToMany('App\Models\Collection\Collection', 'collection_related', 'first_collection_id', 'second_collection_id');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\User', 'collection_user', 'collection_id', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Collection\Comment', 'collection_id', 'id');
+    }
 }

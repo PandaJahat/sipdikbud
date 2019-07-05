@@ -5,33 +5,38 @@
 <div class="uk-grid" data-uk-grid-margin="">
     <div class="uk-width-large-7-10 uk-row-first">
         <div class="md-card">
-            <div class="uk-sticky-placeholder" style="height: 130px; margin: 0px;"><div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }" style="margin: 0px;">
-                <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
-                    <div class="fileinput-new thumbnail">
-                        <img src="https://i.ya-webdesign.com/images/flat-design-png-5.png" alt="user avatar">
+            <div class="uk-sticky-placeholder" style="height: 130px; margin: 0px;">
+                <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }" style="margin: 0px;">
+                    <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                        <div class="fileinput-new thumbnail">
+                            <img src="https://i.ya-webdesign.com/images/flat-design-png-5.png" alt="user avatar">
+                        </div>
+                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                        <div class="user_avatar_controls">
+
+                            <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i
+                                    class="material-icons"></i></a>
+                        </div>
                     </div>
-                    <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                    <div class="user_avatar_controls">
-                        
-                        <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons"></i></a>
+                    <div class="user_heading_content">
+                        <h2 class="heading_b">
+                            <span class="uk-text-truncate">{{ $collection->title }}</span>
+                            <span class="sub-heading">{{ $collection->author()->exists() ? $collection->author->name : '&nbsp;' }}</span>
+                        </h2>
                     </div>
-                </div>
-                <div class="user_heading_content">
-                    <h2 class="heading_b">
-                        <span class="uk-text-truncate">{{ $collection->title }}</span>
-                        <span class="sub-heading">{{ $collection->author()->exists() ? $collection->author->name : '&nbsp;' }}</span>
-                    </h2>
-                </div>
-                <div class="md-fab-wrapper">
-                    <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
-                        <i class="material-icons"></i>
-                        <div class="md-fab-toolbar-actions">
-                            <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Download"><i class="material-icons md-color-white"></i></button>
-                            <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Hapus"><i class="material-icons md-color-white"></i></button>
+                    <div class="md-fab-wrapper">
+                        <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
+                            <i class="material-icons"></i>
+                            <div class="md-fab-toolbar-actions">
+                                <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}"
+                                    title="Download"><i class="material-icons md-color-white"></i></button>
+                                <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}"
+                                    title="Hapus"><i class="material-icons md-color-white"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div></div>
+            </div>
             <div class="user_content">
                 <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#collection_detail', animation:'slide-horizontal'}">
                     <li class="uk-active"><a href="#">Informasi Publikasi</a></li>
@@ -204,6 +209,39 @@
                                     </ul>
                                 </div>
                             </div>
+                            <h3 class="full_width_in_card heading_c">
+                                Diskusi
+                            </h3>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-comment-list">
+                                        <li>
+                                            <article class="uk-comment">
+                                                <header class="uk-comment-header">
+                                                    <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
+                                                    <h4 class="uk-comment-title">Marty Smitham</h4>
+                                                    <div class="uk-comment-meta">24/Jun/15 14:26</div>
+                                                </header>
+                                                <div class="uk-comment-body">
+                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                                </div>
+                                            </article>
+                                        </li>
+                                        <li>
+                                            <article class="uk-comment">
+                                                <header class="uk-comment-header">
+                                                    <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
+                                                    <h4 class="uk-comment-title">Chris Wehner</h4>
+                                                    <div class="uk-comment-meta">24/Jun/15 14:26</div>
+                                                </header>
+                                                <div class="uk-comment-body">
+                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                                </div>
+                                            </article>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                             @if ($collection->user()->exists())
                             <h3 class="full_width_in_card heading_c">
                                     Diupload Oleh
@@ -248,18 +286,22 @@
             </div>
         </div>
     </div>
-    <div class="uk-width-large-3-10">
+    <div class="uk-width-large-3-10 uk-sticky-placeholder">
         <div class="md-card">
             <div class="md-card-content">
-                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
-                <div class="uk-form-row">
-                    <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
-                    <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>
+                @if (Laratrust::hasRole('admin') || $collection->user_id == Auth::user()->id)
+                    <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
+                    <div class="uk-form-row">
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
+                        <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>
+                    </div>
+                    <hr class="md-hr">
+                @else
+                    <h3 class="heading_c uk-margin-medium-bottom">Navigasi</h3>
+                @endif
+                    <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ !empty($prev_url) ? $prev_url : route('collection.list') }}">Kembali</a>
                 </div>
-                <hr class="md-hr">
-                <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.list') }}">Kembali</a>
             </div>
-        </div>
     </div>
 </div>
 

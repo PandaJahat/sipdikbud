@@ -21,7 +21,8 @@ class DetailController extends Controller
             ]);
 
             return view('contents.collection.detail.index', [
-                'collection' => $collection
+                'collection' => $collection,
+                'prev_url' => empty($request->prev_url) ? NULL : Crypt::decrypt($request->prev_url)
             ]);
         } catch (\Exception $e) {
             return redirect()->route('collection.list')->with('error', 'Publikasi tidak ditemukan!');
