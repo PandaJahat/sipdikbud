@@ -65,6 +65,7 @@
                         data: 'institutions_count',
                         name: 'institutions_count',
                         searchable: false,
+                        orderable: false
                     },
                     {
                         data: 'title',

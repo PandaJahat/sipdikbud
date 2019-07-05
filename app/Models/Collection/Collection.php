@@ -80,4 +80,9 @@ class Collection extends Model
     {
         return $this->belongsToMany('App\Models\Collection\Topic', 'collection_topic', 'collection_id', 'topic_id');
     }
+
+    public function related_collections()
+    {
+        return $this->belongsToMany('App\Models\Collection\Collection', 'collection_related', 'first_collection_id', 'second_collection_id');
+    }
 }

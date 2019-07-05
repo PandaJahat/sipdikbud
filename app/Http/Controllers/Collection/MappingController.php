@@ -40,13 +40,13 @@ class MappingController extends Controller
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
             $class = $collection->is_active ? '' : 'uk-text-muted';
-            return '<a class="'.$class.'" href="'.route('collection.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
+            return '<a class="'.$class.'" href="'.route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
         })
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
         })
         ->editColumn('institutions_count', function($collection) {
-            return $collection->institutions_count == 0 ? '<span class="uk-badge uk-badge-danger">Belum</span>' : '<span class="uk-badge uk-badge-success">Sudah</span>';
+            return $collection->institutions()->exists() || $collection->related_collections()->exists() ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
         })
         ->addColumn('category', function($collection) {
             return $collection->categories()->exists() ? $collection->category->name : '-';
@@ -82,11 +82,16 @@ class MappingController extends Controller
         try {
             $collection = Collection::find($request->id);
             $collection->institutions()->detach();
+            $collection->related_collections()->detach();
             
             if (!empty($request->institutions)) {
                 $collection->institutions()->attach($request->institutions, [
                     'user_id' => Auth::user()->id
                 ]);
+            }
+
+            if (!empty($request->related_collections)) {
+                $collection->related_collections()->attach($request->related_collections);
             }
 
             return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Publikasi berhasil dimoderasi!');
@@ -98,5 +103,10 @@ class MappingController extends Controller
     public function getInstitutions()
     {
         return Institution::orderBy('name', 'asc')->get();
+    }
+
+    public function getCollections(Request $request)
+    {
+        return Collection::select('id', 'title')->where('id', '!=', $request->id)->get();
     }
 }

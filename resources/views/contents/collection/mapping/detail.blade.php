@@ -49,14 +49,23 @@
                                 <div class="uk-grid">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $collection->id }}">
-                                    <div class="uk-width-1-1">
+                                    <div class="uk-width-1-10"></div>
+                                    <div class="uk-width-8-10">
                                         <div class="uk-form-row">
+                                            <label for="institutions">Bidang Terkait</label>
                                             <select name="institutions[]" id="institutions" multiple>
                                                 <option value="">Pilih Bidang</option>
                                             </select>
                                         </div>
+                                        <div class="uk-form-row">
+                                            <label for="related_collections">Publikasi Terkait</label>
+                                            <select name="related_collections[]" id="related_collections" multiple>
+                                                <option value="">Pilih Publikasi</option>
+                                            </select>
+                                        </div>
                                         <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-align-right">Simpan</button>
                                     </div>
+                                    <div class="uk-width-1-10"></div>
                                 </div>
                             </form>
                             <h3 class="full_width_in_card heading_c">
@@ -288,12 +297,46 @@
 @push('scripts')
     <script>
         var select_institution = $('#institutions')
+        var select_related = $('#related_collections')
 
         $(function () {
             select_institution.selectize({
                 valueField: "id",
                 labelField: "name",
                 searchField: "name",
+                plugins: {
+                    remove_button: {
+                        label: ""
+                    }
+                },
+                onDropdownOpen: function (t) {
+                    t.hide().velocity("slideDown", {
+                        begin: function () {
+                            t.css({
+                                "margin-top": "0"
+                            })
+                        },
+                        duration: 200,
+                        easing: easing_swiftOut
+                    })
+                },
+                onDropdownClose: function (t) {
+                    t.show().velocity("slideUp", {
+                        complete: function () {
+                            t.css({
+                                "margin-top": ""
+                            })
+                        },
+                        duration: 200,
+                        easing: easing_swiftOut
+                    })
+                }
+            })
+
+            select_related.selectize({
+                valueField: "id",
+                labelField: "title",
+                searchField: "title",
                 plugins: {
                     remove_button: {
                         label: ""
@@ -330,6 +373,16 @@
 
                 @if($collection->institutions()->exists())
                     select_institution[0].selectize.setValue({{ $collection->institutions->pluck('pivot.institution_id') }})
+                @endif
+            })
+
+            $.get("{{ route('collection.mapping.get.collections') }}").done(function (result) {
+                select_related[0].selectize.load(function (callback) {
+                    callback(result)
+                })
+
+                @if($collection->related_collections()->exists())
+                    select_related[0].selectize.setValue({{ $collection->related_collections->pluck('pivot.second_collection_id') }})
                 @endif
             })
         })

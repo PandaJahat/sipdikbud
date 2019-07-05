@@ -6,6 +6,7 @@ Route::prefix('collection/mapping')->group(function () {
 
     Route::get('/detail', 'MappingController@detail')->name('collection.mapping.detail');
     Route::get('/get/institutions', 'MappingController@getInstitutions')->name('collection.mapping.get.institutions');
+    Route::get('/get/collections', 'MappingController@getCollections')->name('collection.mapping.get.collections');
 
     Route::post('/', 'MappingController@save')->name('collection.mapping.submit');
 });

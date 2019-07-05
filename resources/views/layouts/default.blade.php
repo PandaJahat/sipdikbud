@@ -13,9 +13,9 @@
     {{-- <link rel="icon" type="image/png" href="assets/img/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/png" href="assets/img/favicon-32x32.png" sizes="32x32"> --}}
 
-    <title>SIPDIKBUD</title>
+    <title>SIPDIKBUD | Sistem Informasi Penelitian Kemendikbud</title>
 
-    <link rel="icon" type="image" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" href="{{ asset('assets-front/img/favicon.png') }}" sizes="32x32" type="image/png">
 
     @stack('links-first')
 
