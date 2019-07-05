@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Auth;
 
 # Models
 use App\Models\Collection\Collection;
+use App\User;
 
 class ListController extends Controller
 {
@@ -23,14 +23,16 @@ class ListController extends Controller
     public function data(Request $request)
     {
         setlocale(LC_ALL, 'id_ID.utf8');
-        $user = Auth::user();
-
+        
         $collections = Collection::select(DB::raw('collections.*'))->with([
             'author', 'language'
         ]);
-
-        if ($user->hasRole('researcher')) {
-            $collections->where('user_id', $user->id);
+            
+        if (!empty($request->user_id)) {
+            $user = User::find($request->user_id);
+            if ($user->hasRole('researcher')) {
+                $collections->where('user_id', $user->id);
+            }
         }
 
         return DataTables::of($collections)

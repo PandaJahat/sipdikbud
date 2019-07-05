@@ -1,5 +1,7 @@
 @extends('layouts.default')
 
+@include('plugins.sweetalert2')
+
 @section('content')
 <h3 class="heading_b uk-margin-bottom">Detail Publikasi</h3>
 <div class="uk-grid" data-uk-grid-margin="">
@@ -50,7 +52,7 @@
                             </h3>
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">  
-                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin="">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
                                         <div class="uk-grid-margin uk-row-first">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
@@ -58,10 +60,12 @@
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
                                                     <label>Judul</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->title }}" readonly>
+                                                    <textarea class="md-input" readonly>{{ $collection->title }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin="">
                                         <div class="uk-grid-margin">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
@@ -81,17 +85,6 @@
                                                 <div class="md-input-wrapper md-input-filled">
                                                     <label>Kategori</label>
                                                     <input type="text" class="md-input" value="{{ $collection->categories()->exists() ? $collection->category->name : '-' }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid-margin">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">text_format</i>
-                                                </span>
-                                                <div class="md-input-wrapper md-input-filled">
-                                                    <label>Kata Kunci</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->keywords()->exists() ? implode(',', json_decode($collection->keywords->pluck('keyword'))) : '-' }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -162,6 +155,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">text_format</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Kata Kunci</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->keywords()->exists() ? implode(',', json_decode($collection->keywords->pluck('keyword'))) : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="uk-grid">
@@ -215,36 +221,33 @@
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">
                                     <ul class="uk-comment-list">
-                                        <li>
-                                            <article class="uk-comment">
-                                                <header class="uk-comment-header">
-                                                    <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
-                                                    <h4 class="uk-comment-title">Marty Smitham</h4>
-                                                    <div class="uk-comment-meta">24/Jun/15 14:26</div>
-                                                </header>
-                                                <div class="uk-comment-body">
-                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                                                </div>
-                                            </article>
-                                        </li>
-                                        <li>
-                                            <article class="uk-comment">
-                                                <header class="uk-comment-header">
-                                                    <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
-                                                    <h4 class="uk-comment-title">Chris Wehner</h4>
-                                                    <div class="uk-comment-meta">24/Jun/15 14:26</div>
-                                                </header>
-                                                <div class="uk-comment-body">
-                                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                                                </div>
-                                            </article>
-                                        </li>
+                                        @foreach ($collection->comments as $item)
+                                            <li>
+                                                <article class="uk-comment">
+                                                    <header class="uk-comment-header">
+                                                        <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
+                                                        <h4 class="uk-comment-title">{{ $item->user->name }}</h4>
+                                                        <div class="uk-comment-meta">{{ \Carbon\Carbon::parse($item->created_at)->formatLocalized('%d %B %Y') }}, {{ \Carbon\Carbon::parse($item->created_at)->format('H:i') }}</div>
+                                                    </header>
+                                                    <div class="uk-comment-body">
+                                                        <p>{{ $item->text }}</p>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                        @endforeach
                                     </ul>
+                                    <form action="{{ route('collection.detail.add.comment.submit') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $collection->id }}">
+                                        <input type="hidden" name="prev_url" value="{{ Request::get('prev_url') }}">
+                                        <textarea cols="30" rows="4" class="md-input" name="comment" placeholder="Berikan komentar..."></textarea>
+                                        <button type="submit" class="md-btn md-btn-primary uk-margin-top">Kirim</button>
+                                    </form>
                                 </div>
                             </div>
                             @if ($collection->user()->exists())
                             <h3 class="full_width_in_card heading_c">
-                                    Diupload Oleh
+                                Diupload Oleh
                             </h3>
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">
@@ -289,16 +292,18 @@
     <div class="uk-width-large-3-10 uk-sticky-placeholder">
         <div class="md-card">
             <div class="md-card-content">
+                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                 @if (Laratrust::hasRole('admin') || $collection->user_id == Auth::user()->id)
-                    <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
-                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
-                        <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked id="publish" />
+                        <label for="publish" class="inline-label">Diterbitkan pada web</label>
                     </div>
-                    <hr class="md-hr">
-                @else
-                    <h3 class="heading_c uk-margin-medium-bottom">Navigasi</h3>
                 @endif
+                    <div class="uk-form-row">
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" name="favorite" value="1" {{ $collection->favorites()->wherePivot('user_id', Auth::user()->id)->exists() ? 'checked' : '' }} id="favorite" />
+                        <label for="favorite" class="inline-label">Jadikan publikasi favorit</label>
+                    </div>
+                <hr class="md-hr">
                     <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ !empty($prev_url) ? $prev_url : route('collection.list') }}">Kembali</a>
                 </div>
             </div>
@@ -307,3 +312,25 @@
 
 @include('contents.collection.download.reason')
 @endsection
+
+@push('scripts')
+    <script>
+        var favorite_switch = $('input[name=favorite]')
+        $(function () {
+            favorite_switch.on('change', function (el) {
+                $.post("{{ route('collection.detail.add.favorite.submit') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id: "{{ $collection->id }}",
+                    user_id: "{{ Auth::user()->id }}",
+                    is_favorite: (this.checked ? 1 : 0)
+                }).done(function (result) {
+                    Swal.fire(
+                        'Berhasil!',
+                        (result == 'add' ? "Ditambahkan ke favorit!" : "Dihapus dari favorit!"),
+                        'success'
+                    )
+                })
+            })
+        })
+    </script>
+@endpush

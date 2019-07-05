@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 # Models
 use App\User;
@@ -31,7 +32,7 @@ class ListController extends Controller
             return empty($user->roles->first()->display_name) ? '' : $user->roles->first()->display_name;
         })
         ->addColumn('actions', function($user) {
-            return '<a href="'.route('user.update', ['id' => $user->id]).'" class="uk-badge uk-badge-warning">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteUser('.$user->id.')">Hapus</a>';
+            return '<a href="'.route('user.update', ['id' => Crypt::encrypt($user->id)]).'" class="uk-badge uk-badge-warning">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteUser('.$user->id.')">Hapus</a>';
         })
         ->rawColumns([
             'actions'

@@ -40,7 +40,10 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('collection.list.data') }}"
+                    url: "{{ route('collection.list.data') }}",
+                    data: function (param) {
+                        param.user_id = "{{ Auth::user()->id }}"
+                    }
                 },
                 columnDefs: [
                     {

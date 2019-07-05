@@ -72,6 +72,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->moduleIntegrationRoutes();
         $this->moduleHomeRoutes();
         $this->modulePartnerRoutes();
+        $this->moduleProfileRoutes();
     }
 
     // Module Routes: start
@@ -116,6 +117,7 @@ class RouteServiceProvider extends ServiceProvider
         $mapping = (clone $route)->group(base_path('routes/web/collection/mapping.php'));
 
         $search = (clone $route)->group(base_path('routes/web/collection/search.php'));
+        $favorite = (clone $route)->group(base_path('routes/web/collection/favorite.php'));
     }
 
     protected function moduleReferenceRoutes()
@@ -173,6 +175,17 @@ class RouteServiceProvider extends ServiceProvider
         $about = (clone $route)->group(base_path('routes/web/home/about.php'));
         $contact = (clone $route)->group(base_path('routes/web/home/contact.php'));
         $setting = (clone $route)->group(base_path('routes/web/home/setting.php'));
+    }
+
+    protected function moduleProfileRoutes()
+    {
+        $namespace = $this->namespace.'\Profile';
+
+        $route = Route::middleware([
+            'web', 'auth'
+        ])->namespace($namespace);
+
+        $profile = (clone $route)->group(base_path('routes/web/profile/profile.php'));
     }
     // Module Routes: end
 

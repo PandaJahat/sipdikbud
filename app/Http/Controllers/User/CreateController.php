@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 
 # Models
 use App\Models\Area\Province;
-use App\Models\Area\Districts;
+use App\Models\Area\District;
 use App\Models\Area\Subdistrict;
 use App\Models\Area\Village;
 use App\Models\User\Gender;
@@ -69,9 +69,9 @@ class CreateController extends Controller
         return Province::select(DB::raw('id, name'))->get();
     }
 
-    public function getDistricts(Request $request)
+    public function getDistrict(Request $request)
     {
-        return Districts::select(DB::raw('id, name'))->where('province_id', $request->province_id)->get();
+        return District::select(DB::raw('id, name'))->where('province_id', $request->province_id)->get();
     }
 
     public function getSubdistricts(Request $request)

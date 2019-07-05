@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use League\Csv\Reader;
 
-class DistrictsTableSeeder extends Seeder
+class DistrictTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

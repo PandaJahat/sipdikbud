@@ -34,6 +34,7 @@
             @csrf
             @method('PATCH')
             <input type="hidden" name="id" value="{{ $user->id }}">
+            <input type="hidden" name="prev_route" value="{{ $prev_route }}">
             <div class="uk-grid">
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
@@ -60,11 +61,13 @@
                         <label>Password (ulangi)</label>
                         <input type="password" class="md-input" name="password_confirm" />
                     </div>
+                    @if (Laratrust::hasRole('admin'))
                     <div class="uk-form-row">
                         <select name="role_id" required>
                             <option value="">Pilih Peran</option>
                         </select>
                     </div>
+                    @endif
                 </div>
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
@@ -114,7 +117,7 @@
             <hr>
             <button class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" type="submit">Simpan</button>
             &nbsp;&nbsp;
-            <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('user.list') }}">Kembali</a>
+            <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ empty($prev_route) ? route('user.list') : route($prev_route) }}">Kembali</a>
         </form>
     </div>
 </div>
@@ -206,11 +209,21 @@
                 searchField: "name",
             })
 
+            @if (Laratrust::hasRole('admin'))
             select_role.selectize({
                 valueField: "name",
                 labelField: "display_name",
                 searchField: "display_name",
             })
+
+            $.get("{{ route('user.create.get.roles') }}").done(function (result) {
+                select_role[0].selectize.load(function (callback) {
+                    callback(result)
+                })
+
+                select_role[0].selectize.setValue("{{ $user->roles->first()->name }}")
+            })
+            @endif
 
             $.get("{{ route('user.create.get.provinces') }}").done(function (result) {
                 select_province[0].selectize.load(function (callback) {
@@ -220,14 +233,6 @@
                 if (doOnce) {
                     select_province[0].selectize.setValue("{{ $user->profile->province_id }}")
                 }
-            })
-
-            $.get("{{ route('user.create.get.roles') }}").done(function (result) {
-                select_role[0].selectize.load(function (callback) {
-                    callback(result)
-                })
-
-                select_role[0].selectize.setValue("{{ $user->roles->first()->name }}")
             })
         });
     </script>

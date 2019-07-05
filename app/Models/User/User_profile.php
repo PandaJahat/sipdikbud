@@ -32,4 +32,24 @@ class User_profile extends Model implements Auditable
     {
         return $this->belongsTo('App\Models\User\Gender', 'gender_id', 'id');
     }
+
+    public function province()
+    {
+        return $this->belongsTo('App\Models\Area\Province', 'province_id', 'id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo('App\Models\Area\District', 'district_id', 'id');
+    }
+
+    public function subdistrict()
+    {
+        return $this->belongsTo('App\Models\Area\Subdistrict', 'subdistrict_id', 'id');
+    }
+
+    public function village()
+    {
+        return $this->belongsTo('App\Models\Area\Village', 'village_id', 'id');
+    }
 }

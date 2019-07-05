@@ -5,7 +5,7 @@ namespace App\Models\Area;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Districts extends Model
+class District extends Model
 {
     use SoftDeletes;
 
