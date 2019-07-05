@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Detail Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Detail Publikasi</h3>
 <div class="uk-grid" data-uk-grid-margin="">
     <div class="uk-width-large-7-10 uk-row-first">
         <div class="md-card">
@@ -34,7 +34,7 @@
             </div></div>
             <div class="user_content">
                 <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#collection_detail', animation:'slide-horizontal'}">
-                    <li class="uk-active"><a href="#">Informasi Koleksi</a></li>
+                    <li class="uk-active"><a href="#">Informasi Publikasi</a></li>
                     <li><a href="#">Gambar Cover</a></li>
                 </ul>
                 <ul id="collection_detail" class="uk-switcher uk-margin">
@@ -251,7 +251,7 @@
     <div class="uk-width-large-3-10">
         <div class="md-card">
             <div class="md-card-content">
-                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Koleksi</h3>
+                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                 <div class="uk-form-row">
                     <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
                     <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>

@@ -4,7 +4,7 @@
 @include('plugins.autocomplete')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Upload Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Upload Publikasi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <form action="{{ route('collection.create.submit') }}" method="post" enctype="multipart/form-data" id="form-create">

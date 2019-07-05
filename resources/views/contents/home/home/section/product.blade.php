@@ -73,9 +73,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h2 class="font-weight-semibold mb-2">Saat ini terdapat {{ $collection_count }} koleksi di dalam SIPDIKBUD</h2>
+                <h2 class="font-weight-semibold mb-2">Saat ini terdapat {{ $collection_count }} publikasi di dalam SIPDIKBUD</h2>
                 <p class="mb-2">
-                    Koleksi yang diterbitkan akses terbuka ditinjau oleh rekan sejawat dan dibuat bebas untuk dibaca, diunduh, dan digunakan kembali sesuai dengan pilihan lisensi pengguna penulis.</p>
+                    Publikasi yang diterbitkan akses terbuka ditinjau oleh rekan sejawat dan dibuat bebas untuk dibaca, diunduh, dan digunakan kembali sesuai dengan pilihan lisensi pengguna penulis.</p>
                 <ul class="list list-style-1">
                     {{-- <li>Lihat direktori <a class="text-primary" href="hasil.html"> jurnal akses terbuka</a> </li>
                     <li>Lihat semua publikasi dengan <a class="text-primary" href=""> artikel akses terbuka</a></li>

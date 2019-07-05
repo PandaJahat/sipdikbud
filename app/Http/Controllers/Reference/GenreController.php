@@ -46,9 +46,9 @@ class GenreController extends Controller
             $genre = new Genre($request->all());
             $genre->save();
 
-            return redirect()->route('reference.genre')->with('success', 'Berhasil menyimpan genre koleksi!');
+            return redirect()->route('reference.genre')->with('success', 'Berhasil menyimpan genre publikasi!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.genre')->with('error', 'Terjadi kesalahan saat menyimpan kategori koleksi!');
+            return redirect()->route('reference.genre')->with('error', 'Terjadi kesalahan saat menyimpan kategori publikasi!');
         }
     }
 
@@ -67,9 +67,9 @@ class GenreController extends Controller
             $genre->fill($request->all());
             $genre->save();
 
-            return redirect()->route('reference.genre')->with('success', 'Berhasil menyimpan perubahan genre koleksi!');
+            return redirect()->route('reference.genre')->with('success', 'Berhasil menyimpan perubahan genre publikasi!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.genre')->with('error', 'Terjadi kesalahan saat menyimpan perubahan genre koleksi!');
+            return redirect()->route('reference.genre')->with('error', 'Terjadi kesalahan saat menyimpan perubahan genre publikasi!');
         }
     }
 
@@ -77,9 +77,9 @@ class GenreController extends Controller
     {
         $genre = Genre::find($request->id);
 
-        if (empty($genre)) return 'Terjadi kesalahan saat menghapus genre koleksi!';
+        if (empty($genre)) return 'Terjadi kesalahan saat menghapus genre publikasi!';
 
         $genre->delete();
-        return 'Berhasil menghapus genre koleksi!';
+        return 'Berhasil menghapus genre publikasi!';
     }
 }

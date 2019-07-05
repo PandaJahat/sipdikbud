@@ -26,10 +26,7 @@ class RegisterController extends Controller
             if (User::where('email', $request->email)->count()) return redirect()->back()->withErrors([
                 'email' => 'Email sudah digunakan!'
             ])->withInput();
-
-            // if ($request->password != $request->password_confirm) return redirect()->back()->withErrors([
-            //     'password' => 'Kata Sandi dan Kata Sandi (ulangi) harus sama!'
-            // ])->withInput(); 
+ 
             if (empty($request->gender_id)) return redirect()->back()->withErrors([
                     'gender' => 'Jenis kelamin harus diisi!'
             ])->withInput(); 

@@ -21,7 +21,7 @@
 
 @include('contents.dashboard.widget')
 
-<h3 class="heading_b uk-margin-bottom">Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Publikasi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div id="chartdiv"></div>
@@ -609,7 +609,7 @@
 
     // Add Title
     let title = chart.titles.create();
-    title.text = "Tren Pengunduhan Koleksi";
+    title.text = "Tren Pengunduhan Publikasi";
     title.fontSize = 15;
     title.marginBottom = 5;
     title.marginTop = 0;

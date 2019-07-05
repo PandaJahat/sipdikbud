@@ -12,10 +12,6 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->hasRole('public')) {
-            return redirect()->route('home');
-        }
-
         return view('contents.dashboard.index');
     }
 }

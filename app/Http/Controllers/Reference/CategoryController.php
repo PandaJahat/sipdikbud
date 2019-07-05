@@ -46,9 +46,9 @@ class CategoryController extends Controller
             $category = new Category($request->all());
             $category->save();
 
-            return redirect()->route('reference.category')->with('success', 'Berhasil menyimpan kategori koleksi!');
+            return redirect()->route('reference.category')->with('success', 'Berhasil menyimpan kategori publikasi!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.category')->with('error', 'Terjadi kesalahan saat menyimpan kategori koleksi!');
+            return redirect()->route('reference.category')->with('error', 'Terjadi kesalahan saat menyimpan kategori publikasi!');
         }
     }
 
@@ -67,9 +67,9 @@ class CategoryController extends Controller
             $category->fill($request->all());
             $category->save();
 
-            return redirect()->route('reference.category')->with('success', 'Berhasil menyimpan perubahan kategori koleksi!');
+            return redirect()->route('reference.category')->with('success', 'Berhasil menyimpan perubahan kategori publikasi!');
         } catch (\Exception $e) {
-            return redirect()->route('reference.category')->with('error', 'Terjadi kesalahan saat menyimpan perubahan kategori koleksi!');
+            return redirect()->route('reference.category')->with('error', 'Terjadi kesalahan saat menyimpan perubahan kategori publikasi!');
         }
     }
 
@@ -77,9 +77,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($request->id);
 
-        if (empty($category)) return 'Terjadi kesalahan saat menghapus kategori koleksi!';
+        if (empty($category)) return 'Terjadi kesalahan saat menghapus kategori publikasi!';
 
         $category->delete();
-        return 'Berhasil menghapus kategori koleksi!';        
+        return 'Berhasil menghapus kategori publikasi!';        
     }
 }

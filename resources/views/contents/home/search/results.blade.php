@@ -17,7 +17,7 @@
             <div class="row text-left">
                 <div class="col-md-12">
                     <h1>Hasil Pencarian</h1>
-                    <p class="lead">Daftar koleksi hasil pencarian.</p>
+                    <p class="lead">Daftar publikasi hasil pencarian.</p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="d-flex align-items-center">
-                            <span>Menampilkan {{ $collections->firstItem() }} - {{ $collections->lastItem() }} dari {{ $collections->total() }} koleksi</span>
+                            <span>Menampilkan {{ $collections->firstItem() }} - {{ $collections->lastItem() }} dari {{ $collections->total() }} publikasi</span>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-md-9 col-lg-12 col-xl-8">
                             <h2 class="line-height-1 font-weight-bold text-4 mb-2 highlight-title">
-                                <a href="shop-product-detail-right-sidebar.html" class="link-color-dark">
+                                <a href="{{ route('home.detail', ['collection' => Crypt::encrypt($item->id)]) }}" class="link-color-dark">
                                     {{ $item->title }}
                                 </a>
                             </h2>
@@ -110,14 +110,14 @@
                                 </tbody>
                             </table>
                             <hr class="my-4">
-                            <a href="detail.html" class="btn btn-primary btn-rounded font-weight-semibold btn-v-3 btn-h-3 btn-fs-2">Selengkapnya </a>
+                            <a href="{{ route('home.detail', ['collection' => Crypt::encrypt($item->id)]) }}" class="btn btn-primary btn-rounded font-weight-semibold btn-v-3 btn-h-3 btn-fs-2">Selengkapnya </a>
                         </div>
                     </div>
                 @endforeach
                 <hr class="mt-5 mb-4">
                 <div class="row align-items-center justify-content-between">
                     <div class="col-auto mb-3 mb-sm-0">
-                            <span>Menampilkan {{ $collections->firstItem() }} - {{ $collections->lastItem() }} dari {{ $collections->total() }} koleksi</span>
+                            <span>Menampilkan {{ $collections->firstItem() }} - {{ $collections->lastItem() }} dari {{ $collections->total() }} publikasi</span>
                     </div>
                     <div class="col-auto">
                         <nav aria-label="Page navigation example">

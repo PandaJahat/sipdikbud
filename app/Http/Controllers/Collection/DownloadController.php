@@ -19,7 +19,7 @@ class DownloadController extends Controller
         try {
             $collection = Collection::find(Crypt::decrypt($request->id));
 
-            if (empty($collection)) return redirect()->route('collection.list')->with('error', 'Koleksi tidak ditemukan!');
+            if (empty($collection)) return redirect()->route('collection.list')->with('error', 'Publikasi tidak ditemukan!');
             
             return response()->file(storage_path('files/collections/'.$collection->document_file), [
                 'filename' => 'penelitian.pdf'

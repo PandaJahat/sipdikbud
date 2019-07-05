@@ -7,17 +7,11 @@
 
     <div class="menu_section">
         <ul>
-            <li title="Beranda" class="submenu_trigger">
-                <a href="#">
+            <li title="Beranda">
+                <a href="{{ route('home') }}">
                     <span class="menu_icon"><i class="material-icons">home</i></span>
                     <span class="menu_title">Beranda</span>
                 </a>
-                <ul class="" style="display: none;">
-                    <li><a href="{{ route('home') }}">Menuju Beranda</a></li>
-                    @if (Laratrust::hasRole('admin'))
-                        <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Pengaturan Tentang</a></li>
-                    @endif
-                </ul>
             </li>
             <li class="{{ Request::is('dashboard') ? 'current_section' : '' }}" title="Dashboard">
                 <a href="{{ route('dashboard') }}">
@@ -26,15 +20,15 @@
                 </a>
             </li>
             @if (Laratrust::hasRole('admin'))
-            <li title="Koleksi" class="submenu_trigger">
+            <li title="Publikasi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span>
-                    <span class="menu_title">Koleksi</span>
+                    <span class="menu_title">Publikasi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Koleksi</a></li>
-                    <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Koleksi</a></li>
-                    <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Koleksi</a></li>
+                    <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Publikasi</a></li>
+                    <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Publikasi</a></li>
+                    <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Publikasi</a></li>
                 </ul>
             </li>
             <li title="API" class="submenu_trigger">
@@ -54,7 +48,7 @@
                     <span class="menu_title">Referensi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="menu_subtitle">Koleksi</li>
+                    <li class="menu_subtitle">Publikasi</li>
                     <li class="{{ Request::is('reference/category') ? 'act_item' : '' }}"><a href="{{ route('reference.category') }}">Kategori</a></li>
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
                     <li class="{{ Request::is('reference/genre') ? 'act_item' : '' }}"><a href="{{ route('reference.genre') }}">Genre</a></li>
@@ -81,6 +75,15 @@
                 <ul class="" style="display: none;">
                     <li class="{{ Request::is('user/create') ? 'act_item' : '' }}"><a href="{{ route('user.create') }}">Tambah Pengguna</a></li>
                     <li class="{{ Request::is('user/list', 'user/update') ? 'act_item' : '' }}"><a href="{{ route('user.list') }}">Daftar Pengguna</a></li>
+                </ul>
+            </li>
+            <li title="Pengaturan Konten" class="submenu_trigger">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">settings_applications</i></span>
+                    <span class="menu_title">Pengaturan Konten</span>
+                </a>
+                <ul class="" style="display: none;">
+                    <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Halaman Tentang</a></li>
                 </ul>
             </li>
             @endif

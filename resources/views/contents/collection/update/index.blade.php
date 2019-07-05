@@ -4,7 +4,7 @@
 @include('plugins.autocomplete')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Ubah Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Ubah Publikasi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <form action="{{ route('collection.update.submit') }}" method="post" enctype="multipart/form-data" id="form-update">
@@ -14,7 +14,7 @@
             <div class="uk-grid">
                 <div class="uk-width-1-2">
                     <div class="uk-form-row">
-                        <label>Judul Koleksi <span class="uk-text-danger">*</span></label>
+                        <label>Judul Publikasi <span class="uk-text-danger">*</span></label>
                         <input type="text" class="md-input" name="title" value="{{ $collection->title }}" required />
                     </div>
                     <div class="uk-form-row">

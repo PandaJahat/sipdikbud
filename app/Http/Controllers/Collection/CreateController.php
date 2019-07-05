@@ -93,7 +93,7 @@ class CreateController extends Controller
             $collection->topics()->attach([$getTopic->id]);
         }
 
-        return redirect()->route('collection.list')->with('success', 'Berhasil mengupload koleksi!');
+        return redirect()->route('collection.list')->with('success', 'Berhasil mengupload publikasi!');
     }
 
     public function getLanguages()

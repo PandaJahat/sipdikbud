@@ -55,10 +55,10 @@ class ListController extends Controller
     {
         $collection = Collection::find($request->id);
         
-        if (empty($collection)) return 'Koleksi tidak ditemukan!';
+        if (empty($collection)) return 'Publikasi tidak ditemukan!';
 
         $collection->delete();
-        return 'Koleksi berhasil dihapus!';
+        return 'Publikasi berhasil dihapus!';
     }
 
     public function downloadForm(Request $request)

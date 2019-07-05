@@ -4,7 +4,7 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Kategori Koleksi</h3>
+<h3 class="heading_b uk-margin-bottom">Kategori Publikasi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-grid">
@@ -19,7 +19,7 @@
                 <tr>
                     <th style="width: 5%">#</th>
                     <th>Nama</th>
-                    <th>Jumlah Koleksi</th>
+                    <th>Jumlah Publikasi</th>
                     <th>Dibuat pada</th>
                     <th style="width: 12%">Aksi</th>
                 </tr>

@@ -107,6 +107,6 @@ class UpdateController extends Controller
             $collection->topics()->attach([$getTopic->id]);
         }
 
-        return redirect()->route('collection.list')->with('success', 'Berhasil mengubah koleksi!');
+        return redirect()->route('collection.list')->with('success', 'Berhasil mengubah publikasi!');
     }
 }
