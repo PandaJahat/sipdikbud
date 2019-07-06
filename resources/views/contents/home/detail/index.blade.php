@@ -75,10 +75,10 @@
                 </ul>
                 <div class="tab-content" id="contentTabProductDetail">
                     <div class="tab-pane fade pt-4 pb-4 show active" id="productDetailDesc" role="tabpanel" aria-labelledby="productDetailDescTab">
-                        <a href="" class="btn btn-success">Download Publikasi</a>
+                        <a href="{{ route('collection.detail', ['id' => Crypt::encrypt($collection->id), 'prev_url' => Crypt::encrypt(Request::fullUrl())]) }}" class="btn btn-success">Download Publikasi</a>
                     </div>
                     <div class="tab-pane fade pt-4 pb-4" id="productDetailMoreInfo" role="tabpanel" aria-labelledby="productDetailMoreInfoTab">
-                        
+                        <a href="{{ route('collection.detail', ['id' => Crypt::encrypt($collection->id), 'prev_url' => Crypt::encrypt(Request::fullUrl())]) }}" class="btn btn-success">Lihat Diskusi</a>                        
                     </div>
                 </div>
             </div>
