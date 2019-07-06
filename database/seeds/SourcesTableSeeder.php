@@ -19,7 +19,6 @@ class SourcesTableSeeder extends Seeder
             "is_institute" => false,
             "company_name" => "Pusat Penelitian Kebijakan",
             "type" => 'other',
-            "last_sync",
             "route" => "integration.app.rekapin",
 
             'created_at' => now(),
