@@ -19,14 +19,14 @@
     Halaman ini masih dalam tahap pengembangan.
 </div>
 
-@include('contents.dashboard.widget')
+{{-- @include('contents.dashboard.widget')
 
 <h3 class="heading_b uk-margin-bottom">Publikasi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div id="chartdiv"></div>
     </div>
-</div>
+</div> --}}
 @endsection
 
 @push('scripts')

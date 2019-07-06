@@ -118,6 +118,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $search = (clone $route)->group(base_path('routes/web/collection/search.php'));
         $favorite = (clone $route)->group(base_path('routes/web/collection/favorite.php'));
+        $history = (clone $route)->group(base_path('routes/web/collection/history.php'));
     }
 
     protected function moduleReferenceRoutes()

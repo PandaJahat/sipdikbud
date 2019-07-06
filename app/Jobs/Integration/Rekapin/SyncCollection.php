@@ -63,7 +63,7 @@ class SyncCollection implements ShouldQueue
                 "published_year" => Carbon::parse($value->published_date)->format('Y'),
                 "description" => empty($value->fulltext_id) ? $value->fulltext_en : $value->fulltext_id,
                 "cover_file" => $thumbnail,
-                "document_file" => $value->id.'-'.str_replace(' ', '-', $value->title_en),
+                "document_file" => $value->id.'-'.str_replace(' ', '-', $value->title_en).'.pdf',
                 "user_id" => $this->user_id,
                 "is_active" => true,
                 "source_id" => $source->id,

@@ -21,4 +21,9 @@ class Collection extends Model
     {
         return $this->belongsTo('App\Models\Download\Reason', 'reason_id', 'id');
     }
+
+    public function collection()
+    {
+        return $this->belongsTo('App\Models\Collection\Collection', 'collection_id', 'id');
+    }
 }

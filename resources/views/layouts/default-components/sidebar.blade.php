@@ -41,6 +41,7 @@
                     @endif
                     @if (Laratrust::hasRole(['public', 'researcher']))
                     <li class="{{ Request::is('collection/favorite') ? 'act_item' : '' }}"><a href="{{ route('collection.favorite') }}">Publikasi Favorit</a></li>                        
+                    <li class="{{ Request::is('collection/history') ? 'act_item' : '' }}"><a href="{{ route('collection.history') }}">Riwayat Unduhan</a></li>                        
                     @endif
                 </ul>
             </li>
@@ -73,6 +74,9 @@
                     <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
+                    @endif
+                    @if (Laratrust::hasRole('researcher'))
+                    {{-- <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>                         --}}
                     @endif
                 </ul>
             </li>
@@ -109,6 +113,15 @@
                     </ul>
                 </li>
             @endif
+            <li class="{{ Request::is('inbox') ? 'current_section' : '' }}" title="Profil">
+                <a href="javascript:;">
+                    <span class="menu_icon"><i class="material-icons">email</i></span>
+                    <span class="menu_title">
+                        Notifikasi <span class="uk-badge uk-badge-danger uk-badge-notification" style="position: unset; text-transform: unset;">Coming Soon</span>
+                    </span>
+                </a>
+            </li>  
+            <hr>
             <li title="Keluar">
                 <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();

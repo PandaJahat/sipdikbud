@@ -25,7 +25,7 @@ class DownloadController extends Controller
                 'filename' => 'penelitian.pdf'
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('collection.list')->with('error', 'Terjadi kesalahan saat mengunduh penelitian!');
+            return redirect()->route('dashboard')->with('error', 'Terjadi kesalahan saat mengunduh penelitian!');
         }
     }
 
