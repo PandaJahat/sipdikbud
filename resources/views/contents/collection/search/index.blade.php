@@ -54,7 +54,7 @@
                         <span class="search_list_link uk-text-truncate">
                             {{ $item->categories()->exists() ? $item->category->name : '-' }}
                         </span>
-                        {!! empty($item->description) ? '<p>' : substr($item->description, 0, 190).' . . . ' !!}
+                        <span>{!! empty($item->description) ? '<p>' : substr($item->description, 0, 190).' . . . ' !!}</span>
                         <div class="blog_list_footer_info">
                             <span class="uk-margin-right"><i class="material-icons"></i> <small>{{ $item->favorites_count }}</small></span>
                             <span><i class="material-icons"></i> <small>{{ $item->comments_count }}</small></span>
@@ -64,10 +64,9 @@
                     </li>
                 @endforeach
             </ul>
+            {{ $collections->appends(Request::capture()->except('page'))->links('vendor.pagination.default') }}
         </div>
     </div>
-
-    {{ $collections->appends(Request::capture()->except('page'))->links('vendor.pagination.default') }}
 @endif
 
 @endsection

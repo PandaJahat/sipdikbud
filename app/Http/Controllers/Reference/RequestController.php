@@ -11,4 +11,9 @@ class RequestController extends Controller
     {
         # code...
     }
+
+    public function data(Request $request)
+    {
+        # code...
+    }
 }

@@ -76,7 +76,7 @@
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                     @endif
                     @if (Laratrust::hasRole('researcher'))
-                    {{-- <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>                         --}}
+                    <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi <span class="uk-badge uk-badge-danger uk-badge-notification" style="position: unset; text-transform: unset;">Coming Soon</span></a></li>                        
                     @endif
                 </ul>
             </li>
