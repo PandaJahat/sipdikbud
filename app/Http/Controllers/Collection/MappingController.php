@@ -46,7 +46,17 @@ class MappingController extends Controller
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
         })
         ->editColumn('is_active', function($collection) {
-            return $collection->is_active ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
+            if (empty($collection->source_id)) {
+                if (!$collection->reviewer()->exists()) {
+                    return '<span class="uk-badge uk-badge-danger">Belum</span>';
+                } else {
+                    if (!$collection->reviewer->results()->exists()) {
+                        return '<span class="uk-badge uk-badge-warning">Menunggu</span>';
+                    }
+                }
+            }
+
+            return $collection->is_active ? '<span class="uk-badge uk-badge-success">Layak</span>' : '<span class="uk-badge uk-badge-danger">Tidak Layak</span>';
         })
         ->addColumn('category', function($collection) {
             return $collection->categories()->exists() ? $collection->category->name : '-';

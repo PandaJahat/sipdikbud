@@ -45,7 +45,7 @@ class ListController extends Controller
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
         })
         ->addColumn('actions', function($collection) {
-            return '<a href="'.route('collection.update', ['id' => $collection->id]).'" class="uk-badge uk-badge-warning">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteCollection('.$collection->id.')">Hapus</a>';
+            return $collection->is_active ? '' : '<a href="'.route('collection.update', ['id' => $collection->id]).'" class="uk-badge uk-badge-warning">Ubah</a>'.'&nbsp;&nbsp;'.'<a href="javascript:;" class="uk-badge uk-badge-danger" onclick="deleteCollection('.$collection->id.')">Hapus</a>';
         })
         ->rawColumns([
             'actions', 'title'
