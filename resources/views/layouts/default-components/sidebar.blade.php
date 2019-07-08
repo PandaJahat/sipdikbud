@@ -109,6 +109,7 @@
                         <span class="menu_title">Pengaturan Konten</span>
                     </a>
                     <ul class="" style="display: none;">
+                        <li class="{{ Request::is('home/setting/slider') ? 'act_item' : '' }}"><a href="{{ route('home.setting.slider') }}">Slider Beranda</a></li>
                         <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Halaman Tentang</a></li>
                     </ul>
                 </li>
