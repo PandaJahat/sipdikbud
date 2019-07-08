@@ -5,4 +5,5 @@ Route::prefix('collection/detail')->group(function () {
     
     Route::post('/add/favorite', 'DetailController@addFavorite')->name('collection.detail.add.favorite.submit');
     Route::post('/add/comment', 'DetailController@addComment')->name('collection.detail.add.comment.submit');
+    Route::post('/change/status', 'DetailController@changeStatus')->name('collection.detail.change.status.submit');
 });

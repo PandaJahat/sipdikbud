@@ -220,8 +220,15 @@
                             </h3>
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">
+                                    <form action="{{ route('collection.detail.add.comment.submit') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $collection->id }}">
+                                        <input type="hidden" name="prev_url" value="{{ Request::get('prev_url') }}">
+                                        <textarea cols="30" rows="4" class="md-input" name="comment" placeholder="Berikan komentar..."></textarea>
+                                        <button type="submit" class="md-btn md-btn-primary uk-margin-top">Kirim</button>
+                                    </form>
                                     <ul class="uk-comment-list">
-                                        @foreach ($collection->comments as $item)
+                                        @foreach ($collection->comments->sortByDesc('created_at') as $item)
                                             <li>
                                                 <article class="uk-comment">
                                                     <header class="uk-comment-header">
@@ -236,13 +243,6 @@
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <form action="{{ route('collection.detail.add.comment.submit') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $collection->id }}">
-                                        <input type="hidden" name="prev_url" value="{{ Request::get('prev_url') }}">
-                                        <textarea cols="30" rows="4" class="md-input" name="comment" placeholder="Berikan komentar..."></textarea>
-                                        <button type="submit" class="md-btn md-btn-primary uk-margin-top">Kirim</button>
-                                    </form>
                                 </div>
                             </div>
                             @if ($collection->user()->exists())
@@ -293,9 +293,9 @@
         <div class="md-card">
             <div class="md-card-content">
                 <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
-                @if (Laratrust::hasRole('admin') || $collection->user_id == Auth::user()->id)
+                @if (Laratrust::hasRole('admin'))
                     <div class="uk-form-row">
-                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked id="publish" />
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" id="publish" name="active_status" value="1" {{ $collection->is_active ? 'checked' : '' }} />
                         <label for="publish" class="inline-label">Diterbitkan pada web</label>
                     </div>
                 @endif
@@ -316,6 +316,8 @@
 @push('scripts')
     <script>
         var favorite_switch = $('input[name=favorite]')
+
+        var status_switch = $('input[name=active_status]')
         $(function () {
             favorite_switch.on('change', function (el) {
                 $.post("{{ route('collection.detail.add.favorite.submit') }}", {
@@ -327,6 +329,21 @@
                     Swal.fire(
                         'Berhasil!',
                         (result == 'add' ? "Ditambahkan ke favorit!" : "Dihapus dari favorit!"),
+                        'success'
+                    )
+                })
+            })
+
+            status_switch.on('change', function (el) {
+                $.post("{{ route('collection.detail.change.status.submit') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id: "{{ $collection->id }}",
+                    user_id: "{{ Auth::user()->id }}",
+                    is_active: (this.checked ? 1 : 0)
+                }).done(function (result) {
+                    Swal.fire(
+                        'Berhasil!',
+                        (result == 'active' ? "Publikasi diterbikan!" : "Publikasi tidak diterbikan!"),
                         'success'
                     )
                 })

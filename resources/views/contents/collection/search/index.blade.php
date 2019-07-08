@@ -26,6 +26,10 @@
                             <option value="">Kategori Publikasi</option>
                         </select>
                     </div>
+                    <div class="uk-form-row">
+                        <label>Kata Kunci</label>
+                        <input type="text" class="md-input" name="keyword" value="{{ old('keyword') }}"/>
+                    </div>
                 </div>
             </div>
             <div class="uk-grid">
@@ -52,7 +56,7 @@
                     <li>
                         <h3 class="search_list_heading"><a href="{{ route('collection.detail', ['id' => Crypt::encrypt($item->id), 'prev_url' => Crypt::encrypt(Request::fullUrl())]) }}">{{ $item->title }}</a></h3>
                         <span class="search_list_link uk-text-truncate">
-                            {{ $item->categories()->exists() ? $item->category->name : '-' }}
+                            {{ $item->author()->exists() ? $item->author->name : '-' }} | {{ $item->categories()->exists() ? $item->category->name : '-' }}
                         </span>
                         <span>{!! empty($item->description) ? '<p>' : substr($item->description, 0, 190).' . . . ' !!}</span>
                         <div class="blog_list_footer_info">

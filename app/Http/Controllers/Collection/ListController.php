@@ -38,7 +38,7 @@ class ListController extends Controller
         return DataTables::of($collections)
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
-            $class = $collection->is_active ? '' : 'uk-text-muted';
+            $class = $collection->is_active ? '' : 'uk-text-danger';
             return '<a class="'.$class.'" href="'.route('collection.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
         })
         ->editColumn('created_at', function($collection) {

@@ -50,7 +50,7 @@
                         orderable: false
                     },
                     {
-                        targets: [8],
+                        targets: [8, 7],
                         visible: false
                     }
                 ],
@@ -62,10 +62,9 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'institutions_count',
-                        name: 'institutions_count',
-                        searchable: false,
-                        orderable: false
+                        data: 'is_active',
+                        name: 'is_active',
+                        searchable: false
                     },
                     {
                         data: 'title',

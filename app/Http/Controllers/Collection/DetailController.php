@@ -15,7 +15,7 @@ class DetailController extends Controller
 {
     public function index(Request $request)
     {
-        // try {
+        try {
             setlocale(LC_ALL, 'id_ID.utf8');
         
             $collection = Collection::find(Crypt::decrypt($request->id))->load([
@@ -26,9 +26,9 @@ class DetailController extends Controller
                 'collection' => $collection,
                 'prev_url' => empty($request->prev_url) ? NULL : Crypt::decrypt($request->prev_url)
             ]);
-        // } catch (\Exception $e) {
-        //     return redirect()->route('collection.list')->with('error', 'Publikasi tidak ditemukan!');
-        // }
+        } catch (\Exception $e) {
+            return redirect()->route('dashboard')->with('error', 'Publikasi tidak ditemukan!');
+        }
     }
 
     public function addFavorite(Request $request)
@@ -53,5 +53,15 @@ class DetailController extends Controller
         ]);
 
         return redirect()->route('collection.detail', ['id' => Crypt::encrypt($collection->id), 'prev_url' => $request->prev_url]);
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $collection = Collection::find($request->id);
+        $collection->is_active = $request->is_active;
+
+        $collection->save();
+         
+        return $request->is_active ? 'active' : 'inactive';
     }
 }

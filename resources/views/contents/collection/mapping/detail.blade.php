@@ -73,7 +73,7 @@
                             </h3>
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">  
-                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin="">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
                                         <div class="uk-grid-margin uk-row-first">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
@@ -81,10 +81,12 @@
                                                 </span>
                                                 <div class="md-input-wrapper md-input-filled">
                                                     <label>Judul</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->title }}" readonly>
+                                                    <textarea class="md-input" readonly>{{ $collection->title }}</textarea>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2" data-uk-grid-margin="">
                                         <div class="uk-grid-margin">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon">
@@ -104,17 +106,6 @@
                                                 <div class="md-input-wrapper md-input-filled">
                                                     <label>Kategori</label>
                                                     <input type="text" class="md-input" value="{{ $collection->categories()->exists() ? $collection->category->name : '-' }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid-margin">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">text_format</i>
-                                                </span>
-                                                <div class="md-input-wrapper md-input-filled">
-                                                    <label>Kata Kunci</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->keywords()->exists() ? implode(',', json_decode($collection->keywords->pluck('keyword'))) : '-' }}" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -185,6 +176,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">text_format</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Kata Kunci</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->keywords()->exists() ? implode(',', json_decode($collection->keywords->pluck('keyword'))) : '-' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="uk-grid">
@@ -229,6 +233,29 @@
                                                 </div>
                                             </li>
                                         @endif
+                                    </ul>
+                                </div>
+                            </div>
+                            <h3 class="full_width_in_card heading_c">
+                                Diskusi
+                            </h3>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <ul class="uk-comment-list">
+                                        @foreach ($collection->comments->sortByDesc('created_at') as $item)
+                                            <li>
+                                                <article class="uk-comment">
+                                                    <header class="uk-comment-header">
+                                                        <img class="md-user-image uk-comment-avatar" src="{{ asset('img/user.png') }}" alt="">
+                                                        <h4 class="uk-comment-title">{{ $item->user->name }}</h4>
+                                                        <div class="uk-comment-meta">{{ \Carbon\Carbon::parse($item->created_at)->formatLocalized('%d %B %Y') }}, {{ \Carbon\Carbon::parse($item->created_at)->format('H:i') }}</div>
+                                                    </header>
+                                                    <div class="uk-comment-body">
+                                                        <p>{{ $item->text }}</p>
+                                                    </div>
+                                                </article>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -280,10 +307,16 @@
         <div class="md-card">
             <div class="md-card-content">
                 <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
-                <div class="uk-form-row">
-                    <input type="checkbox" data-switchery data-switchery-color="#1e88e5" checked />
-                    <label for="user_edit_active" class="inline-label">Diterbitkan pada web</label>
-                </div>
+                @if (Laratrust::hasRole('admin'))
+                    <div class="uk-form-row">
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" id="publish" name="active_status" value="1" {{ $collection->is_active ? 'checked' : '' }} />
+                        <label for="publish" class="inline-label">Diterbitkan pada web</label>
+                    </div>
+                @endif
+                    <div class="uk-form-row">
+                        <input type="checkbox" data-switchery data-switchery-color="#1e88e5" name="favorite" value="1" {{ $collection->favorites()->wherePivot('user_id', Auth::user()->id)->exists() ? 'checked' : '' }} id="favorite" />
+                        <label for="favorite" class="inline-label">Jadikan publikasi favorit</label>
+                    </div>
                 <hr class="md-hr">
                 <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.mapping') }}">Kembali</a>
             </div>
@@ -298,6 +331,9 @@
     <script>
         var select_institution = $('#institutions')
         var select_related = $('#related_collections')
+
+        var favorite_switch = $('input[name=favorite]')
+        var status_switch = $('input[name=active_status]')
 
         $(function () {
             select_institution.selectize({
@@ -384,6 +420,36 @@
                 @if($collection->related_collections()->exists())
                     select_related[0].selectize.setValue({{ $collection->related_collections->pluck('pivot.second_collection_id') }})
                 @endif
+            })
+
+            favorite_switch.on('change', function (el) {
+                $.post("{{ route('collection.detail.add.favorite.submit') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id: "{{ $collection->id }}",
+                    user_id: "{{ Auth::user()->id }}",
+                    is_favorite: (this.checked ? 1 : 0)
+                }).done(function (result) {
+                    Swal.fire(
+                        'Berhasil!',
+                        (result == 'add' ? "Ditambahkan ke favorit!" : "Dihapus dari favorit!"),
+                        'success'
+                    )
+                })
+            })
+
+            status_switch.on('change', function (el) {
+                $.post("{{ route('collection.detail.change.status.submit') }}", {
+                    _token: "{{ csrf_token() }}",
+                    id: "{{ $collection->id }}",
+                    user_id: "{{ Auth::user()->id }}",
+                    is_active: (this.checked ? 1 : 0)
+                }).done(function (result) {
+                    Swal.fire(
+                        'Berhasil!',
+                        (result == 'active' ? "Publikasi diterbikan!" : "Publikasi tidak diterbikan!"),
+                        'success'
+                    )
+                })
             })
         })
     </script>

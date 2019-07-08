@@ -25,6 +25,8 @@ class CreateController extends Controller
     public function create(Request $request)
     {
         $collection = new Collection($request->all());
+
+        $collection->is_active = false;
         
         if ($request->hasFile('cover')) {
             $cover_file = $request->file('cover');

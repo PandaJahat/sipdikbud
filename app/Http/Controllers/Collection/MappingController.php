@@ -45,8 +45,8 @@ class MappingController extends Controller
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
         })
-        ->editColumn('institutions_count', function($collection) {
-            return $collection->institutions()->exists() || $collection->related_collections()->exists() ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
+        ->editColumn('is_active', function($collection) {
+            return $collection->is_active ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
         })
         ->addColumn('category', function($collection) {
             return $collection->categories()->exists() ? $collection->category->name : '-';
@@ -55,7 +55,7 @@ class MappingController extends Controller
             return '<a href="'.route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)]).'" class="uk-badge uk-badge-primary">Moderasi</a>';
         })
         ->rawColumns([
-            'actions', 'title', 'institutions_count'
+            'actions', 'title', 'is_active'
         ])
         ->make(true);
     }
