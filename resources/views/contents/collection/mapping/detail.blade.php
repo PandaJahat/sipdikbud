@@ -325,22 +325,53 @@
                         </div>
                     </li>
                 </ul>
-                <hr>
-                <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
+                <hr class="md-hr">
                 @if (Laratrust::hasRole('admin'))
+                <h3 class="heading_c uk-margin-medium-bottom">Status Publikasi</h3>
+                    <div class="uk-margin-medium-bottom">
+                        <p>
+                            Status:
+                            @if ($collection->source()->exists())
+                                <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span>
+                            @else
+                                @if (!$collection->reviewer()->exists())
+                                    <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Belum Ada Reviewer</span>
+                                @else
+                                    @if (!$collection->reviewer->results()->exists())
+                                        <span class="uk-badge uk-badge-warning uk-text-upper uk-margin-small-left">Menunggu Review</span>
+                                    @else 
+                                        @if ($collection->is_active)
+                                            <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span> 
+                                        @else
+                                            <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Tidak Layak</span>                                        
+                                        @endif
+                                    @endif
+                                @endif
+                            @endif
+                        </p>
+                        <p>
+                            Reviewer: <span class="uk-badge uk-badge-outline uk-text-upper uk-margin-small-left">{{ $collection->reviewer()->exists() ? $collection->reviewer->user->name : '-' }}</span> 
+                        </p>
+                    </div>
+                @endif
+                @if (Laratrust::hasRole('reviewer'))
+                <hr class="md-hr">
+                    <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" id="publish" name="active_status" value="1" {{ $collection->is_active ? 'checked' : '' }} />
-                        <label for="publish" class="inline-label">Diterbitkan pada web</label>
+                        <label for="publish" class="inline-label">Layak Diterbitkan</label>
                     </div>
                 @endif
                 @if (Laratrust::hasRole(['public', 'researcher', 'reviewer']))
+                <hr class="md-hr">
+                    <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" name="favorite" value="1" {{ $collection->favorites()->wherePivot('user_id', Auth::user()->id)->exists() ? 'checked' : '' }} id="favorite" />
                         <label for="favorite" class="inline-label">Jadikan publikasi favorit</label>
                     </div>
                 @endif
                 <hr class="md-hr">
-                <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.mapping') }}">Kembali</a>
+                <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ !empty($prev_url) ? $prev_url : route('collection.list') }}">Kembali</a>
             </div>
         </div>
     </div>

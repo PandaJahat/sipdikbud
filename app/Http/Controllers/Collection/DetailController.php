@@ -17,7 +17,7 @@ class DetailController extends Controller
     {
         try {
             setlocale(LC_ALL, 'id_ID.utf8');
-        
+            
             $collection = Collection::find(Crypt::decrypt($request->id))->load([
                 'keywords', 'language', 'author', 'user', 'comments.user', 'reasons' => function($query) {
                     $query->with([
