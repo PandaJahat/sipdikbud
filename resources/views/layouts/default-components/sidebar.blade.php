@@ -71,12 +71,12 @@
                     <li class="{{ Request::is('reference/language') ? 'act_item' : '' }}"><a href="{{ route('reference.language') }}">Bahasa</a></li>
                     <li class="{{ Request::is('reference/genre') ? 'act_item' : '' }}"><a href="{{ route('reference.genre') }}">Genre</a></li>
                     <li class="{{ Request::is('reference/topic') ? 'act_item' : '' }}"><a href="{{ route('reference.topic') }}">Topik</a></li>
-                    <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga</a></li>
+                    <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga/Bidang</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                     @endif
                     @if (Laratrust::hasRole('researcher'))
-                    <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi <span class="uk-badge uk-badge-danger uk-badge-notification" style="position: unset; text-transform: unset;">Coming Soon</span></a></li>                        
+                    <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>                        
                     @endif
                 </ul>
             </li>
