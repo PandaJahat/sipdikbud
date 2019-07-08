@@ -1,26 +1,20 @@
 <?php
 
-namespace App\Models\Download;
+namespace App\Models\Collection;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Collection extends Model
+class Reviewer extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'collection_downloads';
+    protected $table = 'collection_reviewer';
     protected $fillable = [
         "collection_id",
         "user_id",
-        "reason_text",
-        "reason_id",
+        "note",
     ];
-
-    public function reason()
-    {
-        return $this->belongsTo('App\Models\Download\Reason', 'reason_id', 'id');
-    }
 
     public function collection()
     {
@@ -30,5 +24,10 @@ class Collection extends Model
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
+    }
+
+    public function results()
+    {
+        return $this->hasMany('App\Models\Review\Result', 'collection_reviewer_id', 'id');
     }
 }

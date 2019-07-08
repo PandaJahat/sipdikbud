@@ -82,6 +82,15 @@
             </li>
             @endif
             @if (Laratrust::hasRole('admin'))
+                <li title="Kebermanfaatan" class="submenu_trigger">
+                    <a href="#">
+                        <span class="menu_icon"><i class="material-icons">library_books</i></span>
+                        <span class="menu_title">Kebermanfaatan</span>
+                    </a>
+                    <ul class="" style="display: none;">
+                        <li class="{{ Request::is('reason/result') ? 'act_item' : '' }}"><a href="{{ route('reason.result') }}">Rekap</a></li>
+                    </ul>
+                </li>
                 <li title="Mitra" class="submenu_trigger">
                     <a href="#">
                         <span class="menu_icon"><i class="material-icons">location_city</i></span>
@@ -91,8 +100,6 @@
                         <li class="{{ Request::is('partner/list') ? 'act_item' : '' }}"><a href="{{ route('partner.list') }}">Daftar Mitra</a></li>
                     </ul>
                 </li>
-            @endif
-            @if (Laratrust::hasRole('admin'))
                 <li title="Pengguna" class="submenu_trigger">
                     <a href="#">
                         <span class="menu_icon"><i class="material-icons">&#xE87C;</i></span>
@@ -103,16 +110,6 @@
                         <li class="{{ Request::is('user/list', 'user/update') ? 'act_item' : '' }}"><a href="{{ route('user.list') }}">Daftar Pengguna</a></li>
                     </ul>
                 </li>
-                <li title="Pengaturan Konten" class="submenu_trigger">
-                    <a href="#">
-                        <span class="menu_icon"><i class="material-icons">settings_applications</i></span>
-                        <span class="menu_title">Pengaturan Konten</span>
-                    </a>
-                    <ul class="" style="display: none;">
-                        <li class="{{ Request::is('home/setting/slider') ? 'act_item' : '' }}"><a href="{{ route('home.setting.slider') }}">Slider Beranda</a></li>
-                        <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Halaman Tentang</a></li>
-                    </ul>
-                </li>
             @endif
             <li class="{{ Request::is('inbox') ? 'current_section' : '' }}" title="Profil">
                 <a href="javascript:;">
@@ -121,7 +118,19 @@
                         Notifikasi <span class="uk-badge uk-badge-danger uk-badge-notification" style="position: unset; text-transform: unset;">Coming Soon</span>
                     </span>
                 </a>
-            </li>  
+            </li>
+            @if (Laratrust::hasRole('admin'))
+            <li title="Pengaturan Konten" class="submenu_trigger">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">settings_applications</i></span>
+                    <span class="menu_title">Pengaturan Konten</span>
+                </a>
+                <ul class="" style="display: none;">
+                    <li class="{{ Request::is('home/setting/slider') ? 'act_item' : '' }}"><a href="{{ route('home.setting.slider') }}">Slider Beranda</a></li>
+                    <li class="{{ Request::is('home/setting/about') ? 'act_item' : '' }}"><a href="{{ route('home.setting.about') }}">Halaman Tentang</a></li>
+                </ul>
+            </li>
+            @endif  
             <hr>
             <li title="Keluar">
                 <a href="{{ route('logout') }}"

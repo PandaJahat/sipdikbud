@@ -22,10 +22,10 @@ class DownloadController extends Controller
             if (empty($collection)) return redirect()->route('collection.list')->with('error', 'Publikasi tidak ditemukan!');
             
             return response()->file(storage_path('files/collections/'.$collection->document_file), [
-                'filename' => 'penelitian.pdf'
+                'filename' => 'publikasi.pdf'
             ]);
         } catch (\Exception $e) {
-            return redirect()->route('dashboard')->with('error', 'Terjadi kesalahan saat mengunduh penelitian!');
+            return redirect()->route('dashboard')->with('error', 'Terjadi kesalahan saat mengunduh publikasi!');
         }
     }
 
@@ -47,7 +47,7 @@ class DownloadController extends Controller
             ]);
             return redirect()->route('collection.download', ['id' => Crypt::encrypt($download->collection_id)]);
         } catch (\Exception $e) {
-            return redirect()->to($request->previous_url)->with('error', 'Terdapat kesalahan saat mengunduh penelitian!');
+            return redirect()->to($request->previous_url)->with('error', 'Terdapat kesalahan saat mengunduh publikasi!');
         }
     }
 

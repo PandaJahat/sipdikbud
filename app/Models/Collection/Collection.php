@@ -100,4 +100,9 @@ class Collection extends Model
     {
         return $this->hasMany('App\Models\Download\Collection', 'collection_id', 'id');
     }
+
+    public function reviewer()
+    {
+        return $this->hasOne('App\Models\Collection\Reviewer', 'collection_id', 'id');
+    }
 }

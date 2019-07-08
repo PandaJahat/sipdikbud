@@ -19,7 +19,11 @@ class DetailController extends Controller
             setlocale(LC_ALL, 'id_ID.utf8');
         
             $collection = Collection::find(Crypt::decrypt($request->id))->load([
-                'keywords', 'language', 'author', 'user', 'comments.user'
+                'keywords', 'language', 'author', 'user', 'comments.user', 'reasons' => function($query) {
+                    $query->with([
+                        'reason', 'user'
+                    ])->orderBy('created_at', 'DESC');
+                }
             ]);
 
             return view('contents.collection.detail.index', [

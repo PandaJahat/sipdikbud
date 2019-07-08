@@ -73,6 +73,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->moduleHomeRoutes();
         $this->modulePartnerRoutes();
         $this->moduleProfileRoutes();
+        $this->moduleReasonRoutes();
     }
 
     // Module Routes: start
@@ -188,6 +189,17 @@ class RouteServiceProvider extends ServiceProvider
         ])->namespace($namespace);
 
         $profile = (clone $route)->group(base_path('routes/web/profile/profile.php'));
+    }
+
+    protected function moduleReasonRoutes()
+    {
+        $namespace = $this->namespace.'\Reason';
+
+        $route = Route::middleware([
+            'web', 'auth'
+        ])->namespace($namespace);
+
+        $result = (clone $route)->group(base_path('routes/web/reason/result.php'));
     }
     // Module Routes: end
 

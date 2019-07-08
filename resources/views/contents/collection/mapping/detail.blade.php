@@ -24,15 +24,19 @@
                         <span class="sub-heading">{{ $collection->author()->exists() ? $collection->author->name : '&nbsp;' }}</span>
                     </h2>
                 </div>
-                <div class="md-fab-wrapper">
-                    <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
-                        <i class="material-icons"></i>
-                        <div class="md-fab-toolbar-actions">
-                            <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Download"><i class="material-icons md-color-white"></i></button>
-                            <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Hapus"><i class="material-icons md-color-white"></i></button>
+                @if (Laratrust::hasRole('admin'))
+                    <div class="md-fab-wrapper">
+                        <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent">
+                            <i class="material-icons"></i>
+                            <div class="md-fab-toolbar-actions">
+                                <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}"
+                                    title="Download"><i class="material-icons md-color-white"></i></button>
+                                <button type="button" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}"
+                                    title="Hapus"><i class="material-icons md-color-white"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
             </div></div>
             <div class="user_content">
                 <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#collection_detail', animation:'slide-horizontal'}">
@@ -193,8 +197,14 @@
                             </div>
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">
-                                    <label>Deskripsi</label>
-                                    <textarea class="md-input autosized" cols="30" rows="4" readonly>{{ !empty($collection->description) ? $collection->description : '-' }}</textarea>
+                                    <ul class="md-list">
+                                        <li>
+                                            <div class="md-list-content">
+                                            <span class="md-list-heading">Deskripsi</span>
+                                            <span class="uk-text-small uk-text-muted">{{ !empty($collection->description) ? $collection->description : '-' }}</span>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <h3 class="full_width_in_card heading_c">
@@ -206,7 +216,13 @@
                                         @if (!empty($collection->abstract_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Abstrak</a></span>
+                                                    <span class="md-list-heading">
+                                                        @if (Laratrust::hasRole(['admin', 'reviewer']) || Auth::user()->id == $collection->user_id)
+                                                        <a href="{{ route('collection.download.abstract', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Abstrak</a>                                                        
+                                                        @else
+                                                        <a href="{{ route('collection.download.abstract.log', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Abstrak</a>
+                                                        @endif
+                                                    </span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -221,7 +237,13 @@
                                         @if (!empty($collection->document_file))
                                             <li>
                                                 <div class="md-list-content">
-                                                    <span class="md-list-heading"><a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Download Dokumen PDF</a></span>
+                                                    <span class="md-list-heading">
+                                                        @if (Laratrust::hasRole(['admin', 'reviewer']) || Auth::user()->id == $collection->user_id)
+                                                        <a href="{{ route('collection.download', ['id' => Crypt::encrypt($collection->id)]) }}" target="_blank">Download Dokumen PDF</a>
+                                                        @else
+                                                        <a href="javascript:;" onclick="downloadCollection({{ $collection->id }})">Download Dokumen PDF</a>
+                                                        @endif
+                                                    </span>
                                                     <div class="uk-margin-small-top">
                                                     <span class="uk-margin-right">
                                                         <i class="material-icons"></i> <span class="uk-text-muted uk-text-small">{{ \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y') }}</span>
@@ -259,39 +281,6 @@
                                     </ul>
                                 </div>
                             </div>
-                            @if ($collection->user()->exists())
-                            <h3 class="full_width_in_card heading_c">
-                                    Diupload Oleh
-                            </h3>
-                            <div class="uk-grid">
-                                <div class="uk-width-1-1">
-                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-2">
-                                        <div class="uk-grid-margin uk-row-first">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">face</i>
-                                                </span>
-                                                <div class="md-input-wrapper md-input-filled">
-                                                    <label>Nama</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->user->name }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid-margin">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon">
-                                                    <i class="md-list-addon-icon material-icons">email</i>
-                                                </span>
-                                                <div class="md-input-wrapper md-input-filled">
-                                                    <label>E-Mail</label>
-                                                    <input type="text" class="md-input" value="{{ $collection->user->email }}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endif
                         </div>
                     </li>
                     <li>
@@ -306,6 +295,37 @@
     <div class="uk-width-large-3-10">
         <div class="md-card">
             <div class="md-card-content">
+                <h2 class="heading_c uk-margin-small-bottom">Diunggah Oleh</h2>
+                <ul class="md-list md-list-addon">
+                    <li>
+                        <div class="md-list-addon-element">
+                            <img class="md-user-image md-list-addon-avatar" src="{{ asset('img/user.png') }}" alt="">
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">{{ $collection->user->name }}</span>
+                            <span class="uk-text-small uk-text-muted">{{ $collection->user->roles->last()->display_name }}</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons"></i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">{{ \Carbon\Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y - %H:%M') }}</span>
+                            <span class="uk-text-small uk-text-muted">Diunggah</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="md-list-addon-element">
+                            <i class="md-list-addon-icon material-icons"></i>
+                        </div>
+                        <div class="md-list-content">
+                            <span class="md-list-heading">{{ $collection->created_at == $collection->updated_at ? '-' : \Carbon\Carbon::parse($collection->updated_at)->formatLocalized('%d %B %Y - %H:%M') }}</span>
+                            <span class="uk-text-small uk-text-muted">Diperbaharuai</span>
+                        </div>
+                    </li>
+                </ul>
+                <hr>
                 <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                 @if (Laratrust::hasRole('admin'))
                     <div class="uk-form-row">
@@ -313,10 +333,12 @@
                         <label for="publish" class="inline-label">Diterbitkan pada web</label>
                     </div>
                 @endif
+                @if (Laratrust::hasRole(['public', 'researcher', 'reviewer']))
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" name="favorite" value="1" {{ $collection->favorites()->wherePivot('user_id', Auth::user()->id)->exists() ? 'checked' : '' }} id="favorite" />
                         <label for="favorite" class="inline-label">Jadikan publikasi favorit</label>
                     </div>
+                @endif
                 <hr class="md-hr">
                 <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('collection.mapping') }}">Kembali</a>
             </div>

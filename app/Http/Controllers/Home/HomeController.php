@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Collection\Category;
 use App\Models\Collection\Source;
 use App\Models\Collection\Collection;
+use App\Models\Setting\Slider;
 
 class HomeController extends Controller
 {
@@ -18,7 +19,8 @@ class HomeController extends Controller
             'categories' => $this->getCategories(),
             'partners' => $this->getSources(),
             'partner_count' => (object) $this->getPartnerCount(),
-            'collection_count' => $this->getCollectionCount()
+            'collection_count' => $this->getCollectionCount(),
+            'sliders' => Slider::all()
         ]);
     }
 

@@ -5,6 +5,7 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner">
+        @if (count($sliders) == 0)
         <div class="carousel-item active">
             <img src="{{ asset('assets-front/img/slider2.jpg') }}" class="d-block w-100" alt="...">
         </div>
@@ -14,6 +15,13 @@
         <div class="carousel-item">
             <img src="{{ asset('assets-front/img/slider.jpg') }}" class="d-block w-100" alt="...">
         </div>
+        @else
+        @foreach ($sliders as $item)
+        <div class="carousel-item active">
+            <img src="{{ asset('assets-front/img/slider/'.$item->image_file) }}" class="d-block w-100" alt="...">
+        </div>
+        @endforeach
+        @endif
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
