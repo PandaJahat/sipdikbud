@@ -1,5 +1,6 @@
 @extends('layouts.default')
 
+@include('plugins.datatables')
 @include('plugins.sweetalert2')
 
 @section('content')
@@ -46,6 +47,40 @@
                 <ul id="collection_detail" class="uk-switcher uk-margin">
                     <li class="uk-active">
                         <div class="uk-margin-top">
+                            @if (Laratrust::hasRole('admin') && !$collection->source()->exists() && !$collection->reviewer()->exists())
+                            <h3 class="full_width_in_card heading_c">
+                                Pilih Reviewer
+                            </h3>
+                            <form action="{{ route('collection.mapping.reviewer.submit') }}" method="POST" id="select-reviewer-form">
+                                <div class="uk-grid">
+                                    <div class="uk-width-1-10"></div>
+                                    <div class="uk-width-8-10">
+                                        @csrf
+                                        <input type="hidden" name="collection_id" value="{{ $collection->id }}">
+                                        <input type="hidden" name="user_id">
+                                        <div class="uk-form-row">
+                                            <div class="uk-input-group">
+                                                <label>Nama Reviewer</label>
+                                                <input type="text" class="md-input label-fixed readonly" name="name" required />
+                                                <span class="uk-input-group-addon"><button class="md-btn" type="button" data-uk-modal="{target:'#select-reviewer'}">Pilih</button></span>
+                                            </div>
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <label>Lembaga/Bidang</label>
+                                            <input type="text" class="md-input label-fixed readonly" name="institute" />
+                                        </div>
+                                        <div class="uk-form-row">
+                                            <label>Catatan (opsional)</label>
+                                            <textarea cols="30" rows="4" class="md-input" name="note"></textarea>
+                                        </div>
+                                        <br>
+                                        <button type="submit" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light uk-align-right">Simpan</button>
+                                    </div>
+                                    <div class="uk-width-1-10"></div>
+                                </div>
+                            </form>
+                            @include('contents.collection.mapping.select-reviewer')
+                            @endif
                             <h3 class="full_width_in_card heading_c">
                                 Moderasi
                             </h3>
@@ -326,34 +361,32 @@
                     </li>
                 </ul>
                 <hr class="md-hr">
-                @if (Laratrust::hasRole('admin'))
                 <h3 class="heading_c uk-margin-medium-bottom">Status Publikasi</h3>
-                    <div class="uk-margin-medium-bottom">
-                        <p>
-                            Status:
-                            @if ($collection->source()->exists())
-                                <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span>
+                <div class="uk-margin-medium-bottom">
+                    <p>
+                        Status:
+                        @if ($collection->source()->exists())
+                            <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span>
+                        @else
+                            @if (!$collection->reviewer()->exists())
+                                <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Belum Ada Reviewer</span>
                             @else
-                                @if (!$collection->reviewer()->exists())
-                                    <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Belum Ada Reviewer</span>
-                                @else
-                                    @if (!$collection->reviewer->results()->exists())
-                                        <span class="uk-badge uk-badge-warning uk-text-upper uk-margin-small-left">Menunggu Review</span>
-                                    @else 
-                                        @if ($collection->is_active)
-                                            <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span> 
-                                        @else
-                                            <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Tidak Layak</span>                                        
-                                        @endif
+                                @if (!$collection->reviewer->results()->exists())
+                                    <span class="uk-badge uk-badge-warning uk-text-upper uk-margin-small-left">Menunggu Review</span>
+                                @else 
+                                    @if ($collection->is_active)
+                                        <span class="uk-badge uk-badge-success uk-text-upper uk-margin-small-left">Layak</span> 
+                                    @else
+                                        <span class="uk-badge uk-badge-danger uk-text-upper uk-margin-small-left">Tidak Layak</span>                                        
                                     @endif
                                 @endif
                             @endif
-                        </p>
-                        <p>
-                            Reviewer: <span class="uk-badge uk-badge-outline uk-text-upper uk-margin-small-left">{{ $collection->reviewer()->exists() ? $collection->reviewer->user->name : '-' }}</span> 
-                        </p>
-                    </div>
-                @endif
+                        @endif
+                    </p>
+                    <p>
+                        Reviewer: <span class="uk-badge uk-badge-outline uk-text-upper uk-margin-small-left">{{ $collection->reviewer()->exists() ? $collection->reviewer->user->name : '-' }}</span> 
+                    </p>
+                </div>
                 @if (Laratrust::hasRole('reviewer'))
                 <hr class="md-hr">
                     <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
@@ -389,6 +422,10 @@
         var status_switch = $('input[name=active_status]')
 
         $(function () {
+            $(".readonly").keydown(function(e){
+                e.preventDefault();
+            })
+
             select_institution.selectize({
                 valueField: "id",
                 labelField: "name",

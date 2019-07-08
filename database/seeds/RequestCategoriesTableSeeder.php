@@ -12,6 +12,15 @@ class RequestCategoriesTableSeeder extends Seeder
     public function run()
     {
         DB::table('reference_request_categories')->insert([
+            'name' => 'Kategori Publikasi',
+            'code' => 'category',
+            'need_additional' => true,
+
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('reference_request_categories')->insert([
             'name' => 'Bahasa',
             'code' => 'language',
             'need_additional' => true,

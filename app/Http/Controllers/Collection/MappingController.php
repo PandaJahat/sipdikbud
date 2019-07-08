@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 # Models
 use App\Models\Collection\Collection;
 use App\Models\Collection\Institution;
+use App\User;
 
 class MappingController extends Controller
 {
@@ -39,8 +40,7 @@ class MappingController extends Controller
         return DataTables::of($collections)
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
-            $class = $collection->is_active ? '' : 'uk-text-muted';
-            return '<a class="'.$class.'" href="'.route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
+            return '<a href="'.route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)]).'">'.$collection->title.'</a>';
         })
         ->editColumn('created_at', function($collection) {
             return Carbon::parse($collection->created_at)->formatLocalized('%d %B %Y');
@@ -118,5 +118,42 @@ class MappingController extends Controller
     public function getCollections(Request $request)
     {
         return Collection::select('id', 'title')->where('id', '!=', $request->id)->get();
+    }
+
+    public function dataReviewer(Request $request)
+    {
+        $users = User::select(DB::raw('users.*'))->whereHas('roles', function($query) {
+            $query->where('name', 'reviewer');
+        })->with(['profile']);
+
+        return DataTables::of($users)
+        ->addIndexColumn()
+        ->editColumn('id', function($user) {
+            return '<input type="radio" name="reviewer_id" class="select_reviewer" id="check_'.$user->id.'" value="'.$user->id.'" />';
+        })
+        ->editColumn('name', function($user) {
+            return '<label for="check_'.$user->id.'" id="reviewer_name_'.$user->id.'">'.$user->name.'</label>';
+        })
+        ->editColumn('profile.institute', function($user) {
+            return '<label for="check_'.$user->id.'" id="reviewer_institute_'.$user->id.'">'.$user->profile->institute.'</label>';
+        })
+        ->rawColumns([
+            'id', 'name', 'profile.institute'
+        ])
+        ->make(true);
+    }
+
+    public function saveReviewer(Request $request)
+    {
+        $collection = Collection::find($request->collection_id);
+        
+        if ($collection->reviewer()->exists()) $collection->reviewer()->delete();
+
+        $collection->reviewer()->create([
+            "user_id" => $request->user_id,
+            "note" => $request->note,
+        ]);
+
+        return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Berhasil memilih reviewer!');
     }
 }

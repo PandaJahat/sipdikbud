@@ -9,4 +9,7 @@ Route::prefix('collection/mapping')->group(function () {
     Route::get('/get/collections', 'MappingController@getCollections')->name('collection.mapping.get.collections');
 
     Route::post('/', 'MappingController@save')->name('collection.mapping.submit');
+    
+    Route::get('/reviewer/data', 'MappingController@dataReviewer')->name('collection.mapping.reviewer.data');
+    Route::post('/reviewer/save', 'MappingController@saveReviewer')->name('collection.mapping.reviewer.submit');
 });
