@@ -71,6 +71,17 @@ class UsersTableSeeder extends Seeder
             'user_id' => 2,
             'user_type' => 'App\User'
         ]);
+        DB::table('user_profiles')->insert([
+            "user_id" => 2,
+            "fullname" => 'Peneliti',
+            "date_of_birth" => '2000-01-01',
+            "institute" => 'Pengembang Aplikasi',
+            "gender_id" => 1,
+            "email" => 'peneliti@app.com',
+
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         DB::table('users')->insert([
             'name' => 'Reviewer',
@@ -85,6 +96,17 @@ class UsersTableSeeder extends Seeder
             'user_id' => 3,
             'user_type' => 'App\User'
         ]);
+        DB::table('user_profiles')->insert([
+            "user_id" => 3,
+            "fullname" => 'Reviewer',
+            "date_of_birth" => '2000-01-01',
+            "institute" => 'Pengembang Aplikasi',
+            "gender_id" => 1,
+            "email" => 'reviewer@app.com',
+
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
         DB::table('users')->insert([
             'name' => 'Pengguna',
@@ -98,6 +120,17 @@ class UsersTableSeeder extends Seeder
             'role_id' => 4,
             'user_id' => 4,
             'user_type' => 'App\User'
+        ]);
+        DB::table('user_profiles')->insert([
+            "user_id" => 4,
+            "fullname" => 'Pengguna',
+            "date_of_birth" => '2000-01-01',
+            "institute" => 'Pengembang Aplikasi',
+            "gender_id" => 1,
+            "email" => 'pengguna@app.com',
+
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
