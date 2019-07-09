@@ -13,7 +13,7 @@
                     <span class="menu_title">Beranda</span>
                 </a>
             </li>
-            <li class="{{ Request::is('dashboard') ? 'current_section' : '' }}" title="Dashboard">
+            <li class="{{ Request::is('dashboard', 'dashboard/*') ? 'current_section' : '' }}" title="Dashboard">
                 <a href="{{ route('dashboard') }}">
                     <span class="menu_icon"><i class="material-icons">&#xE871;</i></span>
                     <span class="menu_title">Dashboard</span>

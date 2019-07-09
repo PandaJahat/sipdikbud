@@ -1,10 +1,16 @@
+@extends('layouts.default')
+
+@include('plugins.amchart')
+@include('plugins.peity')
+
+@section('content')
 <div class="uk-grid uk-grid-width-large-1-4 uk-grid-width-medium-1-2 uk-grid-medium uk-sortable sortable-handler hierarchical_show" data-uk-sortable data-uk-grid-margin>
     <div>
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_visitors peity_data">5,3,9,6,5,9,7</span></div>
                 <span class="uk-text-muted uk-text-small">Publikasi</span>
-                <h2 class="uk-margin-remove"><span id="count-pilot">0</span></h2>
+                <h2 class="uk-margin-remove"><span id="count-collections">0</span></h2>
             </div>
         </div>
     </div>
@@ -13,7 +19,7 @@
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_sale peity_data">5,3,9,6,5,9,7,3,5,2</span></div>
                 <span class="uk-text-muted uk-text-small">Pengunduhan</span>
-                <h2 class="uk-margin-remove"><span id="count-participant">0</span></h2>
+                <h2 class="uk-margin-remove"><span id="count-downloads">0</span></h2>
             </div>
         </div>
     </div>
@@ -21,8 +27,8 @@
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-float-right uk-margin-top uk-margin-small-right"><span class="peity_orders peity_data">64/100</span></div>
-                <span class="uk-text-muted uk-text-small">Pengguna</span>
-                <h2 class="uk-margin-remove"><span id="count-school">0</span></h2>
+                <span class="uk-text-muted uk-text-small">Publikasi Terunduh</span>
+                <h2 class="uk-margin-remove"><span id="count-collection-downloaded">0</span></h2>
             </div>
         </div>
     </div>
@@ -36,6 +42,7 @@
         </div>
     </div>
 </div>
+@endsection
 
 @push('scripts')
     <script>
@@ -81,10 +88,10 @@
                 }, 2e3)
             }
 
-            new CountUp('count-pilot', 0, "5632").start();
-            new CountUp('count-participant', 0, "3220").start();
-            new CountUp('count-school', 0, "223").start();
-            new CountUp('peity_live_text', 0, "60").start();
+            new CountUp('count-collections', 0, "{{ $data['collectionts_count'] }}").start();
+            new CountUp('count-downloads', 0, "{{ $data['downloads_count'] }}").start();
+            new CountUp('count-collection-downloaded', 0, "{{ $data['collectionts_downloaded_count'] }}").start();
+            new CountUp('peity_live_text', 0, "{{ $data['visits_count'] }}").start();
         });
     </script>
 @endpush
