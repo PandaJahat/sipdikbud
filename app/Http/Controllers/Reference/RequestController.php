@@ -31,7 +31,7 @@ class RequestController extends Controller
             'category', 'user'
         ]);
 
-        if (Auth::user()->hasRole('researcher')) {
+        if (Auth::user()->hasRole(['researcher', 'reviewer'])) {
             $reference_requests->where('user_id', Auth::user()->id);
         }
 

@@ -52,6 +52,45 @@
                 <ul id="collection_detail" class="uk-switcher uk-margin">
                     <li class="uk-active">
                         <div class="uk-margin-top">
+                            @if ($collection->reviewer->results()->exists() && (Laratrust::hasRole(['reviewer', 'admin']) || Auth::user()->id == $collection->user_id))
+                            <h3 class="full_width_in_card heading_c">
+                                Hasil Review
+                            </h3>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">gavel</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Layak Diterbitkan</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->reviewer->results->last()->status ? 'Ya' : 'Tidak' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">notes</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Catatan dari Reviewer</label>
+                                                    <textarea class="md-input" readonly>{{ $collection->reviewer->results->last()->note }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <h3 class="full_width_in_card heading_c">
                                 Informasi Umum
                             </h3>
@@ -345,12 +384,12 @@
                     </p>
                 </div>
                 @if (Laratrust::hasRole('reviewer'))
-                <hr class="md-hr">
+                {{-- <hr class="md-hr">
                     <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" id="publish" name="active_status" value="1" {{ $collection->is_active ? 'checked' : '' }} />
                         <label for="publish" class="inline-label">Layak Diterbitkan</label>
-                    </div>
+                    </div> --}}
                 @endif
                 @if (Laratrust::hasRole(['public', 'researcher', 'reviewer']))
                 <hr class="md-hr">

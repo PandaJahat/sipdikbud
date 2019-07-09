@@ -19,7 +19,7 @@
                     <span class="menu_title">Dashboard</span>
                 </a>
             </li>
-            @if (Laratrust::hasRole(['public', 'researcher']))
+            @if (Laratrust::hasRole(['public', 'researcher', 'reviewer']))
             <li class="{{ Request::is('profile', 'user/update') ? 'current_section' : '' }}" title="Profil">
                 <a href="{{ route('profile') }}">
                     <span class="menu_icon"><i class="material-icons">person</i></span>
@@ -33,10 +33,14 @@
                     <span class="menu_title">Publikasi</span>
                 </a>
                 <ul class="" style="display: none;">
+                    @if (Laratrust::hasRole(['admin', 'researcher', 'public']))
                     <li class="{{ Request::is('collection/search') ? 'act_item' : '' }} {{ Request::is('collection/detail') && Laratrust::hasRole('public') ? 'act_item' : '' }}"><a href="{{ route('collection.search') }}">Pencarian Publikasi</a></li>
+                    @endif
                     @if (Laratrust::hasRole(['admin', 'researcher']))
                     <li class="{{ Request::is('collection/create') ? 'act_item' : '' }}"><a href="{{ route('collection.create') }}">Upload Publikasi</a></li>
                     <li class="{{ Request::is('collection/list', 'collection/detail', 'collection/update') ? 'act_item' : '' }}"><a href="{{ route('collection.list') }}">Daftar Publikasi</a></li>
+                    @endif
+                    @if (Laratrust::hasRole(['admin', 'researcher', 'reviewer']))
                     <li class="{{ Request::is('collection/mapping', 'collection/mapping/detail') ? 'act_item' : '' }}"><a href="{{ route('collection.mapping') }}">Moderasi Publikasi</a></li>
                     @endif
                     @if (Laratrust::hasRole(['public', 'researcher']))
@@ -58,7 +62,7 @@
                 </ul>
             </li>
             @endif
-            @if (Laratrust::hasRole(['admin', 'researcher']))
+            @if (Laratrust::hasRole(['admin', 'researcher', 'reviewer']))
             <li title="Referensi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE241;</i></span>
@@ -75,7 +79,7 @@
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
                     @endif
-                    @if (Laratrust::hasRole('researcher'))
+                    @if (Laratrust::hasRole(['researcher', 'reviewer']))
                     <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>                        
                     @endif
                 </ul>

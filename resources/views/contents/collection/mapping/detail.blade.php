@@ -81,6 +81,45 @@
                             </form>
                             @include('contents.collection.mapping.select-reviewer')
                             @endif
+                            @if ($collection->reviewer->results()->exists() && (Laratrust::hasRole(['reviewer', 'admin']) || Auth::user()->id == $collection->user_id))
+                            <h3 class="full_width_in_card heading_c">
+                                Hasil Review
+                            </h3>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">gavel</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Layak Diterbitkan</label>
+                                                    <input type="text" class="md-input" value="{{ $collection->reviewer->results->last()->status ? 'Ya' : 'Tidak' }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-grid">
+                                <div class="uk-width-1-1">
+                                    <div class="uk-grid uk-grid-width-1-1 uk-grid-width-large-1-1" data-uk-grid-margin="">
+                                        <div class="uk-grid-margin uk-row-first">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="md-list-addon-icon material-icons">notes</i>
+                                                </span>
+                                                <div class="md-input-wrapper md-input-filled">
+                                                    <label>Catatan dari reviewer</label>
+                                                    <textarea class="md-input" readonly>{{ $collection->reviewer->results->last()->note }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <h3 class="full_width_in_card heading_c">
                                 Moderasi
                             </h3>
@@ -90,6 +129,25 @@
                                     <input type="hidden" name="id" value="{{ $collection->id }}">
                                     <div class="uk-width-1-10"></div>
                                     <div class="uk-width-8-10">
+                                        @if (Laratrust::hasRole('reviewer') && !$collection->reviewer->results()->exists())
+                                            <div class="uk-form-row">
+                                                <label>Apakah publikasi ini layak terbit</label>
+                                                <div class="uk-margin-small-top">
+                                                    <span class="icheck-inline">
+                                                        <input type="radio" name="is_active" id="radio_demo_inline_1" value="1" data-md-icheck />
+                                                        <label for="radio_demo_inline_1" class="inline-label">Ya</label>
+                                                    </span>
+                                                    <span class="icheck-inline">
+                                                        <input type="radio" name="is_active" id="radio_demo_inline_2" value="0" data-md-icheck />
+                                                        <label for="radio_demo_inline_2" class="inline-label">Tidak</label>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="uk-form-row">
+                                                <label>Catatan</label>
+                                                <textarea cols="30" rows="4" class="md-input" name="note"></textarea>
+                                            </div>
+                                        @endif
                                         <div class="uk-form-row">
                                             <label for="institutions">Bidang Terkait</label>
                                             <select name="institutions[]" id="institutions" multiple>
@@ -320,7 +378,9 @@
                     </li>
                     <li>
                         @if (!empty($collection->cover_file))
-                        <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" alt="cover">
+                            <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" alt="cover">
+                        @else
+                            <img class="uk-responsive-width" src="{{ asset('assets-front/img/nothing.png') }}" alt="cover">
                         @endif
                     </li>
                 </ul>
@@ -388,15 +448,15 @@
                     </p>
                 </div>
                 @if (Laratrust::hasRole('reviewer'))
-                <hr class="md-hr">
+                    {{-- <hr class="md-hr">
                     <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" id="publish" name="active_status" value="1" {{ $collection->is_active ? 'checked' : '' }} />
                         <label for="publish" class="inline-label">Layak Diterbitkan</label>
-                    </div>
+                    </div> --}}
                 @endif
-                @if (Laratrust::hasRole(['public', 'researcher', 'reviewer']))
-                <hr class="md-hr">
+                @if (Laratrust::hasRole(['public', 'researcher']))
+                    <hr class="md-hr">
                     <h3 class="heading_c uk-margin-medium-bottom">Pengaturan Publikasi</h3>
                     <div class="uk-form-row">
                         <input type="checkbox" data-switchery data-switchery-color="#1e88e5" name="favorite" value="1" {{ $collection->favorites()->wherePivot('user_id', Auth::user()->id)->exists() ? 'checked' : '' }} id="favorite" />

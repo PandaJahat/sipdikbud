@@ -37,6 +37,12 @@ class MappingController extends Controller
             $collections->where('user_id', $user->id);
         }
 
+        if ($user->hasRole('reviewer')) {
+            $collections->whereHas('reviewer', function($query) use($user) {
+                $query->where('user_id', $user->id);
+            });
+        }
+
         return DataTables::of($collections)
         ->addIndexColumn()
         ->editColumn('title', function($collection) {
@@ -93,15 +99,26 @@ class MappingController extends Controller
             $collection = Collection::find($request->id);
             $collection->institutions()->detach();
             $collection->related_collections()->detach();
+
+            $user = Auth::user();
             
             if (!empty($request->institutions)) {
                 $collection->institutions()->attach($request->institutions, [
-                    'user_id' => Auth::user()->id
+                    'user_id' => $user->id
                 ]);
             }
 
             if (!empty($request->related_collections)) {
                 $collection->related_collections()->attach($request->related_collections);
+            }
+            
+            if ($user->hasRole('reviewer') && !$collection->reviewer->results()->exists()) {
+                $collection->reviewer->results()->create([
+                    "status" => $request->is_active,
+                    "note" => $request->note,
+                ]);
+
+                $collection->is_active = $request->is_active;
             }
 
             return redirect()->route('collection.mapping.detail', ['id' => Crypt::encrypt($collection->id)])->with('success', 'Publikasi berhasil dimoderasi!');

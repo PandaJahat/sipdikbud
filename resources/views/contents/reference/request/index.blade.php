@@ -7,7 +7,7 @@
 <h3 class="heading_b uk-margin-bottom">Permohonan Data Referensi</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
-        @if (Laratrust::hasRole('researcher'))
+        @if (Laratrust::hasRole(['researcher', 'reviewer']))
         <div class="uk-grid">
             <div class="uk-width-1-1">
                 <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light md-btn-icon" data-uk-modal="{target:'#request-create'}"><i class="uk-icon-plus"></i> Buat Permohonan</button>
@@ -35,7 +35,7 @@
     </div>
 </div>
 
-@if (Laratrust::hasRole('researcher'))
+@if (Laratrust::hasRole(['researcher', 'reviewer']))
     <div class="uk-modal" id="request-create">
         <div class="uk-modal-dialog">
             <div class="uk-modal-header">
@@ -70,7 +70,7 @@
 @endif
 @endsection
 
-@if (Laratrust::hasRole('researcher'))
+@if (Laratrust::hasRole(['researcher', 'reviewer']))
     @push('scripts')
         <script>
             $(function () {
