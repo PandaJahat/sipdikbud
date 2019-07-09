@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col mb-5">
-                <h2 class="font-weight-semibold mb-0">Jelajahi penelitian ilmiah dan buku di Sipdikbud</h2>
+                <h2 class="font-weight-semibold mb-0">Jelajahi publikasi di Sipdikbud</h2>
                 {{-- <p class="font-weight-light mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eros ipsum, facilisis eget scelerisque non, fermentum at tellus.</p> --}}
             </div>
         </div>
@@ -94,84 +94,11 @@
                 <h4>Telusuri menurut Judul Publikasi :</h4>
                 <hr class="mb-4">
                 <ul class="list list-inline">
+                    @foreach (range('A', 'Z') as $char)
                     <li class="list-inline-item px-2">
-                        <h2><a href=""> A</a></h2>
+                        <h2><a href="{{ route('home.alphabet', ['char' => Crypt::encrypt($char)]) }}"> {{ $char }}</a></h2>
                     </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> B</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> C</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> D</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> E</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> F</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> G</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> H</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> I</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> J</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> K</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> L</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> M</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> N</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> O</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> P</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> Q</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> R</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> S</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> T</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> U</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> V</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> W</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> X</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> Y</a></h2>
-                    </li>
-                    <li class="list-inline-item px-2">
-                        <h2><a href=""> Z</a></h2>
-                    </li>
+                    @endforeach
                     <li class="list-inline-item px-2">
                         <h2><a href=""> 0-9</a></h2>
                     </li>

@@ -65,15 +65,30 @@ class HomeController extends Controller
 
     public function category(Request $request)
     {
-        $category = Category::find(Crypt::decrypt($request->id));
+        try {
+            $category = Category::find(Crypt::decrypt($request->id));
 
-        if (empty($category)) return redirect()->back();
+            if (empty($category)) return redirect()->route('home');
 
-        return view('contents.home.home.category',[
-            'category' => $category,
-            'collections' => Collection::whereHas('categories', function($query) use($category) {
-                $query->where('category_id', $category->id);
-            })->where('is_active', true)->paginate(10)
-        ]);
+            return view('contents.home.home.category',[
+                'category' => $category,
+                'collections' => Collection::whereHas('categories', function($query) use($category) {
+                    $query->where('category_id', $category->id);
+                })->where('is_active', true)->paginate(10)
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->route('home');
+        }
+    }
+
+    public function alphabet(Request $request)
+    {
+        try {
+            $collections = Collection::where('title', 'LIKE', Crypt::decrypt($request->char).'%')->where('is_active', true)->get();
+
+            return $collections;
+        } catch (\Exception $e) {
+            return redirect()->route('home');
+        }
     }
 }
