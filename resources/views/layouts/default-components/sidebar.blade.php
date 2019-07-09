@@ -78,6 +78,8 @@
                     <li class="{{ Request::is('reference/institution') ? 'act_item' : '' }}"><a href="{{ route('reference.institution') }}">Lembaga/Bidang</a></li>
                     <li class="menu_subtitle">Kebermanfaatan</li>
                     <li class="{{ Request::is('reference/reason') ? 'act_item' : '' }}"><a href="{{ route('reference.reason') }}">Kategori</a></li>
+                    <li class="menu_subtitle">Permohonan</li>
+                    <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>
                     @endif
                     @if (Laratrust::hasRole(['researcher', 'reviewer']))
                     <li class="{{ Request::is('reference/request') ? 'act_item' : '' }}"><a href="{{ route('reference.request') }}">Permohonan Referensi</a></li>                        
