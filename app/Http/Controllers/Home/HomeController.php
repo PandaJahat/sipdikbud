@@ -61,4 +61,14 @@ class HomeController extends Controller
             'non_institute' => $non_institute 
         ];
     }
+
+    public function category(Request $request)
+    {
+        return view('contents.home.home.category',[
+            'category' => Category::find($request->category),
+            'collections' => Collection::whereHas('categories', function($query) use($request) {
+                $query->where('category_id', $request->category);
+            })->where('is_active', true)->paginate(10)
+        ]);
+    }
 }

@@ -50,18 +50,18 @@
                 </div>
             </div>
             <div class="col-lg-3 mb-5 mb-md-0">
-                <h4 class="mb-4">Sektor</h4>
+                {{-- <h4 class="mb-4">Sektor</h4>
                 <ul class="list list-style-1">
                     @foreach ($partners as $item)
                         <li><a href="">{{ $item->name }} ({{ number_format($item->collections_count) }})</a> </li>
                     @endforeach
-                </ul>
+                </ul> --}}
             </div>
             <div class="col-lg-3 mb-5 mb-md-0">
                 <h4 class="mb-4">Kategori</h4>
                 <ul class="list list-style-1">
                     @foreach ($categories as $item)
-                        <li><a href="">{{ $item->name }} ({{ number_format($item->collections_count) }})</a></li>                        
+                        <li><a href="{{ route('home.category', ['category' => $item->id]) }}">{{ $item->name }} ({{ number_format($item->collections_count) }})</a></li>                        
                     @endforeach
                 </ul>
             </div>

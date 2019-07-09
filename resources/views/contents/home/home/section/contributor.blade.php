@@ -1,4 +1,4 @@
-<section class="section section-background section-height-3 overlay overlay-color-primary overlay-show overlay-op-5 " data-plugin-image-background data-plugin-options="{'imageUrl': '{{ asset('assets-front/img/half.jpg') }}'}">
+{{-- <section class="section section-background section-height-3 overlay overlay-color-primary overlay-show overlay-op-5 " data-plugin-image-background data-plugin-options="{'imageUrl': '{{ asset('assets-front/img/half.jpg') }}'}">
     <div class="container">
         <div class="row">
             <div class="col">
@@ -50,4 +50,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}

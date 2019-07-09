@@ -23,7 +23,7 @@ class SearchController extends Controller
 
     public function getCollection(Request $request)
     {
-        $collections = Collection::query();
+        $collections = Collection::where('is_active', true);
         
         if (!empty($request->publisher)) {
             $collections->orWhere('published_by', 'like', "%$request->publisher%");
