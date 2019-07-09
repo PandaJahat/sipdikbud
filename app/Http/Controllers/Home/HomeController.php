@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Crypt;
 
 # Models
 use App\Models\Collection\Category;
@@ -64,10 +65,14 @@ class HomeController extends Controller
 
     public function category(Request $request)
     {
+        $category = Category::find(Crypt::decrypt($request->id));
+
+        if (empty($category)) return redirect()->back();
+
         return view('contents.home.home.category',[
-            'category' => Category::find($request->category),
-            'collections' => Collection::whereHas('categories', function($query) use($request) {
-                $query->where('category_id', $request->category);
+            'category' => $category,
+            'collections' => Collection::whereHas('categories', function($query) use($category) {
+                $query->where('category_id', $category->id);
             })->where('is_active', true)->paginate(10)
         ]);
     }

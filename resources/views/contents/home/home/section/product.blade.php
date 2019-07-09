@@ -61,7 +61,7 @@
                 <h4 class="mb-4">Kategori</h4>
                 <ul class="list list-style-1">
                     @foreach ($categories as $item)
-                        <li><a href="{{ route('home.category', ['category' => $item->id]) }}">{{ $item->name }} ({{ number_format($item->collections_count) }})</a></li>                        
+                        <li><a href="{{ route('home.category', ['id' => Crypt::encrypt($item->id)]) }}">{{ $item->name }} ({{ number_format($item->collections_count) }})</a></li>                        
                     @endforeach
                 </ul>
             </div>
