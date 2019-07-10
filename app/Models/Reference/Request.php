@@ -15,6 +15,7 @@ class Request extends Model
         "data",
         "additional_data",
         "user_id",
+        "status"
     ];
 
     public function category()

@@ -176,6 +176,62 @@
                 }
             })
         }
+
+        function acceptRequest(id) {
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Ingin menyetujui permohonan referensi ini",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, setujui!',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.value) {
+                    $.post("{{ route('reference.request.accept.submit') }}", {
+                        _token: "{{ csrf_token() }}",
+                        id: id
+                    }).done(function (result) {
+                        Swal.fire(
+                            'Berhasil!',
+                            result,
+                            'success'
+                        )
+
+                        request_table.draw(false)
+                    })
+                }
+            })
+        }
+
+        function rejectRequest(id) {
+            Swal.fire({
+                title: 'Anda yakin?',
+                text: "Ingin menolak permohonan referensi ini",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, tolak!',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.value) {
+                    $.post("{{ route('reference.request.reject.submit') }}", {
+                        _token: "{{ csrf_token() }}",
+                        id: id
+                    }).done(function (result) {
+                        Swal.fire(
+                            'Berhasil!',
+                            result,
+                            'success'
+                        )
+
+                        request_table.draw(false)
+                    })
+                }
+            })
+        }
     </script>
 @endpush
 

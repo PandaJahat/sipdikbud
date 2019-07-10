@@ -6,4 +6,7 @@ Route::prefix('reference/request')->group(function () {
 
     Route::post('/create', 'RequestController@create')->name('reference.request.create.submit');
     Route::delete('/delete', 'RequestController@delete')->name('reference.request.delete.submit');
+
+    Route::post('/accept', 'RequestController@accept')->name('reference.request.accept.submit');
+    Route::post('/reject', 'RequestController@reject')->name('reference.request.reject.submit');
 });
