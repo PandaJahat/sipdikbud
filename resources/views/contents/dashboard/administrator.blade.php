@@ -47,12 +47,27 @@
     <div class="uk-width-1-2">
         @include('contents.dashboard.administrator.top-collections')
     </div>
+    <div class="uk-width-1-2">
+        @include('contents.dashboard.administrator.chart-category')
+    </div>
+</div>
+
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        @include('contents.dashboard.administrator.trend-visit')
+    </div>
 </div>
 @endsection
 
 @push('scripts')
     <script>
         $(function () {
+            $.get("{{ route('dashboard.admin.chart.data') }}").done(function (result) {
+                chartCategory(result.collection_category)
+                visitLog(result.visit_log)
+            })
+
+
             function e(e, t) {
                 return Math.floor(Math.random() * (t - e + 1)) + e
             }

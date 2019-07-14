@@ -2,7 +2,7 @@
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        {{-- <li data-target="#carouselExampleIndicators" data-slide-to="2"></li> --}}
     </ol>
     <div class="carousel-inner">
         @if (count($sliders) == 0)
@@ -12,9 +12,9 @@
         <div class="carousel-item">
             <img src="{{ asset('assets-front/img/slider1.jpg') }}" class="d-block w-100" alt="...">
         </div>
-        <div class="carousel-item">
+        {{-- <div class="carousel-item">
             <img src="{{ asset('assets-front/img/slider.jpg') }}" class="d-block w-100" alt="...">
-        </div>
+        </div> --}}
         @else
         @foreach ($sliders as $item)
         <div class="carousel-item active">

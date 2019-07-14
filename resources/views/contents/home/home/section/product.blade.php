@@ -57,7 +57,7 @@
                     @endforeach
                 </ul> --}}
             </div>
-            <div class="col-lg-3 mb-5 mb-md-0">
+            <div class="col-lg-3 mb-5 mb-md-0" style="font-size: 18px;">
                 <h4 class="mb-4">Kategori</h4>
                 <ul class="list list-style-1">
                     @foreach ($categories as $item)
