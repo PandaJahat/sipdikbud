@@ -7,10 +7,10 @@
     <div class="carousel-inner">
         @if (count($sliders) == 0)
         <div class="carousel-item active">
-            <img src="{{ asset('assets-front/img/slider2.jpg') }}" class="d-block w-100" alt="...">
+            <img src="{{ asset('assets-front/img/slider3.jpg') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('assets-front/img/slider1.jpg') }}" class="d-block w-100" alt="...">
+            <img src="{{ asset('assets-front/img/slider4.jpg') }}" class="d-block w-100" alt="...">
         </div>
         {{-- <div class="carousel-item">
             <img src="{{ asset('assets-front/img/slider.jpg') }}" class="d-block w-100" alt="...">

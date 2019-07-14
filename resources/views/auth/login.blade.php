@@ -57,14 +57,14 @@
                         <div class="row m-0">
                             <div class="col-half-section pl-md-5">
                                 <div role="main" class="main">
-                                    <div class="overflow-hidden">
+                                    {{-- <div class="overflow-hidden">
                                         <span class="d-block top-sub-title appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="600" style="animation-delay: 600ms;">MASUK</span>
+                                    </div> --}}
+                                    <div class="overflow-hidden mb-1">
+                                        <h1 class="font-weight-bold text-6 mb-0 appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="800" style="animation-delay: 800ms; font-size: 3.8rem !important;">SIP</h1>
                                     </div>
                                     <div class="overflow-hidden mb-1">
-                                        <h1 class="font-weight-bold text-6 mb-0 appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="800" style="animation-delay: 800ms;">Sipdikbud</h1>
-                                    </div>
-                                    <div class="overflow-hidden mb-1">
-                                        <p class="text-2 mb-0 appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="1000" style="animation-delay: 1000ms;">Sistem Informasi Penelitian Kemdikbud</p>
+                                        <p class="text-2 mb-0 appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="1000" style="animation-delay: 1000ms;">Sistem Informasi Penelitian Pendidikan dan Kebudayaan</p>
                                     </div>
                                     <div class="appear-animation animated maskUp appear-animation-visible" data-appear-animation="maskUp" data-appear-animation-delay="800" style="animation-delay: 800ms;">
                                         <ul style="justify-content: left;" class="nav nav-tabs nav-tabs-minimal" id="tabMinimal" role="tablist">

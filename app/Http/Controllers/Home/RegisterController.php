@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 # Models
 use App\User;
@@ -49,6 +50,7 @@ class RegisterController extends Controller
             $profile->user_id = $user->id;
             $profile->save();
 
+            Auth::login($user);
             return redirect()->route('login');
 
         } catch (\Exception $e) {

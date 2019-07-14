@@ -1,5 +1,12 @@
 @extends('layouts.home')
 
+@push('styles')
+    <style>
+        .highlight-title a {
+            line-height: 24px;
+        }
+    </style>
+@endpush
 
 @section('content')
 <div role="main" class="main">
@@ -23,8 +30,8 @@
     </section>
     <div class="container">
         <div class="row">
-            <aside class="sidebar col-md-4 col-lg-3 order-2 order-md-1 mb-5">
-                {{-- <div class="accordion accordion-default accordion-toggle accordion-style-1" role="tablist">
+            {{-- <aside class="sidebar col-md-4 col-lg-3 order-2 order-md-1 mb-5">
+                <div class="accordion accordion-default accordion-toggle accordion-style-1" role="tablist">
                     <div class="card">
                         <div class="card-header accordion-header" role="tab" id="categories">
                             <h5 class="mb-0">
@@ -38,8 +45,8 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-primary btn-block btn-4 btn-v-3 mb-2">CARI</button> --}}
-            </aside>
+                <button type="button" class="btn btn-primary btn-block btn-4 btn-v-3 mb-2">CARI</button>
+            </aside> --}}
             <div class="col-md-8 col-lg-9 order-1 order-md-2 mb-5">
                 <div class="row align-items-center justify-content-between mb-4">
                     <div class="col-auto mb-3 mb-sm-0">
@@ -67,7 +74,11 @@
                             <div class="image-frame">
                                 <span class="image-frame-wrapper">
                                     <a href="shop-product-detail-right-sidebar.html">
-                                        <img src="{{ asset('covers/'.$item->cover_file) }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                                        @if (!empty($item->cover_file))
+                                            <img src="{{ $item->source()->exists() ? $item->source->thumbnail_path.$item->cover_file : $item->source }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                                        @else
+                                            <img src="{{ asset('assets-front/img/nothing.png') }}" class="img-fluid" alt="">
+                                        @endif
                                     </a>
                                 </span>
                             </div>
@@ -78,20 +89,24 @@
                                     {{ $item->title }}
                                 </a>
                             </h2>
-                            <span class="badge badge-info">{{ $item->categories()->exists() ? $item->category->name : 'Lainnya' }}</span>
+                            {{-- <span class="badge badge-info">{{ $item->categories()->exists() ? $item->category->name : 'Lainnya' }}</span> --}}
                             <table class="table table-borderless table-sm">
                                 <tbody>
                                     <tr>
-                                        <th scope="row" style="width: 100px;">Terbitan :</th>
-                                        <td class="highlight-publisher">{{ $item->published_by }}</td>
+                                        <th scope="row" style="width: 110px;">Kategori :</th>
+                                        <td class="highlight-publisher">{{ $item->categories()->exists() ? $item->category->name : 'Lainnya' }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Institusi :</th>
-                                        <td>{{ $item->source()->exists() ? $item->source->name : 'SIPDIKBUD' }}</td>
+                                        <th scope="row" style="width: 110px;">Tahun Terbit :</th>
+                                        <td class="highlight-publisher">{{ $item->published_year }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Penulis :</th>
                                         <td class="highlight-author">{{ $item->author->name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sumber Data :</th>
+                                        <td>{{ $item->source()->exists() ? $item->source->name : 'SIPDIKBUD' }}</td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Lokasi :</th>

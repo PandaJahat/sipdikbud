@@ -1,7 +1,5 @@
 @extends('layouts.home')
 
-@include('plugins.mark')
-
 @push('styles')
     <style>
         .highlight-title a {
@@ -18,21 +16,21 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb justify-content-start">
                         <li><a href="{{ route('home') }}">Beranda</a></li>
-                        <li class="active">Hasil Pencarian</li>
+                        <li class="active">Alfabet</li>
                     </ul>
                 </div>
             </div>
             <div class="row text-left">
                 <div class="col-md-12">
-                    <h1>Hasil Pencarian</h1>
-                    <p class="lead">Daftar publikasi hasil pencarian.</p>
+                    <h1>Judul Publikasi Huruf {{ $char }}</h1>
+                    <p class="lead">Daftar publikasi dengan judul berawalan huruf {{ $char }}.</p>
                 </div>
             </div>
         </div>
     </section>
     <div class="container">
         <div class="row">
-            <aside class="sidebar col-md-4 col-lg-3 order-2 order-md-1 mb-5">
+            {{-- <aside class="sidebar col-md-4 col-lg-3 order-2 order-md-1 mb-5">
                 <div class="accordion accordion-default accordion-toggle accordion-style-1" role="tablist">
                     <div class="card">
                         <div class="card-header accordion-header" role="tab" id="categories">
@@ -42,22 +40,13 @@
                         </div>
                         <div id="toggleCategories" class="accordion-body collapse show" role="tabpanel" aria-labelledby="categories">
                             <div class="card-body">
-                                <ul class="list list-unstyled mb-0">
-                                    @foreach ($categories as $item)
-                                        <li>
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck_{{ $item->id }}" name="categories[]" value="{{ $item->id }}">
-                                                <label class="custom-control-label" for="customCheck_{{ $item->id }}">{{ $item->name }}</label>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary btn-block btn-4 btn-v-3 mb-2">CARI</button>
-            </aside>
+            </aside> --}}
             <div class="col-md-8 col-lg-9 order-1 order-md-2 mb-5">
                 <div class="row align-items-center justify-content-between mb-4">
                     <div class="col-auto mb-3 mb-sm-0">
@@ -146,27 +135,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-    <script>
-        $(function () {
-            $('.highlight-title').each(function (e) {
-                @if (!empty($request->keywords))
-                $(this).mark("{{ $request->keywords }}");
-                @endif
-            })  
-
-            $('.highlight-publisher').each(function (e) {
-                @if (!empty($request->publisher))
-                $(this).mark("{{ $request->publisher }}");
-                @endif
-            })  
-
-            $('.highlight-author').each(function (e) {
-                @if (!empty($request->author))
-                $(this).mark("{{ $request->author }}");
-                @endif
-            })  
-        })
-    </script>
-@endpush

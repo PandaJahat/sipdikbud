@@ -74,19 +74,8 @@ class HomeController extends Controller
                 'category' => $category,
                 'collections' => Collection::whereHas('categories', function($query) use($category) {
                     $query->where('category_id', $category->id);
-                })->where('is_active', true)->paginate(10)
+                })->where('is_active', true)->orderBy('title')->paginate(10)
             ]);
-        } catch (\Exception $e) {
-            return redirect()->route('home');
-        }
-    }
-
-    public function alphabet(Request $request)
-    {
-        try {
-            $collections = Collection::where('title', 'LIKE', Crypt::decrypt($request->char).'%')->where('is_active', true)->get();
-
-            return $collections;
         } catch (\Exception $e) {
             return redirect()->route('home');
         }

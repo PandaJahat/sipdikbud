@@ -26,7 +26,11 @@
                 <div class="image-frame">
                     <span class="image-frame-wrapper">
                         <a href="javascript:;">
-                            <img src="{{ asset('covers/'.$collection->cover_file) }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                            @if (!empty($collection->cover_file))
+                                <img src="{{ $collection->source()->exists() ? $collection->source->thumbnail_path.$collection->cover_file : $collection->source }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                            @else
+                                <img src="{{ asset('assets-front/img/nothing.png') }}" class="img-fluid" alt="">
+                            @endif
                         </a>
                     </span>
                 </div>
@@ -40,20 +44,28 @@
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
-                            <th scope="row" style="width: 150px;">Penulis :</th>
-                            <td>{{ $collection->author->name }}</td>
+                            <th scope="row" style="width: 150px;">Kategori :</th>
+                            <td class="highlight-publisher">{{ $collection->categories()->exists() ? $collection->category->name : 'Lainnya' }}</td>
                         </tr>
                         <tr>
-                            <th scope="row">Kategori :</th>
-                            <td>{{ $collection->category->name }}</td>
+                            <th scope="row">Tahun Terbit :</th>
+                            <td class="highlight-publisher">{{ $collection->published_year }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Penulis :</th>
+                            <td class="highlight-author">{{ $collection->author->name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sumber Data :</th>
+                            <td>{{ $collection->source()->exists() ? $collection->source->name : 'SIPDIKBUD' }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Lokasi :</th>
+                            <td><a href="{{ $collection->source()->exists() ? $collection->source->url : 'javascript:;' }}" target="_blank">{{ $collection->source()->exists() ? $collection->source->url : 'SIPDIKBUD' }}</a></td>
                         </tr>
                         <tr>
                             <th scope="row">Bahasa :</th>
                             <td>{{ $collection->language()->exists() ? $collection->language->name : '-' }}</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Institusi :</th>
-                            <td>{{ $collection->source()->exists() ? $collection->source->name : 'SIPDIKBUD' }}</td>
                         </tr>
                         <tr>
                             <th scope="row">Kata Kunci :</th>

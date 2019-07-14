@@ -6,7 +6,7 @@
     </li>
     <li class="dropdown dropdown-mega">
         <a class="dropdown-item {{ Request::is('home/about') ? 'active' : '' }}" href="{{ route('home.about') }}">
-            Tentang SIPDIKBUD
+            Tentang SIP
         </a>
     </li>
     <li class="dropdown dropdown-mega">

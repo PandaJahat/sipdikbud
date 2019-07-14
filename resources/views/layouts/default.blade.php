@@ -38,7 +38,7 @@
 
     <style>
       #sidebar_main .sidebar_main_header {
-          background-image: url("{{ asset('img/logo_resize.png') }}");
+          background-image: url("{{ asset('img/rsz_logo-sip.png') }}");
           background-position: center;
           height: 100;
           width: 100;

@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('home.register.create.submit') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('home.register.create.submit') }}">
     <div class="row">
         <div class="col p-1">
             @if($errors->any())
