@@ -17,7 +17,7 @@
                     </div>
                     <div class="icon-box-info">
                         <div class="icon-box-info-title">
-                            <h4>Institusi ({{ $partner_count->institute }})</h4>
+                            <h4><a href="{{ route('home.partner.institute') }}">Institusi (2)</a></h4>
                         </div>
                         <p>Institusi terintegrasi dengan SIP-DIKBUD.</p>
                     </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="icon-box-info">
                         <div class="icon-box-info-title">
-                            <h4>Open Journal Systems ({{ $partner_count->ojs }})</h4>
+                            <h4><a href="javascript:;">Repositori (0)</a></h4>
                         </div>
                         <p>Open Journal System terintegrasi dengan SIP-DIKBUD.</p>
                     </div>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="icon-box-info">
                         <div class="icon-box-info-title">
-                            <h4>Aplikasi Lainnya ({{ $partner_count->non_institute }})</h4>
+                            <h4><a href="javascript:;">Lainnya (0)</a></h4>
                         </div>
                         <p>Aplikasi lainnya terintegrasi dengan SIP-DIKBUD.</p>
                     </div>

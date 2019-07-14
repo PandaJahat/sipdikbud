@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-4 mt-lg-4 pt-lg-2">
                 <h2 class="text-color-light font-weight-semibold text-1 mb-3">TENTANG SIPDIKBUD</h2>
-                <p>-.</p>
+                <p>SIP merupakan media penyebarluasan hasil Penelitian/Kajian Pendidikan dan Kebudayaan dan menjadi wadah pertemuan dan pertukaran ide/gagasan antar jejaring penelitian.</p>
             </div>
             <div class="col-lg-4 ml-auto mt-lg-4 pt-lg-2">
                 <ul class="list list-icon list-unstyled mb-0 mb-lg-3">
@@ -14,9 +14,9 @@
             </div>
             <div class="col-lg-3 mt-lg-4 pt-lg-2">
                 <ul class="list list-icon list-unstyled">
-                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="javascript:;">PUSLITJAKDIKBUD</a></li>
-                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="javascript:;">KEMDIKBUD</a></li>
-                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="javascript:;">FAQ</a></li>
+                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="http://puslitjakdikbud.kemdikbud.go.id" target="_blank">PUSLITJAKDIKBUD</a></li>
+                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="https://litbang.kemdikbud.go.id/" target="_blank">BALITBANG KEMENDIKBUD</a></li>
+                    <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <a href="https://www.kemdikbud.go.id/main/" target="_blank">KEMDIKBUD</a></li>
                 </ul>
             </div>
         </div>
