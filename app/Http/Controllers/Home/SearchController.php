@@ -23,25 +23,25 @@ class SearchController extends Controller
 
     public function getCollection(Request $request)
     {
-        $collections = Collection::where('is_active', true);
-        
-        if (!empty($request->publisher)) {
-            $collections->orWhere('published_by', 'like', "%$request->publisher%");
-        }
-
-        if (!empty($request->author)) {
-            $collections->orWhereHas('author', function($query) use($request) {
-                $query->where('name', 'like', "%$request->author%");
-            });
-        }
-
-        if (!empty($request->keywords)) {
-            $collections->orWhereHas('keywords', function($query) use($request) {
-                $query->where('keyword', 'like', "%$request->keywords%");
-            });
-
-            $collections->orWhere('title', 'like', "%$request->keywords%");
-        }
+        $collections = Collection::where('is_active', true)->where(function($query) use($request) {
+            if (!empty($request->publisher)) {
+                $query->orWhere('published_by', 'like', "%$request->publisher%");
+            }
+    
+            if (!empty($request->author)) {
+                $query->orWhereHas('author', function($query) use($request) {
+                    $query->where('name', 'like', "%$request->author%");
+                });
+            }
+    
+            if (!empty($request->keywords)) {
+                $query->orWhereHas('keywords', function($query) use($request) {
+                    $query->where('keyword', 'like', "%$request->keywords%");
+                });
+    
+                $query->orWhere('title', 'like', "%$request->keywords%");
+            }
+        });
 
         $collections->orderBy('title', 'asc');
 

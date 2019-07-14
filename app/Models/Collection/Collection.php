@@ -23,7 +23,8 @@ class Collection extends Model
         "author_id",
         "language_id",
         "source_id",
-        "code"
+        "code",
+        "file_exist"
     ];
 
     public function categories()
@@ -104,5 +105,10 @@ class Collection extends Model
     public function reviewer()
     {
         return $this->hasOne('App\Models\Collection\Reviewer', 'collection_id', 'id');
+    }
+
+    public function visits()
+    {
+        return $this->hasMany('App\Models\Collection\Visit', 'collection_id', 'id');
     }
 }

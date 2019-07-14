@@ -77,7 +77,11 @@
                             <div class="image-frame">
                                 <span class="image-frame-wrapper">
                                     <a href="shop-product-detail-right-sidebar.html">
-                                        <img src="{{ asset('covers/'.$item->cover_file) }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                                        @if (!empty($item->cover_file))
+                                            <img src="{{ $item->source()->exists() ? $item->source->thumbnail_path.$item->cover_file : $item->source }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" class="img-fluid" alt="">
+                                        @else
+                                            <img src="{{ asset('assets-front/img/nothing.png') }}" class="img-fluid" alt="">
+                                        @endif
                                     </a>
                                 </span>
                             </div>

@@ -74,6 +74,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->modulePartnerRoutes();
         $this->moduleProfileRoutes();
         $this->moduleReasonRoutes();
+
+        $this->moduleTestRoutes();
     }
 
     // Module Routes: start
@@ -200,6 +202,17 @@ class RouteServiceProvider extends ServiceProvider
         ])->namespace($namespace);
 
         $result = (clone $route)->group(base_path('routes/web/reason/result.php'));
+    }
+
+    protected function moduleTestRoutes()
+    {
+        $namespace = $this->namespace.'\Test';
+
+        $route = Route::middleware([
+            'web'
+        ])->namespace($namespace);
+
+        $test = (clone $route)->group(base_path('routes/web/test/test.php'));
     }
     // Module Routes: end
 

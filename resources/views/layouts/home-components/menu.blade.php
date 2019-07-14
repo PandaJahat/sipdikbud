@@ -14,11 +14,4 @@
             Hubungi Kami
         </a>
     </li>
-    @if (Laratrust::hasRole('public'))
-        <li class="dropdown dropdown-mega">
-            <a class="dropdown-item {{ Request::is('home/profile') ? 'active' : '' }}" href="javascript:;">
-                Profil
-            </a>
-        </li>
-    @endif
 </ul>

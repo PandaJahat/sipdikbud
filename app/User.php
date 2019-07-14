@@ -54,4 +54,9 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasOne('App\Models\User\User_profile', 'user_id', 'id');
     }
+
+    public function visits()
+    {
+        return $this->hasMany('App\Models\Collection\Visit', 'user_id', 'id');
+    }
 }

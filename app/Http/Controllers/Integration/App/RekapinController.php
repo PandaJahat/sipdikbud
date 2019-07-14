@@ -37,9 +37,6 @@ class RekapinController extends Controller
         ]);
 
         return DataTables::of($collections)
-        ->editColumn('title_id', function($collection) {
-            return empty($collection->title_id) ? $collection->title_en : $collection->title_id;
-        })
         ->editColumn('published_date', function($collection) {
             return Carbon::parse($collection->published_date)->format('Y');
         })

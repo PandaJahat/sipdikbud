@@ -313,7 +313,9 @@
                     </li>
                     <li>
                         @if (!empty($collection->cover_file))
-                            <img class="uk-responsive-width" src="{{ asset('covers/'.$collection->cover_file) }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" alt="cover">
+                            <img class="uk-responsive-width" src="{{ $collection->source()->exists() ? $collection->source->thumbnail_path.$collection->cover_file : $collection->source }}" onerror="this.onerror=null;this.src='{{ asset('assets-front/img/nothing.png') }}';" alt="cover">
+                        @else
+                            <img class="uk-responsive-width" src="{{ asset('assets-front/img/nothing.png') }}" alt="cover">
                         @endif
                     </li>
                     @if (Laratrust::hasRole('admin'))

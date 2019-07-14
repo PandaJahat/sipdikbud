@@ -22,6 +22,10 @@ class DashboardController extends Controller
 
     public function administrator()
     {
+        $top_collection = Collection::whereHas('visits', function($query) {
+            
+        });
+
         return view('contents.dashboard.administrator', [
             'data' => [
                 'collectionts_count' => Collection::where('is_active', true)->count(),
@@ -34,16 +38,16 @@ class DashboardController extends Controller
 
     public function public()
     {
-        return view('contents.dashboard.administrator');
+        return view('contents.dashboard.index');
     }
 
-    public function researcher(Type $var = null)
+    public function researcher()
     {
-        return view('contents.dashboard.administrator');
+        return view('contents.dashboard.index');
     }
 
-    public function reviewer(Type $var = null)
+    public function reviewer()
     {
-        # code...
+        return view('contents.dashboard.index');
     }
 }

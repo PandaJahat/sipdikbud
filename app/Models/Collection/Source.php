@@ -20,7 +20,8 @@ class Source extends Model
         "company_name",
         "type",
         "last_sync",
-        "route"
+        "route",
+        "thumbnail_path"
     ];
 
     public function collections()

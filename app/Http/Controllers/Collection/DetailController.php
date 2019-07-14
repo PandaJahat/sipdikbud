@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Crypt;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 # Models
 use App\User;
 use App\Models\Collection\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class DetailController extends Controller
 {
@@ -17,6 +17,8 @@ class DetailController extends Controller
     {
         try {
             setlocale(LC_ALL, 'id_ID.utf8');
+
+            $user = Auth::user();
             
             $collection = Collection::find(Crypt::decrypt($request->id))->load([
                 'keywords', 'language', 'author', 'user', 'comments.user', 'reasons' => function($query) {
@@ -25,6 +27,15 @@ class DetailController extends Controller
                     ])->orderBy('created_at', 'DESC');
                 }
             ]);
+
+            if ($user->hasRole([
+                'public', 'researcher', 'reviewer'
+            ])) {
+                $user->visits()->create([
+                    'collection_id' => $collection->id,
+                    'previous_url' => URL::previous()
+                ]);
+            }
 
             return view('contents.collection.detail.index', [
                 'collection' => $collection,

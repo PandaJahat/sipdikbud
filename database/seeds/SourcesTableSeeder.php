@@ -20,6 +20,7 @@ class SourcesTableSeeder extends Seeder
             "company_name" => "Pusat Penelitian Kebijakan",
             "type" => 'other',
             "route" => "integration.app.rekapin",
+            "thumbnail_path" => '/img/rekapin/',
 
             'created_at' => now(),
             'updated_at' => now()

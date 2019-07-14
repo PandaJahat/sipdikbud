@@ -32,14 +32,14 @@
                             <a href="{{ route('login') }}" class="btn btn-primary">
                                 <span style="font-weight: 400;" class="wrap">
                                     <span>Masuk/Daftar</span>
-                                    <i class="lnr lnr-user"></i>
+                                    {{-- <i class="lnr lnr-user"></i> --}}
                                 </span>
                             </a>
                             @else
                             <a href="{{ route('dashboard') }}" class="btn btn-primary">
                                 <span style="font-weight: 400;" class="wrap">
                                     <span>{{ Auth::user()->name }}</span>
-                                    <i class="lnr lnr-user"></i>
+                                    {{-- <i class="lnr lnr-user"></i> --}}
                                 </span>
                             </a>
                             @endguest

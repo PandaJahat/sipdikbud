@@ -4,7 +4,7 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Integrasi REKAPIN</h3>
+<h3 class="heading_b uk-margin-bottom">Integrasi WEB PUSLITJAK</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
        <div class="uk-grid">
@@ -49,6 +49,8 @@
        </div>
        <br>
        <button type="button" class="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light" onclick="SyncNow({{ Auth::user()->id }})">Integrasi Data</button>
+       &nbsp;&nbsp;
+       <button type="button" class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light" onclick="UpdateNow()">Update Data</button>
        <br>
        <div class="uk-grid">
            <div class="uk-width-1-1">
@@ -60,9 +62,7 @@
                             <th style="width: 40%">Judul</th>
                             <th>Penulis</th>
                             <th>Tahun</th>
-                            <th>Kategori</th>
-                            <th></th>
-                            <th>Judul (English)</th>
+                            <th>Bidang</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -76,7 +76,6 @@
        <a class="md-btn md-btn-default md-btn-wave-light waves-effect waves-button waves-light" href="{{ route('integration.other') }}">Kembali</a>
     </div>
 </div>
-
 @endsection
 
 @push('scripts')
@@ -89,7 +88,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('integration.app.rekapin.data') }}"
+                    url: "{{ route('integration.app.web-puslitjak.data') }}"
                 },
                 columnDefs: [
                     {
@@ -106,50 +105,39 @@
                     [5, 'desc']
                 ], 
                 columns: [{
-                        data: 'status',
-                        name: 'status'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
-                        data: 'title_id',
-                        name: 'title_id',
-                        defaultContent: '-'
+                        data: 'judul',
+                        name: 'judul'
                     },
                     {
-                        data: 'author',
-                        name: 'author'
+                        data: 'id_bidang',
+                        name: 'id_bidang'
                     },
                     {
-                        data: 'published_date',
-                        name: 'published_date'
+                        data: 'tahun_terbit',
+                        name: 'tahun_terbit'
                     },
                     {
-                        data: 'category.title_id',
-                        name: 'category.title_id'
+                        data: 'id_bidang',
+                        name: 'id_bidang'
                     },
                     {
-                        data: 'created_date',
-                        name: 'created_date'
-                    },
-                    {
-                        data: 'title_en',
-                        name: 'title_en',
-                        defaultContent: '-'
+                        data: 'created',
+                        name: 'created'
                     }
                 ]
             })  
 
         })
 
-        function SyncNow(user_id) {
-            $.LoadingOverlay('show')
-            $.get("{{ route('integration.app.rekapin.sync') }}", {
-                user_id: user_id
-            }).done(function (result) {
-                $.LoadingOverlay('hide', true)
-
+        function UpdateNow() {
+            $.get("{{ route('integration.app.web-puslitjak.update') }}").done(function () {
                 Swal.fire(
                     'Berhasil!',
-                    'Sistem dalam proses integrasi!',
+                    'Sistem dalam proses update data!',
                     'success'
                 )
             })

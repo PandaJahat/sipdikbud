@@ -42,6 +42,12 @@
         </div>
     </div>
 </div>
+
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        @include('contents.dashboard.administrator.top-collections')
+    </div>
+</div>
 @endsection
 
 @push('scripts')
