@@ -5,7 +5,7 @@
                 <div class="header-column justify-content-start">
                     <div class="header-logo">
                         <a href="{{ route('home') }}">
-                            <img alt="logo" width="175" height="30" src="{{ asset('assets-front/img/logo-sipdikbud-revised.png') }}">
+                            <img alt="logo" width="175" height="25" src="{{ asset('assets-front/img/logo-sipdikbud-new.png') }}">
                         </a>
                     </div>
                 </div>

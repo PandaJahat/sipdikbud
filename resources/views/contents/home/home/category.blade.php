@@ -22,7 +22,7 @@
             </div>
             <div class="row text-left">
                 <div class="col-md-12">
-                    <h1>Kategori {{ $category->name }}</h1>
+                    <h1>{{ $category->name }}</h1>
                     <p class="lead">Daftar publikasi kategori {{ $category->name }}.</p>
                 </div>
             </div>
@@ -93,24 +93,24 @@
                             <table class="table table-borderless table-sm">
                                 <tbody>
                                     <tr>
-                                        <th scope="row" style="width: 110px;">Kategori :</th>
-                                        <td class="highlight-publisher">{{ $item->categories()->exists() ? $item->category->name : 'Lainnya' }}</td>
+                                        <th scope="row" style="width: 110px;">Kategori</th>
+                                        <td class="highlight-publisher">: {{ $item->categories()->exists() ? $item->category->name : 'Lainnya' }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row" style="width: 110px;">Tahun Terbit :</th>
-                                        <td class="highlight-publisher">{{ $item->published_year }}</td>
+                                        <th scope="row" style="width: 110px;">Tahun Terbit</th>
+                                        <td class="highlight-publisher">: {{ $item->published_year }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Penulis :</th>
-                                        <td class="highlight-author">{{ $item->author->name }}</td>
+                                        <th scope="row">Penulis</th>
+                                        <td class="highlight-author">: {{ $item->author->name }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Sumber Data :</th>
-                                        <td>{{ $item->source()->exists() ? $item->source->name : 'SIPDIKBUD' }}</td>
+                                        <th scope="row">Sumber Data</th>
+                                        <td>: {{ $item->source()->exists() ? $item->source->name : 'SIPDIKBUD' }}</td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Lokasi :</th>
-                                        <td><a href="{{ $item->source()->exists() ? $item->source->url : 'javascript:;' }}" target="_blank">{{ $item->source()->exists() ? $item->source->url : 'SIPDIKBUD' }}</a></td>
+                                        <th scope="row">Lokasi</th>
+                                        <td><a href="{{ $item->source()->exists() ? $item->source->url : 'javascript:;' }}" target="_blank">: {{ $item->source()->exists() ? $item->source->url : 'SIPDIKBUD' }}</a></td>
                                     </tr>
                                 </tbody>
                             </table>

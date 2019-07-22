@@ -8,28 +8,31 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb justify-content-start">
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li class="active">Kontak</li>
+                        <li class="active">Hubungi Kami</li>
                     </ul>
                 </div>
             </div>
             <div class="row text-left">
                 <div class="col-md-12">
-                    <h1>Kontak</h1>
-                    <p class="lead">Informasi Kontak</p>
+                    <h1>Hubungi Kami</h1>
+                    <p class="lead"></p>
                 </div>
             </div>
         </div>
     </section>
     <div class="container">
         <div class="no-gutters py-5">
-            <h3 class="mb-3">Mari Kenal <strong class="text-primary">SIPDIKBUD !</strong></h3>
+            <h3 class="mb-3">Mari Kenal <strong class="text-primary">Sistem Informasi Penelitian Pendidikan dan Kebudayaan !</strong></h3>
+            <p class="text-3">Pusat Penelitian Kebijakan Pendidikan dan Kebudayaan <br>
+                Badan Penelitian dan Pengembangan 
+                <br>Kementerian Pendidikan dan Kebudayaan</p>
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="d-flex justify-content-start align-items-center py-3">
                         <img class="img-fluid" width="90" src="{{ asset('assets-front/img/sign-post.svg') }}">
-                        <h6 class="text-justify pl-3">
+                        <h5 class="text-justify pl-3">
                             Komplek Kementerian Pendidikan dan Kebudayaan, Gedung E Lantai 19, Jalan Jenderal Sudirman - Senayan, Jakarta 10270
-                        </h6>
+                        </h5>
                     </div>
                     <div class="d-flex justify-content-start align-items-center py-3">
                         <img class="img-fluid" width="90" src="{{ asset('assets-front/img/call.svg') }}">

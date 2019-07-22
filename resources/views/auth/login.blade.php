@@ -47,7 +47,7 @@
                 <div class="col-md-6 align-self-stretch p-0">
                     <div class="image-frame h-100">
                         <div class="image-frame-wrapper">
-                            <div class="image-frame-background min-height-370 appear-animation animated scaleOut appear-animation-visible" data-appear-animation="scaleOut" data-appear-animation-duration="8s" data-plugin-image-background="" data-plugin-options="{'imageUrl': '{{ asset('assets-front/img/login.jpg') }}'}" style="background-image: url({{ asset('assets-front/img/login.jpg') }}); background-size: cover; background-position: center center; background-repeat: no-repeat; animation-duration: 8s; animation-delay: 100ms;"></div>
+                            <div class="image-frame-background min-height-370 appear-animation animated scaleOut appear-animation-visible" data-appear-animation="scaleOut" data-appear-animation-duration="8s" data-plugin-image-background="" data-plugin-options="{'imageUrl': '{{ asset('assets-front/img/login-new.jpg') }}'}" style="background-image: url({{ asset('assets-front/img/login-new.jpg') }}); background-size: cover; background-position: center center; background-repeat: no-repeat; animation-duration: 8s; animation-delay: 100ms;"></div>
                         </div>
                     </div>
                 </div>
