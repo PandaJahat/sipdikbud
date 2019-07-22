@@ -58,6 +58,7 @@ class WebPuslitjakController extends Controller
 
     public function sync(Request $request)
     {
+        UpdateData::dispatch();
         SyncBook::dispatch($request->id);
         return 'done';
     }
