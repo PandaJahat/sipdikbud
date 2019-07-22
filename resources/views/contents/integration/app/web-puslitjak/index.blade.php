@@ -58,7 +58,7 @@
                     <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair hasFilters uk-table-hover" id="collection-table">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th style="width: 5%">#</th>
                             <th style="width: 40%">Judul</th>
                             <th>Penulis</th>
                             <th>Tahun</th>
@@ -92,7 +92,7 @@
                 },
                 columnDefs: [
                     {
-                        targets: [0],
+                        targets: [0, 2],
                         searchable: false,
                         orderable: false
                     },
@@ -113,8 +113,8 @@
                         name: 'judul'
                     },
                     {
-                        data: 'id_bidang',
-                        name: 'id_bidang'
+                        data: 'author',
+                        name: 'author'
                     },
                     {
                         data: 'tahun_terbit',

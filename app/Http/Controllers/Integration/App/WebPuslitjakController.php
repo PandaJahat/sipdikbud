@@ -10,6 +10,9 @@ use Yajra\DataTables\Facades\DataTables;
 # Models
 use App\Models\Collection\Source;
 use App\Models\Integration\WebPuslitjak\Book;
+use App\Models\Integration\WebPuslitjak\Category;
+
+use App\Models\Collection\Collection;
 
 # Jobs
 use App\Jobs\Integration\WebPuslitjak\UpdateData;
@@ -31,12 +34,29 @@ class WebPuslitjakController extends Controller
     {
         $books = Book::select(DB::raw('buku.*'));
 
-        return DataTables::of($books)->make(true);
+        return DataTables::of($books)
+        ->addColumn('author', function() {
+            return 'Web Puslitjak';
+        })
+        ->editColumn('id', function($book) {
+            return Collection::where('code', 'web'.$book->id)->count() > 0 ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
+        })
+        ->editColumn('id_bidang', function($book) {
+
+            return implode(', ', (array) Category::whereIn('id', explode(',', $book->id_bidang))->get()->pluck('nama')->toArray());
+        })
+        ->rawColumns(['id'])
+        ->make(true);
     }
 
     public function update()
     {
         UpdateData::dispatch();
         return 'done';
+    }
+
+    public function sync()
+    {
+        # code...
     }
 }
