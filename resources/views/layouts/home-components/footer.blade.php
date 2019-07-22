@@ -2,14 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 mt-lg-4 pt-lg-2">
-                <h2 class="text-color-light font-weight-semibold text-1 mb-3">TENTANG SIPDIKBUD</h2>
-                <p>SIP merupakan media penyebarluasan hasil Penelitian/Kajian Pendidikan dan Kebudayaan dan menjadi wadah pertemuan dan pertukaran ide/gagasan antar jejaring penelitian.</p>
+                <h2 class="text-color-light font-weight-semibold text-1 mb-3 text-3">TENTANG SIPDIKBUD</h2>
+                <p class="text-2">SIP merupakan media penyebarluasan hasil Penelitian/Kajian Pendidikan dan Kebudayaan dan menjadi wadah pertemuan dan pertukaran ide/gagasan antar jejaring penelitian.</p>
             </div>
             <div class="col-lg-4 ml-auto mt-lg-4 pt-lg-2">
                 <ul class="list list-icon list-unstyled mb-0 mb-lg-3">
-                        <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Alamat:</span> Komplek Kementerian Pendidikan dan Kebudayaan, Gedung E Lantai 19, Jalan Jenderal Sudirman - Senayan, Jakarta 10270</li>
-                        <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Telepon:</span> <a href="tel:+1234567890">021-5713827</a></li>
-                        <li class="mb-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Email:</span> <a href="mailto:puslitjakbud@kemdikbud.go.id" class="link-underline-light">puslitjakbud@kemdikbud.go.id</a></li>
+                        <li class="mb-2 text-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Alamat:</span> Komplek Kementerian Pendidikan dan Kebudayaan, Gedung E Lantai 19, Jalan Jenderal Sudirman - Senayan, Jakarta 10270</li>
+                        <li class="mb-2 text-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Telepon:</span> <a href="tel:+1234567890">021-5713827</a></li>
+                        <li class="mb-2 text-2"><i class="fas fa-angle-right mr-2 ml-1"></i> <span class="text-color-light">Email:</span> <a href="mailto:puslitjakbud@kemdikbud.go.id" class="link-underline-light">puslitjakbud@kemdikbud.go.id</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 mt-lg-4 pt-lg-2">
@@ -32,7 +32,7 @@
                     </ul>
                 </div>
                 <div class="col-md-5 col-lg-4">
-                    <p class="text-md-right pb-0 mb-0">Copyrights © 2019. Sistem Informasi Penelitian Kemdikbud</p>
+                    <p class="text-md-right pb-0 mb-0 text-2">Copyrights © 2019. Sistem Informasi Penelitian Kemdikbud</p>
                 </div>
             </div>
         </div>

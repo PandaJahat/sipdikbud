@@ -14,8 +14,8 @@
             </div>
             <div class="row text-left">
                 <div class="col-md-12">
-                    <h1>Header Default</h1>
-                    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h1>Kontak</h1>
+                    <p class="lead">Informasi Kontak</p>
                 </div>
             </div>
         </div>
