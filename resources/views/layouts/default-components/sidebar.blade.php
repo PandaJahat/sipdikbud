@@ -56,9 +56,9 @@
                     <span class="menu_title">Integrasi</span>
                 </a>
                 <ul class="" style="display: none;">
-                    <li class="{{ Request::is('integration/ojs') ? 'act_item' : '' }}"><a href="{{ route('integration.ojs') }}">Integrasi OJS</a></li>
-                    <li class="{{ Request::is('integration/other', 'integration/app/*') ? 'act_item' : '' }}"><a href="{{ route('integration.other') }}">Integrasi Aplikasi Lain</a></li>
-                    <li ><a href="javascript:;">Pengaturan Integrasi</a></li>
+                    <li ><a href="javascript:;">Repositori</a></li>
+                    <li class="{{ Request::is('integration/other', 'integration/app/*') ? 'act_item' : '' }}"><a href="{{ route('integration.other') }}">Balitbang Kemendikbud</a></li>
+                    <li ><a href="javascript:;">Lainnya</a></li>
                 </ul>
             </li>
             @endif

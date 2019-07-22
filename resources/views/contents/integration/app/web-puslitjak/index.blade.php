@@ -142,5 +142,17 @@
                 )
             })
         }
+
+        function SyncNow(id) {
+            $.get("{{ route('integration.app.web-puslitjak.sync') }}", {
+                id: id
+            }).done(function () {
+                Swal.fire(
+                    'Berhasil!',
+                    'Sistem dalam proses integrasi data!',
+                    'success'
+                )
+            });
+        }
     </script>
 @endpush

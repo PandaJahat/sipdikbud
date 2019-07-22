@@ -16,6 +16,7 @@ use App\Models\Collection\Collection;
 
 # Jobs
 use App\Jobs\Integration\WebPuslitjak\UpdateData;
+use App\Jobs\Integration\WebPuslitjak\SyncBook;
 
 class WebPuslitjakController extends Controller
 {
@@ -39,7 +40,7 @@ class WebPuslitjakController extends Controller
             return 'Web Puslitjak';
         })
         ->editColumn('id', function($book) {
-            return Collection::where('code', 'web'.$book->id)->count() > 0 ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
+            return Collection::where('code', 'webpuslitjak'.$book->id)->count() > 0 ? '<span class="uk-badge uk-badge-success">Sudah</span>' : '<span class="uk-badge uk-badge-danger">Belum</span>';
         })
         ->editColumn('id_bidang', function($book) {
 
@@ -55,8 +56,9 @@ class WebPuslitjakController extends Controller
         return 'done';
     }
 
-    public function sync()
+    public function sync(Request $request)
     {
-        # code...
+        SyncBook::dispatch($request->id);
+        return 'done';
     }
 }

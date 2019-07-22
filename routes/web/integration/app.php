@@ -14,6 +14,7 @@ Route::prefix('integration/app')->group(function () {
             Route::get('/', 'WebPuslitjakController@index')->name('integration.app.web-puslitjak'); 
             Route::get('/data', 'WebPuslitjakController@data')->name('integration.app.web-puslitjak.data'); 
             Route::get('/update', 'WebPuslitjakController@update')->name('integration.app.web-puslitjak.update'); 
+            Route::get('/sync', 'WebPuslitjakController@sync')->name('integration.app.web-puslitjak.sync'); 
         });
     });
 });

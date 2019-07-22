@@ -4,7 +4,7 @@
 @include('plugins.sweetalert2')
 
 @section('content')
-<h3 class="heading_b uk-margin-bottom">Integrasi Aplikasi Lainnya</h3>
+<h3 class="heading_b uk-margin-bottom">Integrasi Balitbang Kemendikbud</h3>
 <div class="md-card uk-margin-medium-bottom">
     <div class="md-card-content">
         <div class="uk-overflow-container">
