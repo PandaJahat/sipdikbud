@@ -2,6 +2,7 @@
 
 @include('plugins.dropify')
 @include('plugins.autocomplete')
+@include('plugins.ckeditor')
 
 @section('content')
 <h3 class="heading_b uk-margin-bottom">Ubah Publikasi</h3>
@@ -30,9 +31,47 @@
                         <input type="text" class="md-input" name="published_by" value="{{ $collection->published_by }}" />
                     </div>
                     <div class="uk-form-row">
-                        <label>Deskripsi</label>
-                        <textarea cols="30" rows="4" class="md-input" name="description">{{ $collection->description }}</textarea>
+                        <label>Subjek</label>
+                        <input type="text" class="md-input" name="subjects" value="{{ $collection->subjects }}" />
                     </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row">
+                        <select name="category_id" id="categories" required>
+                            <option value="">Pilih Kategori</option>
+                        </select>
+                    </div>
+                    <div class="uk-form-row">
+                        <select name="genres[]" id="genre" multiple>
+                            <option value="">Pilih Genre</option>
+                        </select>
+                    </div>
+                    <div class="uk-form-row">
+                        <select name="language_id" required>
+                            <option value="">Pilih Bahasa</option>
+                        </select>
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Kata Kunci (pisahkan dengan koma)</label>
+                        <input type="text" class="md-input" name="keywords" value="{{ $keywords }}" />
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Topik (pisahkan dengan koma)</label>
+                        <input type="text" class="md-input" name="topics" value="{{ $topics }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                 <div class="uk-width-1-1">
+                    <div class="uk-form-row">
+                        <label>Deskripsi</label>
+                        <br>
+                        <textarea cols="30" rows="4" class="md-input" name="description" id="wysiwyg_ckeditor">{{ $collection->description }}</textarea>
+                    </div>
+                 </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
                     @if (!empty($collection->cover_file))
                     <div class="uk-form-row">
                         <label>Gambar Cover Sebelumnya</label>
@@ -60,31 +99,6 @@
                     <div class="uk-form-row">
                         <label>File Dokumen (pilih file untuk mengganti dokumen sebelumnya)</label>
                         <input type="file" name="document" class="dropify-id"/>
-                    </div>
-                </div>
-                <div class="uk-width-1-2">
-                    <div class="uk-form-row">
-                        <select name="category_id" id="categories" required>
-                            <option value="">Pilih Kategori</option>
-                        </select>
-                    </div>
-                    <div class="uk-form-row">
-                        <select name="genres[]" id="genre" multiple>
-                            <option value="">Pilih Genre</option>
-                        </select>
-                    </div>
-                    <div class="uk-form-row">
-                        <select name="language_id" required>
-                            <option value="">Pilih Bahasa</option>
-                        </select>
-                    </div>
-                    <div class="uk-form-row">
-                        <label>Kata Kunci (pisahkan dengan koma)</label>
-                        <input type="text" class="md-input" name="keywords" value="{{ $keywords }}" />
-                    </div>
-                    <div class="uk-form-row">
-                        <label>Topik (pisahkan dengan koma)</label>
-                        <input type="text" class="md-input" name="topics" value="{{ $topics }}" />
                     </div>
                 </div>
             </div>
@@ -234,5 +248,16 @@
                 return false
             }
         })
+
+        $(function () {
+            altair_wysiwyg._ckeditor(), altair_wysiwyg._ckeditor_inline(), altair_wysiwyg._tinymce()
+        }), altair_wysiwyg = {
+            _ckeditor: function () {
+                var i = $("#wysiwyg_ckeditor");
+                i.length && i.ckeditor(function () {}, {
+                    // customConfig: "../../assets/js/custom/ckeditor_config.js"
+                })
+            }
+        };
     </script>    
 @endpush

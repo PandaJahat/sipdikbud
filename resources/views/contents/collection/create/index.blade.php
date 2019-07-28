@@ -2,6 +2,7 @@
 
 @include('plugins.dropify')
 @include('plugins.autocomplete')
+@include('plugins.ckeditor')
 
 @section('content')
 <h3 class="heading_b uk-margin-bottom">Upload Publikasi</h3>
@@ -28,20 +29,8 @@
                         <input type="text" class="md-input" name="published_by" value="{{ old('published_by') }}" />
                     </div>
                     <div class="uk-form-row">
-                        <label>Deskripsi</label>
-                        <textarea cols="30" rows="4" class="md-input" name="description">{{ old('description') }}</textarea>
-                    </div>
-                    <div class="uk-form-row">
-                        <label>Gambar Cover</label>
-                        <input type="file" name="cover" class="dropify-id" accept="image/*" />
-                    </div>
-                    {{-- <div class="uk-form-row">
-                        <label>Abstrak</label>
-                        <input type="file" name="abstract" class="dropify-id"/>
-                    </div> --}}
-                    <div class="uk-form-row">
-                        <label>File Dokumen <span class="uk-text-danger">*</span></label>
-                        <input type="file" name="document" class="dropify-id" required/>
+                        <label>Subjek</label>
+                        <input type="text" class="md-input" name="subjects" value="{{ old('subjects') }}" />
                     </div>
                 </div>
                 <div class="uk-width-1-2">
@@ -67,6 +56,31 @@
                     <div class="uk-form-row">
                         <label>Topik (pisahkan dengan koma)</label>
                         <input type="text" class="md-input" name="topics" value="{{ old('topics') }}" />
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-1">
+                    <div class="uk-form-row">
+                        <label>Deskripsi</label>
+                        <br>
+                        <textarea cols="30" rows="4" class="md-input" name="description" id="wysiwyg_ckeditor">{{ old('description') }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <div class="uk-form-row">
+                        <label>Gambar Cover</label>
+                        <input type="file" name="cover" class="dropify-id" accept="image/*" />
+                    </div>
+                    {{-- <div class="uk-form-row">
+                        <label>Abstrak</label>
+                        <input type="file" name="abstract" class="dropify-id"/>
+                    </div> --}}
+                    <div class="uk-form-row">
+                        <label>File Dokumen <span class="uk-text-danger">*</span></label>
+                        <input type="file" name="document" class="dropify-id" required/>
                     </div>
                 </div>
             </div>
@@ -214,5 +228,16 @@
                 return false
             }
         })
+
+        $(function () {
+            altair_wysiwyg._ckeditor(), altair_wysiwyg._ckeditor_inline(), altair_wysiwyg._tinymce()
+        }), altair_wysiwyg = {
+            _ckeditor: function () {
+                var i = $("#wysiwyg_ckeditor");
+                i.length && i.ckeditor(function () {}, {
+                    // customConfig: "../../assets/js/custom/ckeditor_config.js"
+                })
+            }
+        };
     </script>    
 @endpush

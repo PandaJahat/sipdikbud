@@ -42,7 +42,7 @@ class RegisterController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $user->attachRole('public');
+            $user->attachRole('researcher');
 
             $profile = new User_profile($request->all());
             $profile->date_of_birth = Carbon::createFromFormat('d/m/Y', $request->date_of_birth)->format('Y-m-d');

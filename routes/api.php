@@ -23,3 +23,7 @@ Route::post('register', 'API\UserController@register');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::get('details', 'API\UserController@details');
 });
+
+Route::prefix('collection')->group(function () {
+    Route::get('get', 'API\CollectionController@get');
+});

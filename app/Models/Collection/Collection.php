@@ -24,7 +24,8 @@ class Collection extends Model
         "language_id",
         "source_id",
         "code",
-        "file_exist"
+        "file_exist",
+        "subjects"
     ];
 
     public function categories()
