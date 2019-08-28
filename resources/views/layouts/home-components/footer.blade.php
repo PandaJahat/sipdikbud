@@ -1,16 +1,3 @@
-<div class="container">
-    <h2 style="text-align: center; padding: 20px;">Partner SIP-Dikbud</h2>
-     <section class="customer-logos slider">
-        <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg"></div>
-        <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg"></div>
-        <div class="slide"><img src="https://rin.lipi.go.id/images/logo_rin2.png"></div>
-        <div class="slide"><img src="https://s3-ap-southeast-1.amazonaws.com/dev-rekapin/images/logo_rkp.png" style="padding-top: 20px"></div>
-        <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg"></div>
-        <div class="slide"><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Blank.jpg"></div>
-     </section>
-</div>
-<br>
-<br>
 <footer id="footer" class="footer-hover-links-light mt-0">
     <div class="container">
         <div class="row">

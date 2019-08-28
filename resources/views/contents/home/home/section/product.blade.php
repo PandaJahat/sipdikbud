@@ -30,9 +30,9 @@
                     </div>
                     <div class="icon-box-info">
                         <div class="icon-box-info-title">
-                            <h3><a href="{{ route('home.partner.repository') }}">Repositori (1)</a></h3>
+                            <h3><a href="javascript:;">Repositori (0)</a></h3>
                         </div>
-                        <p class="text-3">Repositori terintegrasi dengan SIP-DIKBUD.</p>
+                        <p class="text-3">Open Journal System terintegrasi dengan SIP-DIKBUD.</p>
                     </div>
                 </div>
                 <div class="icon-box icon-box-style-4 pb-3">
@@ -49,11 +49,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 mb-5 mb-md-0" style="font-size: 18px;">
-                {{-- <h4 class="mb-4">Dataverse</h4>
+            <div class="col-lg-3 mb-5 mb-md-0">
+                {{-- <h4 class="mb-4">Sektor</h4>
                 <ul class="list list-style-1">
-                    @foreach ($dataverse as $item)
-                        <li><a href="{{ $item['url'] }}">{{ $item['name'] }}</a> </li>
+                    @foreach ($partners as $item)
+                        <li><a href="">{{ $item->name }} ({{ number_format($item->collections_count) }})</a> </li>
                     @endforeach
                 </ul> --}}
             </div>

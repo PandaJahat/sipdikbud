@@ -11,9 +11,4 @@ class PartnerController extends Controller
     {
         return view('contents.home.partner.institute');
     }
-
-    public function repository()
-    {
-        return view('contents.home.partner.repository');        
-    }   
 }
