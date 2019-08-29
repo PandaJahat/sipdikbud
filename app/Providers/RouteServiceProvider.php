@@ -228,6 +228,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $test = (clone $route)->group(base_path('routes/web/article/list.php'));
         $test = (clone $route)->group(base_path('routes/web/article/create.php'));
+        $test = (clone $route)->group(base_path('routes/web/article/update.php'));
+        $test = (clone $route)->group(base_path('routes/web/article/category.php'));
     }
     // Module Routes: end
 

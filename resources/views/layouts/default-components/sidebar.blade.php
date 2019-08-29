@@ -37,6 +37,7 @@
                     <li class="{{ Request::is('article/create') ? 'act_item' : '' }}"><a href="{{ route('article.create') }}">Buat Artikel</a></li>
                     <li class="{{ Request::is('article/list', 'article/detail') ? 'act_item' : '' }}"><a href="{{ route('article.list') }}">Daftar Artikel</a></li>
                     <li ><a href="javascript:;">Arsip Artikel</a></li>
+                    <li class="{{ Request::is('article/category') ? 'act_item' : '' }}"><a href="{{ route('article.category') }}">Kategori Artikel</a></li>
                 </ul>
             </li>
             @endif
