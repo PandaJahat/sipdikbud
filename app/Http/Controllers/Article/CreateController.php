@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\URL;
 
 # Models
 use App\Models\Article\Article;
@@ -31,8 +30,8 @@ class CreateController extends Controller
             
             $image->move(public_path('thumbnails/original'), $filename);  
             $article->thumbnail_file = $filename;
-            
-            Image::make(URL::to('thumbnails/original/'.$article->thumbnail_file))->resize(200, 200)->save(public_path('thumbnails/original', $article->thumbnail_file));
+
+            Image::make(public_path('thumbnails/original/').$article->thumbnail_file)->resize(200, 200)->save(public_path('thumbnails/').$article->thumbnail_file);
         }
 
         $article->save();
