@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Auth;
 
 # Models
 use App\Models\Article\Article;
@@ -21,6 +22,7 @@ class CreateController extends Controller
     public function create(Request $request)
     {
         $article = new Article($request->all());
+        $article->user_id = Auth::user()->id;
 
         if ($request->hasFile('thumbnail')) {
             $image = $request->file('thumbnail');
@@ -30,8 +32,9 @@ class CreateController extends Controller
             
             $image->move(public_path('thumbnails/original'), $filename);  
             $article->thumbnail_file = $filename;
-
-            Image::make(public_path('thumbnails/original/').$article->thumbnail_file)->resize(200, 200)->save(public_path('thumbnails/').$article->thumbnail_file);
+            
+            // ->resize(200, 200) # before save
+            Image::make(public_path('thumbnails/original/').$article->thumbnail_file)->save(public_path('thumbnails/').$article->thumbnail_file);
         }
 
         $article->save();
