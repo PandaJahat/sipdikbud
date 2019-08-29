@@ -27,6 +27,19 @@
                 </a>
             </li>  
             @endif
+            @if (Laratrust::hasRole('admin'))
+            <li title="API" class="submenu_trigger">
+                <a href="#">
+                    <span class="menu_icon"><i class="material-icons">&#xE8D2;</i></span>
+                    <span class="menu_title">Artikel</span>
+                </a>
+                <ul class="" style="display: none;">
+                    <li class="{{ Request::is('article/create') ? 'act_item' : '' }}"><a href="{{ route('article.create') }}">Buat Artikel</a></li>
+                    <li class="{{ Request::is('article/list', 'article/detail') ? 'act_item' : '' }}"><a href="{{ route('article.list') }}">Daftar Artikel</a></li>
+                    <li ><a href="javascript:;">Arsip Artikel</a></li>
+                </ul>
+            </li>
+            @endif
             <li title="Publikasi" class="submenu_trigger">
                 <a href="#">
                     <span class="menu_icon"><i class="material-icons">&#xE24D;</i></span>

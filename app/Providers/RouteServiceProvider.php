@@ -74,6 +74,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->modulePartnerRoutes();
         $this->moduleProfileRoutes();
         $this->moduleReasonRoutes();
+        $this->moduleArticleRoutes();
 
         $this->moduleTestRoutes();
     }
@@ -215,6 +216,18 @@ class RouteServiceProvider extends ServiceProvider
         ])->namespace($namespace);
 
         $test = (clone $route)->group(base_path('routes/web/test/test.php'));
+    }
+
+    public function moduleArticleRoutes()
+    {
+        $namespace = $this->namespace.'\Article';
+
+        $route = Route::middleware([
+            'web', 'auth'
+        ])->namespace($namespace);
+
+        $test = (clone $route)->group(base_path('routes/web/article/list.php'));
+        $test = (clone $route)->group(base_path('routes/web/article/create.php'));
     }
     // Module Routes: end
 
