@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Crypt;
 
 # Models
 use App\Models\Article\Article;
@@ -30,7 +31,7 @@ class ListController extends Controller
             return Carbon::parse($article->created_at)->formatLocalized('%d %B %Y');
         })
         ->addColumn('actions', function($article) {
-            return '<a href="" class="uk-badge uk-badge-warning">Ubah</a>';
+            return '<a href="'.route('article.update', ['id' => Crypt::encrypt($article->id)]).'" class="uk-badge uk-badge-warning">Ubah</a>';
         })
         ->rawColumns([
             'actions'

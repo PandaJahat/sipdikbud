@@ -34,7 +34,7 @@ class CreateController extends Controller
             $article->thumbnail_file = $filename;
             
             // ->resize(200, 200) # before save
-            Image::make(public_path('thumbnails/original/').$article->thumbnail_file)->save(public_path('thumbnails/').$article->thumbnail_file);
+            Image::make(public_path('thumbnails/original/').$article->thumbnail_file)->resize(1280, 853)->save(public_path('thumbnails/').$article->thumbnail_file);
         }
 
         $article->save();
