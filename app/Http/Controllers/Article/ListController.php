@@ -27,6 +27,9 @@ class ListController extends Controller
 
         return DataTables::of($articles)
         ->addIndexColumn()
+        ->editColumn('title', function($article) {
+            return '<a href="'.route('article.detail', ['id' => Crypt::encrypt($article->id)]).'">'.$article->title.'</a>';
+        })
         ->editColumn('created_at', function($article) {
             return Carbon::parse($article->created_at)->formatLocalized('%d %B %Y');
         })
@@ -34,7 +37,7 @@ class ListController extends Controller
             return '<a href="'.route('article.update', ['id' => Crypt::encrypt($article->id)]).'" class="uk-badge uk-badge-warning">Ubah</a>';
         })
         ->rawColumns([
-            'actions'
+            'actions', 'title'
         ])
         ->make(true);
     }
