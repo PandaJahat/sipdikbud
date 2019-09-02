@@ -11,6 +11,8 @@ use GuzzleHttp\Client;
 
 # Models
 use App\Models\Integration\WebPuslitjak\Book;
+use App\Models\Integration\WebPuslitjak\News;
+use App\Models\Integration\WebPuslitjak\News_category;
 
 class UpdateData implements ShouldQueue
 {
@@ -49,6 +51,30 @@ class UpdateData implements ShouldQueue
                 $book->fill((array) $item);
             }
             $book->save();
+        }
+
+        $articles = collect(json_decode($client->request('GET', "http://puslitjakdikbud.kemdikbud.go.id/get_db/index/berita")->getBody()));
+        foreach ($articles as $item) {
+            $article = News::find($item->id);
+
+            if (empty($article)) {
+                $article = new News((array) $item);
+            } else {
+                $article->fill((array) $item);
+            }
+            $article->save();
+        }
+
+        $article_categories = collect(json_decode($client->request('GET', "http://puslitjakdikbud.kemdikbud.go.id/get_db/index/ref_kategori_berita")->getBody()));
+        foreach ($article_categories as $item) {
+            $category = News_category::find($item->id);
+
+            if (empty($article)) {
+                $category = new News_category((array) $item);
+            } else {
+                $category->fill((array) $item);
+            }
+            $category->save();
         }
     }
 }

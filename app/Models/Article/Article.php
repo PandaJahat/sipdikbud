@@ -18,6 +18,8 @@ class Article extends Model
         "user_id",
         "author",
         "archived_at",
+        "code",
+        "created_at"
     ];
 
     public function category()

@@ -183,6 +183,7 @@ class RouteServiceProvider extends ServiceProvider
         $setting = (clone $route)->group(base_path('routes/web/home/setting.php'));
         $alphabet = (clone $route)->group(base_path('routes/web/home/alphabet.php'));
         $partner = (clone $route)->group(base_path('routes/web/home/partner.php'));
+        $partner = (clone $route)->group(base_path('routes/web/home/article.php'));
     }
 
     protected function moduleProfileRoutes()
