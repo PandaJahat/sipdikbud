@@ -11,6 +11,7 @@ use App\Models\Collection\Category;
 use App\Models\Collection\Source;
 use App\Models\Collection\Collection;
 use App\Models\Setting\Slider;
+use App\Models\Article\Article;
 
 class HomeController extends Controller
 {
@@ -21,7 +22,8 @@ class HomeController extends Controller
             'partners' => $this->getSources(),
             'partner_count' => (object) $this->getPartnerCount(),
             'collection_count' => $this->getCollectionCount(),
-            'sliders' => Slider::all()
+            'sliders' => Slider::all(),
+            'articles' => $this->latestArticles()
         ]);
     }
 
@@ -79,5 +81,10 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('home');
         }
+    }
+
+    public function latestArticles()
+    {
+        return Article::orderBy('created_at', 'DESC')->limit(3)->get();
     }
 }

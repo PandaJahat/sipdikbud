@@ -8,9 +8,14 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Auth;
 
 # Models
 use App\Models\Article\Article;
+
+# Jobs
+use App\Jobs\Integration\WebPuslitjak\UpdateData;
+use App\Jobs\Integration\WebPuslitjak\SyncArticle;
 
 class ListController extends Controller
 {
@@ -40,5 +45,13 @@ class ListController extends Controller
             'actions', 'title'
         ])
         ->make(true);
+    }
+
+    public function sync()
+    {
+        UpdateData::dispatch();
+        SyncArticle::dispatch(Auth::user()->id);
+
+        return redirect()->route('article.list')->with('success', 'Sedang dalam proses singkronisasi!');
     }
 }

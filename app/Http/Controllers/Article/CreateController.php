@@ -23,6 +23,7 @@ class CreateController extends Controller
     {
         $article = new Article($request->all());
         $article->user_id = Auth::user()->id;
+        $article->author = Auth::user()->name;
 
         if ($request->hasFile('thumbnail')) {
             $image = $request->file('thumbnail');
