@@ -19,7 +19,7 @@
                         <div class="image-frame hover-effect-2">
                             <div class="image-frame-wrapper">
                                 <a href="{{ route('home.article.detail', ['id' => Crypt::encrypt($article->id)]) }}">
-                                    <img src="{{ empty($article->thumbnail_file) ? URL::to('/img/blank.png') : URL::to('/thumbnails/'.$article->thumbnail_file) }}" class="img-fluid img-news rounded" alt="">
+                                    <img src="{{ !file_exists(public_path('/thumbnails/'.$article->thumbnail_file)) ? URL::to('/img/blank.png') : URL::to('/thumbnails/'.$article->thumbnail_file) }}" class="img-fluid img-news rounded" alt="">
                                 </a>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                         <h2 class="font-weight-bold text-4 mb-3">
                             <a href="{{ route('home.article.detail', ['id' => Crypt::encrypt($article->id)]) }}" class="link-color-dark">{{ ucwords(strtolower($article->title)) }}</a>
                         </h2>
-                        <p class="text-color-light-3">Kategori {{ $article->category->name }}</p>
+                        <p class="text-color-light-3">{{ str_limit(strip_tags($article->content), 50,'. . .') }}</p>
                         <a href="{{ route('home.article.detail', ['id' => Crypt::encrypt($article->id)]) }}" class="text-color-primary font-weight-bold learn-more">SELENGKAPNYA <i class="fas fa-angle-right text-3" aria-label="Read more"></i></a>
                     </article>
                 </div>

@@ -11,9 +11,13 @@ use App\Models\Article\Article;
 
 class ArticleController extends Controller
 {
-    public function list()
+    public function list(Request $request)
     {
-        # code...
+        $articles = Article::whereNull('archived_at')->orderBy('created_at')->paginate(5);
+
+        return view('contents.home.article.list', [
+            'articles' => $articles
+        ]);
     }
 
     public function detail(Request $request)

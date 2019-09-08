@@ -5,6 +5,11 @@
         </a>
     </li>
     <li class="dropdown dropdown-mega">
+        <a class="dropdown-item {{ Request::is('home/article/*') ? 'active' : '' }}" href="{{ route('home.article.list') }}">
+            Berita
+        </a>
+    </li>
+    <li class="dropdown dropdown-mega">
         <a class="dropdown-item {{ Request::is('home/about') ? 'active' : '' }}" href="{{ route('home.about') }}">
             Tentang SIP-Dikbud
         </a>

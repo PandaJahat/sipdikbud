@@ -17,6 +17,8 @@
                     <hr class="uk-article-divider">
                     {!! $article->content !!}
                 </div>
+                <hr>
+                <a href="{{ route('article.list') }}" class="md-btn md-btn-default">Kembali</a>
             </div>
         </div>
     </div>

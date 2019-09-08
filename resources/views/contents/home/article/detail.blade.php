@@ -8,6 +8,7 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb justify-content-start">
                         <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('home.article.list') }}">Berita</a></li>
                         <li class="active">Detail Berita</li>
                     </ul>
                 </div>
